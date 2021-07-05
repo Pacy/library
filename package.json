@@ -1,0 +1,18 @@
+{
+  "name": "library2021july",
+  "version": "1.0.0",
+  "description": "starting frontend,backend and mongodb together",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":" concurrently \"npm run backend\" \"npm run frontend\" \"npm run server\"",
+    "backend": "cd backend && nodemon server.js",
+    "frontend": "cd frontend && ng serve",
+    "server": "mongod"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
+}
