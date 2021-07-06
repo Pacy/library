@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'lib-frontend'`, () => {
+  it(`should have as title 'LibFrontend'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('lib-frontend');
+    expect(app.title).toEqual('LibFrontend');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('lib-frontend app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('LibFrontend app is running!');
   });
 });
