@@ -4,7 +4,7 @@
   <mat-icon>menu</mat-icon>
 </button>
 <mat-menu #navigationMenu="matMenu" id="burgerMenu" backdropClass="customize" [overlapTrigger]="false" yPosition="below" xPosition="after">
-  <button  mat-menu-item>Search</button>
+  <button  mat-menu-item routerLink="mediaSearch">Search</button>
   <button  mat-menu-item [matMenuTriggerFor]="MediaMenu">Media</button>
   <button [matMenuTriggerFor]="UsersMenu" mat-menu-item>Users</button>
   <button  mat-menu-item>Account</button>
@@ -18,7 +18,7 @@
   <button mat-menu-item  routerLink="/updateUser/:id">View User Information </button>
 </mat-menu>
   <h1 class="title"><a routerLink="home">Basic Library</a></h1>
-    <a class="toolbarNav">-  Search</a>
+    <a class="toolbarNav" routerLink="mediaSearch">-  Search</a>
     <a class="toolbarNav">-  Media</a>
     <a class="toolbarNav">-  Users</a>
     <div class="spacer"></div>
@@ -29,13 +29,13 @@
       </svg>
     </a>
     <a routerLink="account" id="accountLinkIcon">
-      <mat-icon title="Account settings">person</mat-icon>
+      <mat-icon title="Account settings" class="mat-icon-person">person</mat-icon>
     </a> 
 </div>
 <nav id="navBar">
   <ul>
     <li><a routerLink="home">Home</a></li>
-    <li><a routerLink="search">Search</a></li>
+    <li><a routerLink="mediaSearch">Search</a></li>
     <li class="navButton" [matMenuTriggerFor]="MediaMenu">Media</li>
     <li class="navButton" [matMenuTriggerFor]="UsersMenu">Users</li>
   </ul>

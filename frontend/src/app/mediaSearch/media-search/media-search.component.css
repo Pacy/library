@@ -1,0 +1,15 @@
+.simpleSearch {
+    flex-grow: 2;
+    margin-right: 0;
+}
+
+.extendedSearchButton {
+    margin-left: 20px;
+    flex-grow: 1;
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}

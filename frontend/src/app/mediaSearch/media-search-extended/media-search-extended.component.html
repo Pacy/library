@@ -1,0 +1,84 @@
+<mat-card class="search-matcard">
+  <mat-card-header>
+    <mat-card-title>Extended Search</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="search-matcard-form" id="extendedSearch" #extendedSearch="ngForm"
+      (ngSubmit)="search(extendedSearch.value)">
+
+      <div class="search-matcard-form-row">
+        <mat-form-field class="formfield-select-restriction search-matcard-row-top">
+          <!-- <mat-label>Filter language</mat-label> -->
+          <mat-select [(ngModel)]="searchField0" name="searchField0">
+            <mat-option *ngFor="let o of searchFields" [value]="o">{{o}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="formfield-search-term">
+          <mat-label>first search querry</mat-label>
+          <input type="search" matInput ngModel name="searchTerm0">
+        </mat-form-field>
+      </div>
+
+      <div class="search-matcard-form-row">
+        <mat-form-field class="formfield-select-search-operator">
+          <!-- <mat-label>Filter language</mat-label> -->
+          <mat-select [(ngModel)]="searchOperator1" name="searchOperator1">
+            <mat-option *ngFor="let s of searchOperators" [value]="s">{{s}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="formfield-select-restriction">
+          <!-- <mat-label>Filter language</mat-label> -->
+          <mat-select [(ngModel)]="searchField1" name="searchField1">
+            <mat-option *ngFor="let o of searchFields" [value]="o">{{o}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="formfield-search-term">
+          <mat-label>second search querry</mat-label>
+          <input type="search" matInput ngModel name="searchTerm1">
+        </mat-form-field>
+      </div>
+
+      <div class="search-matcard-form-row">
+        <mat-form-field class="formfield-select-search-operator">
+          <!-- <mat-label>Filter language</mat-label> -->
+          <mat-select [(ngModel)]="searchOperator2" name="searchOperator2">
+            <mat-option *ngFor="let s of searchOperators" [value]="s">{{s}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="formfield-select-restriction">
+          <!-- <mat-label>Filter language</mat-label> -->
+          <mat-select [(ngModel)]="searchField2" name="searchField2">
+            <mat-option *ngFor="let o of searchFields" [value]="o">{{o}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="formfield-search-term">
+          <mat-label>third search querry</mat-label>
+          <input type="search" matInput ngModel name="searchTerm2">
+        </mat-form-field>
+      </div>
+
+      <!-- ToDO Optional: allow to select multiple options instead of only allowing a specific one in each category-->
+      <mat-form-field>
+        <mat-label>Filter language</mat-label>
+        <mat-select [(ngModel)]="selectedLanguage" name="language">
+          <mat-option *ngFor="let l of languages" [value]="l">{{l}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Filter genre</mat-label>
+        <mat-select [(ngModel)]="selectedGenre" name="genre">
+          <mat-option *ngFor="let g of genres" [value]="g">{{g}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Filter media type</mat-label>
+        <mat-select [(ngModel)]="selectedMediaType" name="mediaType">
+          <mat-option *ngFor="let m of mediaTypes" [value]="m">{{m}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button id="search-button" mat-raised-button type="submit" form="extendedSearch">Search</button>
+  </mat-card-actions>
+</mat-card>

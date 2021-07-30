@@ -1,0 +1,65 @@
+<div class="mat-card-container">
+    <mat-card class="mat-card">
+        <mat-card-header>
+            <mat-card-title>{{searchResult.length}} search results</mat-card-title>
+            <mat-card-subtitle>Searched for; {{searchQuerry}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+
+            <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+                <ng-container matColumnDef="resultNumber">
+                    <th mat-header-cell *matHeaderCellDef> # </th>
+                    <td mat-cell *matCellDef="let i = dataIndex" class="result-enum">
+                        {{paginator.pageIndex * paginator.pageSize + i + 1}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef>Title</th>
+                    <td mat-cell *matCellDef="let media" routerLink="/viewMedia/{{media.id}}" class="hover-link">
+                        {{media.title}}
+                    </td>
+                </ng-container>
+                <!-- column for media graphic -->
+                <ng-container matColumnDef="mediaTyp2">
+                    <th mat-header-cell *matHeaderCellDef> Media type </th>
+                    <td mat-cell *matCellDef="let media" class="result-mediaTyp-icon">
+                        <mat-icon>{{getSvg(media.mediaTyp)}}</mat-icon>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="expand">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let media" class="result-unfold-icon">
+                        <mat-icon>unfold_more</mat-icon>
+                    </td>
+                </ng-container>
+                <mat-text-column name="mediaTyp"></mat-text-column>
+                <!-- Optional a picture of the item could be added here -->
+                <!-- expandable Row with description and release year -->
+                <ng-container matColumnDef="expandedDetail">
+                    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                        <div class="element-detail"
+                            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                            <div class="element-description">
+                                {{element.description}}
+                                <span class="element-description-attribution hover-link"
+                                    routerLink="/viewMedia/{{element.id}}"> View Media</span>
+                            </div>
+                            <div>
+                                {{element.releaseYear}}
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let element; columns: columnsToDisplay" class="element-row"
+                    [class.expanded-row]="expandedElement === element"
+                    (click)="expandedElement = expandedElement === element ? null : element"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[4, 10, 20, 50]" showFirstLastButtons></mat-paginator>
+        </mat-card-content>
+
+    </mat-card>
+</div>

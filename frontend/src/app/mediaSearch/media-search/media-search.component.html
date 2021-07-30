@@ -1,0 +1,19 @@
+<div class="searchContainer">
+    <app-media-search-simple class="simpleSearch"></app-media-search-simple>
+    <div class="extendedSearchButton" *ngIf="!extendedSearch" (click)="toggleExtendedSearch()">
+        <button mat-raised-button>extended search
+            <mat-icon>expand_more</mat-icon>
+        </button>
+    </div>
+    <div class="extendedSearchButton" *ngIf="extendedSearch">
+        <button mat-stroked-button (click)="toggleExtendedSearch()">extended search
+            <mat-icon>expand_less</mat-icon>
+        </button>
+    </div>
+</div>
+
+<div *ngIf="extendedSearch">
+    <app-media-search-extended></app-media-search-extended>
+</div>
+
+<app-media-search-results *ngIf="getSearchStatus()"></app-media-search-results>

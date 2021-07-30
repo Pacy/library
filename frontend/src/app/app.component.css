@@ -7,12 +7,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     margin: 8px 0;
   }
 
@@ -47,6 +42,7 @@
   .toolbar #twitter-logo:hover {
     opacity: 0.8;
   }
+
   .content {
     margin: 60px auto 0;
     /* padding: 0 16px; */
@@ -58,7 +54,7 @@
     color: #125699;
   }
 
-/*
+  /*
   footer {
     margin-top: 8px;
     display: flex;
@@ -72,93 +68,100 @@
   }
 */
 
-.title{
+  .title {
     font-family: 'Varela Round', sans-serif;
     font-weight: normal;
     padding-right: 15px;
     padding-left: 25px;
-}
+  }
 
-
-
-#navBar{
+  #navBar {
     position: absolute;
-    display:none;
+    display: none;
     top: 60px;
     left: 0;
     right: 0;
     height: 40px;
     background-color: #a8d4ff;
-}
-#navBar ul{
-    padding:0px;
+  }
+
+  #navBar ul {
+    padding: 0px;
     margin: 0px;
     overflow: hidden;
     list-style-type: none;
-}
+  }
 
-#navBar li{
-    float:left;
+  #navBar li {
+    float: left;
     padding: 12px 20px;
     border-left: 1px solid white;
-}
-#navBar li:first-child{
-    border-left:none;
-}
-.navButton{
-  cursor: pointer;
-  color: white;
-}
+  }
 
-.toolbarNav{
+  #navBar li:first-child {
+    border-left: none;
+  }
+
+  .navButton {
+    cursor: pointer;
+    color: white;
+  }
+
+  .toolbarNav {
     margin-right: 10px;
-}
+  }
 
-a{
+  a {
     text-decoration: none;
-}
+  }
 
-a:visited,
-a{
-    color:white;
-}
+  a:visited, a {
+    color: white;
+  }
 
-#burgerMenuIcon{
+  #burgerMenuIcon {
     margin-right: 10px;
     margin-left: 5px;
     display: none;
-}
+  }
+
+  #accountLinkIcon{
+    margin-right: 15px;
+  }
+
+  .mat-icon-person{
+    font-size: 30px;
+  }
 
   /* Responsive Styles */
+
   @media screen and (max-width: 960px) {
-    .toolbarNav{
+    .toolbarNav {
       display: none;
     }
-    #navBar{
+    #navBar {
       display: block;
     }
-   .content{
-     margin-top: 100px;
-   }
+    .content {
+      margin-top: 100px;
+    }
   }
 
   @media screen and (max-width: 480px) {
-    .toolbarNav,
-    #accountLinkIcon,
-    #navBar{
-      display:none;
+    .toolbarNav, #accountLinkIcon, #navBar {
+      display: none;
     }
-    .content{
+    .content {
       margin-top: 60px;
     }
-    #burgerMenuIcon{
-      display:block;
+    #burgerMenuIcon {
+      display: block;
     }
-.spacer{
-  flex: 0;
-}
-.title{
-  padding-right: 0px;
-  padding-left: 0px;
-}
+    .spacer {
+      flex: 0;
+    }
+    .title {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
   }

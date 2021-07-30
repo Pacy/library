@@ -1,0 +1,69 @@
+/* 
+Css taken from https://v10.material.angular.io/components/table/overview example 
+*/
+
+table {
+    width: 100%;
+}
+
+tr.detail-row {
+    height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+    background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+    background: #efefef;
+}
+
+.element-row td {
+    border-bottom-width: 0;
+}
+
+.element-detail {
+    overflow: hidden;
+    display: flex;
+}
+
+.element-description {
+    padding: 16px;
+}
+
+.element-description-attribution {
+    opacity: 0.5;
+}
+
+
+/* 
+    Css not from exmaple above
+*/
+
+.mat-card-container {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.mat-card {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+.result-enum {
+    width: 40px;
+}
+
+.result-mediaTyp-icon {
+    width: 40px;
+}
+
+.result-unfold-icon {
+    width: 30px;
+}
+
+.hover-link {
+    cursor: pointer;
+}

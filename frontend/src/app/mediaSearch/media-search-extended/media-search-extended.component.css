@@ -1,0 +1,49 @@
+.search-matcard {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 720px;
+}
+
+.search-matcard-form {
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-matcard-form-row {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+#search-button {
+    float: right;
+    border: 1px solid #a8d4ff;
+    background-color: #cde6ff;
+}
+
+.formfield-select-search-operator {
+    flex-grow: 1;
+    margin-right: 4px;
+    max-width: 60px;
+}
+
+.formfield-select-restriction {
+    flex-grow: 1;
+    margin-right: 4px;
+    max-width: 120px;
+}
+
+.formfield-search-term {
+    flex-grow: 2;
+}
+
+.search-matcard-row-top {
+    margin-left: 64px;
+}
