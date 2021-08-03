@@ -68,7 +68,7 @@ export class MediaSearchResultsComponent implements OnInit {
     switch (s) {
       case this.mediaTyp[1]: return "fas fa-book"; //"menu_book";
       case this.mediaTyp[2]: return "fas fa-compact-disc"; //"album";
-      case this.mediaTyp[3]: return "das fa-gamepad"; //"videogame_asset";
+      case this.mediaTyp[3]: return "fas fa-gamepad"; //"videogame_asset";
       case this.mediaTyp[4]: return "fas fa-dice"; // "casino";
       case this.mediaTyp[5]: return "far fa-newspaper"; // "article";
       default: return "fas fa-bug"; //"error";
