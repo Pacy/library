@@ -1,0 +1,113 @@
+#media-card {
+    margin-top: 90px;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+#card-header {
+    /* display: flex; */
+    /* align-items: center; */
+    justify-content: center;
+}
+#medium-icon {
+    float: right;
+    margin-left: 4px;
+}
+#medium-title {
+    display: inline;
+}
+
+.split {
+    float: left;
+    width: 50%;
+}
+.medium-table {
+    width: 100%;
+}
+.medium-table-left {
+    padding-right: 8px;
+}
+.medium-table-right {
+    padding-left: 8px;
+}
+
+table {
+    border-collapse: seperate;
+    border-spacing: 0 2px;
+}
+table>tr>td:nth-child(odd) {
+    text-align: center;
+}
+td:nth-child(1) {
+    width: 90px;
+}
+
+.left {
+    text-align: left;
+}
+tr:nth-child(odd) {
+    background-color: #cde6ffaa;
+}
+
+#preview-image-pc {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 250px;
+    max-height: 200px;
+}
+.note{
+    color:red; 
+    clear:both;
+}
+
+/* Responsive Styles */
+
+@media screen and (max-width: 960px) {
+    #media-card {
+        width: 85%;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .split {
+        display: block;
+        width: 100%;
+    }
+    /* Clearfix (clear floats) */
+    .split::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .medium-table-left {
+        padding-right: 0px;
+    }
+    #preview-image-pc {
+        width: 20%;
+        padding: 5px;
+        float: left
+    }
+    .medium-table-right {
+        float: left;
+        width: 80%;
+        padding-left: 0px;
+    }
+}
+
+/* Optional: A.1) Remove image when on mobile screen as the picture is quite small then 
+             A.2) Enable Zoom for picture when clicking/hovering it
+             A.3) Change display order, so picture can be larger
+*/
+@media screen and (max-width: 480px) {
+    #media-card {
+        margin-top: 60px;
+        width: 95%;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}

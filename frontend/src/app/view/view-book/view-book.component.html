@@ -1,0 +1,23 @@
+<table id="medium-table">
+    <tr>
+        <td>ISBN</td>
+        <td>{{data.isbn}}</td>
+    </tr>
+    <tr>
+        <td>Author</td>
+        <td>{{data.author}}</td>
+    </tr>
+    <tr>
+        <td>Genre</td>
+        <td>{{data.genre}}</td>
+    </tr>
+    <tr>
+        <td>Pages</td>
+        <td>{{data.pages}}</td>
+    </tr>
+    <tr>
+        <td>Table of Content </td>
+        <td><a *ngIf="data.tableOfContent !== undefined" href="{{data.tableOfContent}}" class="btn btn-primary btn-sm"  target="_blank" rel="noopener noreferrer">Table of content</a>
+        </td>
+    </tr>
+</table> 

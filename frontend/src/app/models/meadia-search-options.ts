@@ -7,6 +7,8 @@ import { Injectable } from "@angular/core";
 export class mediaSearchOptions {
     private searchFields = ["No restriction", "Author", "Isbn", "Media type", "Publisher", "Title"]
     private languages = ["-- All --", "English", "German"];
+    // toDO (genre would have to be extended to include game/music/movies genres) or adapt genre in selection pages depending on media typ
+    // could also argue, that priority for the lib is on books, therefore search pages only filter genres by books (for now)
     private genres = ["-- All --", "Art", "Children", "Cooking", "Crafts, Hobbies & Home", "Crime", "Education", "Health & Fitness", "Historical", "Horror", "Humor", "Motivational", "Politics", "Religiion", "Romance", "Thriller", "Adventure", "Fantasy", "Roman", "Sci-fi"]
     private mediaTypes = ["-- All --", "Book", "CD / DVD / Blu-Ray", "electronical Game", "Game", "Magazine"];
     private searchOperators = ["And", "Or", "Not"];

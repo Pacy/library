@@ -31,6 +31,13 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 // Services
 import { MediaSearchService } from './services/search/media-search-service.service';
 import { ViewMediaComponent } from './view/view-media/view-media.component';
+import { ViewGameComponent } from './view/view-game/view-game.component';
+import { ViewDiscComponent } from './view/view-disc/view-disc.component';
+import { ViewDigitalGameComponent } from './view/view-digital-game/view-digital-game.component';
+import { ViewMagazineComponent } from './view/view-magazine/view-magazine.component';
+import { ViewBookComponent } from './view/view-book/view-book.component';
+import { SanitizeHtmlPipe } from './pipes/sanitize-html-pipe.pipe';
+import { SubCategoryViewDirective } from './view/view-media/sub-category-view.directive';
 
 @NgModule({
   declarations: [
@@ -42,7 +49,14 @@ import { ViewMediaComponent } from './view/view-media/view-media.component';
     MediaSearchResultsComponent,
     MediaSearchExtendedComponent,
     MediaSearchSimpleComponent,
-    ViewMediaComponent
+    ViewMediaComponent,
+    ViewGameComponent,
+    ViewDiscComponent,
+    ViewDigitalGameComponent,
+    ViewMagazineComponent,
+    ViewBookComponent,
+    SanitizeHtmlPipe,//obsolete at this point
+    SubCategoryViewDirective
   ],
   imports: [
     BrowserModule,

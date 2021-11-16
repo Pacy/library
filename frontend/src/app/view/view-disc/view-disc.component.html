@@ -1,0 +1,19 @@
+<table id="medium-table">
+    <tr>
+        <td>FSK</td>
+        <td>{{data.fsk}}</td>
+    </tr>
+    <tr>
+        <td>Duration</td>
+        <td>{{data.contentDuration}}</td>
+    </tr>
+    <tr>
+        <td>Involved People</td>
+        <td>{{data.involvedPerson}}</td>
+    </tr>
+    <tr>
+        <td>Table of Content </td>
+        <td><a *ngIf="data.contentLink !== undefined" href="{{data.tableOfContent}}" class="btn btn-primary btn-sm"  target="_blank" rel="noopener noreferrer">Table of content</a>
+        </td>
+    </tr>
+</table>
