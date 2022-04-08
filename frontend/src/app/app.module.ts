@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';  
 
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,7 +30,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
 // Services
-import { MediaSearchService } from './services/search/media-search-service.service';
+import { MediaService } from './services/media/media.service';
+
+
 import { ViewMediaComponent } from './view/view-media/view-media.component';
 import { ViewGameComponent } from './view/view-game/view-game.component';
 import { ViewDiscComponent } from './view/view-disc/view-disc.component';
@@ -75,9 +78,10 @@ import { SubCategoryViewDirective } from './view/view-media/sub-category-view.di
     CommonModule, 
     MatSelectModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    HttpClientModule
     ],
-  providers: [MediaSearchService],
+  providers: [MediaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

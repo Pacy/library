@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MediaSearchService } from 'src/app/services/search/media-search-service.service';
+import { MediaService } from 'src/app/services/media/media.service';
 
 @Component({
   selector: 'app-media-search',
@@ -10,7 +10,7 @@ export class MediaSearchComponent implements OnInit {
 
 
   constructor(
-    private searchService: MediaSearchService
+    private searchService: MediaService
   ) { }
 
   ngOnInit(): void {

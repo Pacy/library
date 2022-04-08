@@ -10,8 +10,8 @@
   <button  mat-menu-item>Account</button>
 </mat-menu>
 <mat-menu #MediaMenu="matMenu">
-  <button mat-menu-item routerLink="/addMediaUnit">Add Media </button>
-  <button mat-menu-item routerLink="/updateMediaUnit">View Media</button>
+  <button mat-menu-item routerLink="/addMedia">Add Media </button>
+  <button mat-menu-item routerLink="/updateMediaUnit">Update Media</button>
 </mat-menu>
 <mat-menu #UsersMenu="matMenu">
   <button mat-menu-item routerLink="/createUser">Add Users</button>
@@ -19,7 +19,7 @@
 </mat-menu>
   <h1 class="title"><a routerLink="home">Basic Library</a></h1>
     <a class="toolbarNav" routerLink="mediaSearch">-  Search</a>
-    <a class="toolbarNav">-  Media</a>
+    <a class="toolbarNav" [matMenuTriggerFor]="MediaMenu">-  Media</a>
     <a class="toolbarNav">-  Users</a>
     <div class="spacer"></div>
     <a aria-label="Optional twitter link" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">

@@ -88,4 +88,15 @@ export class mediaSearchOptions {
         }
         return searchString;
     }
+
+    getSvg(mediaType: string) {
+        switch (mediaType) {
+          case this.mediaTypes[1]: return "fas fa-book";  //"menu_book";
+          case this.mediaTypes[2]: return "fas fa-compact-disc"; //"album";
+          case this.mediaTypes[3]: return "fas fa-gamepad"; //"videogame_asset";
+          case this.mediaTypes[4]: return "fas fa-dice";// "casino";
+          case this.mediaTypes[5]: return "far fa-newspaper"; // "article";
+          default: return "fas fa-bug"; //"error";
+        }
+      }
 }

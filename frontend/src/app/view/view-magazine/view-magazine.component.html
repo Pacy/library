@@ -8,16 +8,12 @@
         <td>{{data.pages}}</td>
     </tr>
     <tr>
-        <td>Articles</td>
-        <td>{{data.articles}}</td>
-    </tr>
-    <tr>
         <td>Magazine Number</td>
         <td>{{data.magazineNumber}}</td>
     </tr>
     <tr>
         <td>Table of Content </td>
-        <td><a *ngIf="data.tableOfContent !== undefined" href="{{data.tableOfContent}}" class="btn btn-primary btn-sm"  target="_blank" rel="noopener noreferrer">Table of content</a>
+        <td><a *ngIf="data.tableOfContentLink !== undefined" href="{{data.tableOfContentLink}}" class="btn btn-primary btn-sm"  target="_blank" rel="noopener noreferrer">Table of content</a>
         </td>
     </tr>
 </table>

@@ -1,10 +1,10 @@
-<mat-card id="media-card">
+<mat-card id="media-card" >
     <mat-card-content>
-        <div *ngIf="medium$ | async as medium">
+        <div *ngIf="medium$ | async as medium" >
             <mat-card-header id="card-header">
-                <mat-card-title>
+                <mat-card-title> 
                     <!-- media graphic -->
-                    <i id="medium-icon" class="{{getSvg(medium.mediaTyp)}} fa-2x"></i>
+                    <i id="medium-icon" class="{{svgClass}} fa-2x"></i>
                     <h2 id="medium-title">{{medium.title}}</h2>
                 </mat-card-title>
             </mat-card-header>
@@ -23,8 +23,8 @@
                         <td >{{medium.genre}}</td>
                     </tr>
                     <tr>
-                        <td>Available languages</td>
-                        <td>{{medium.languages}}</td>
+                        <td>Language</td>
+                        <td>{{medium.language}}</td>
                     </tr>
                     <tr>
                         <td>Description</td>
@@ -38,7 +38,7 @@
                         onerror="this.onerror=null;this.src='https://www.insticc.org/node/TechnicalProgram/56e7352809eb881d8c5546a9bbf8406e.png';">
                 </a>
                 <div class="medium-table-right medium-table">
-                    <ng-template SubCategoryView></ng-template>
+                    <ng-template #SubCategoryView></ng-template>
                 </div>
             </div>
             <div *ngIf="!medium.possibleToTakeHome">
@@ -47,5 +47,4 @@
         </div>
     </mat-card-content>
 </mat-card>
-
 <!-- Optional change (table) layout for phone size to reduce the space of the first table column (actually only affects description column) -->

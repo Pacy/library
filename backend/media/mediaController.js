@@ -6,7 +6,7 @@ const mediaRoute = express.Router();
 const Media = require('./mediaSchema.js');
 
 exports.getSearchResults = function(req, res, next) {
-  // skipping $or $and combination; search char (i.e *, ?) for the moment as prior is frontend
+  // skipping $or $and combination; search char (i.e *, ?) for the moment as prioriety is frontend
   Media.find({
     ...req.query.ean? {ean: req.query.ean} : {},
     ...req.query.title? {title: new RegExp(req.query.title,"i")} : {},
@@ -56,7 +56,10 @@ exports.getMedia= function(req, res, next) {
     if (error) {
       return next(error)
     } else {
-      res.status(200).json(data)
+      if (data === null)
+      // different opinions wether port 404 or 204 should be used for no result from a get querry
+      res.status(404).send(); 
+      else res.status(200).json(data);
     }
   })
 };

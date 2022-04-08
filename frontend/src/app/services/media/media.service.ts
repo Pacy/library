@@ -2,15 +2,24 @@ import { Injectable } from '@angular/core';
 import {Book, Disc, digitalGame,Magazine, Game, Media } from 'src/app/models/media';
 import { mediaSearchOptions } from 'src/app/models/meadia-search-options';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
+import { AppSettings } from 'src/appSetting';
+import { catchError, refCount, map, publish , share} from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class MediaSearchService {
+export class MediaService {
+  
+  endpoint = AppSettings.api + "/media";
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
+
 
   constructor(
-    private searchOption: mediaSearchOptions
+    private searchOption: mediaSearchOptions,
+    private http: HttpClient
   ) {
     //ToDO remove when server connection is established
     this.searchResult.push(this.media1, this.media2, this.media3, this.media4, this.media5)
@@ -35,18 +44,18 @@ export class MediaSearchService {
 
   //toDo remove later, when backend connection is established
   book1: Book = { id: 2, title: "harry potter 2", mediaTyp: "Book", genre: "fantasy",
-   releaseYear: 2020, isbn: 213213, author: ["Jk Rowling"], pages: 600 };
+   releaseYear: 2020, isbn: 213213, authors: ["Jk Rowling"], pages: 600 };
    book2: Book = { id: 1, title: "Harry Potter and the Philosopher Stone", mediaTyp: "Book", genre: "Fantasy",
-   releaseYear: 1997, isbn: 747532699, author: ["Jk Rowling","Ghost"], pages: 223  , purchasePrice: "30.09€", languages:["english, german"], description:"Harry Potter is an ordinary boy living with his hostile relatives the Dursleys. He is later visited by a mysterious stranger named Rubeus Hagrid that he is famous for having survived an attack by the evil Lord Voldemort, that killed his parents, as a baby, and that he is the one chosen to defeat him. The film is known as Harry Potter and the Sorcerer's Stone in North America & India.", tableOfContent:"https://www.google.de",
+   releaseYear: 1997, isbn: 747532699, authors: ["Jk Rowling","Ghost"], pages: 223 , language:"english", description:"Harry Potter is an ordinary boy living with his hostile relatives the Dursleys. He is later visited by a mysterious stranger named Rubeus Hagrid that he is famous for having survived an attack by the evil Lord Voldemort, that killed his parents, as a baby, and that he is the one chosen to defeat him. The film is known as Harry Potter and the Sorcerer's Stone in North America & India.", tableOfContentLink:"https://www.google.de",
    previewImageLink:"https://books.google.de/books/content?id=XtekEncdTZcC&printsec=frontcover&img=1&zoom=5&edge=curl", externalProductLink:"https://www.google.de/books/edition/Harry_Potter_und_der_Stein_der_Weisen/XtekEncdTZcC?hl=de&gbpv=0"};
 
    cd1: Disc = { id: 3, title: "audio book hp1", releaseYear: 2010, mediaTyp:"CD / DVD / Blu-Ray",previewImageLink:"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.wallpapersafari.com%2F14%2F18%2FXzO4eC.jpg&f=1&nofb=1" }; //large image test
    cd2: Disc = { id: 4, title: "audio book hp2", description:"the audio book for the second book in the famous harry potter serious. Read by stephen fry",
-    releaseYear: 2010, mediaTyp:"CD, DVD, Blu-ray", contentLink: "google.de", contentDuration:600, involvedPerson: ["stephen fry"]};
+    releaseYear: 2010, mediaTyp:"CD, DVD, Blu-ray", tableOfContentLink: "google.de", duration:600, involvedPerson: ["stephen fry"]};
 
-    game1: digitalGame ={ id:3, title:"super mario", languages:["german"], usk: 6, developers:["Nintendo"], platforms:["snes"], mediaTyp:"electronical Game"};
+    game1: digitalGame ={ id:3, title:"super mario", language:"german", usk: 6, developers:["Nintendo"], platforms:["snes"], mediaTyp:"electronical Game"};
     boardGame1: Game = {id:3, title: "monopoly", playTime:60, playersMaximum:6, playersMinimum: 2, mediaTyp:"Game"};
-    magazine1: Magazine= {id: 4, title:"asjdw dsfi asdfsj", languages:["english"], mediaTyp:"Magazine", issn:"1234 567X", pages:100};
+    magazine1: Magazine= {id: 4, title:"asjdw dsfi asdfsj", language:"english", mediaTyp:"Magazine", issn:"1234 567X", pages:100};
     
     arraycollection= [this.book1,this.book2,this.cd1,this.cd2,this.game1,this.boardGame1,this.magazine1];
 
@@ -63,12 +72,17 @@ export class MediaSearchService {
     return "error gettingMediumID";
   }
 
-  getMediumExemplarByID(i: number): Observable<Media> {
-    if(i >=this.arraycollection.length)
-    return of(this.arraycollection[this.arraycollection.length-1])
-    else if (i< 0)
-    return of(this.arraycollection[0])
-    else return of(this.arraycollection[i])
+
+  getMediumExemplarByID(id): Observable<any> {
+    let apiUrl= `${this.endpoint}/${id}`;
+    return this.http.get(apiUrl,{ headers: this.headers})
+    .pipe(
+      share(),
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
    }
 
   editMediumByID(i: number) { }
@@ -111,4 +125,74 @@ export class MediaSearchService {
       return this.searchedForString;
     }
   }
+  getAllCats(): Observable<Cat[]> {
+    return this.http.get<Cat[]>('http://localhost:3000/api/cats')
+  }
+  // GetMedias() {
+  //   return this.http.get(`${this.endpoint}`);
+  // }
+  getCat(name: string): Observable<Cat> {
+    let r= "rrr";
+    this.http.get<Cat>('http://localhost:3000/api/cats/' + r)
+    .subscribe((res) => {
+      console.log(res, "getCat +id")
+    })
+    return null;
+  }
+
+  insertCat(r): Observable<Cat> {
+    console.log("Insert called",r),
+    this.http.post<Cat[]>('http://localhost:3000/api/cats/', new Cat("rrr"))
+    .subscribe((res) =>{
+      console.log(res);
+      console.log("test2,2")
+  });
+    return this.http.post<Cat>('http://localhost:3000/api/cats/',r)
+  }
+
+  updateCat(cat: Cat): Observable<void> {
+
+   this.http.put<void>( 'http://localhost:3000/api/cats/' + "rrr","ccc")
+   .subscribe((res)=>{
+     console.log(res)
+   })
+    return null;
+  }
+
+  deleteCat(name: string) {
+    return this.http.delete('http://localhost:3000/api/cats/' + "rrr")
+    .subscribe((res)=>
+    console.log(res)
+    )
+  }
+  editCat(name:string){
+    
+  }
+
+  // Error handling 
+ handleError(error: HttpErrorResponse) {
+   console.log("handle error")
+  let errorMessage = '';
+      if (error.error instanceof ErrorEvent) {
+        // Get client-side error
+        errorMessage = error.error.message;
+      } else {
+        // Get server-side error
+        errorMessage = `Error Code: ${error.status}\n Message: ${error.message}`;
+        window.alert(errorMessage);
+      } 
+      console.log(errorMessage);
+      return throwError(errorMessage);
+ }
 }
+
+export class Cat {
+  name: string
+  constructor(r){
+    this.name=r;
+  }
+
+  
+ 
+  
+} 
