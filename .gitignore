@@ -202,3 +202,8 @@ $RECYCLE.BIN/
 readme.txt
 frontend/src/app/_altWays.js
 frontend/.angular/cache/*
+personal/*
+todo.txt
+toNote.txt
+todo_private.txt
+zsafe_old.txt

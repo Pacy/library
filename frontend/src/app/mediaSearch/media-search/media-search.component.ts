@@ -8,7 +8,7 @@ import { MediaService } from 'src/app/services/media/media.service';
 })
 export class MediaSearchComponent implements OnInit {
 
-
+  
   constructor(
     private searchService: MediaService
   ) { }

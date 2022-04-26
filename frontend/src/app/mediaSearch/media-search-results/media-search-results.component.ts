@@ -5,6 +5,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { mediaSearchOptions } from 'src/app/models/meadia-search-options';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -22,38 +23,56 @@ import { mediaSearchOptions } from 'src/app/models/meadia-search-options';
 export class MediaSearchResultsComponent implements OnInit {
   searchResult: Media[];
   searchQuerry: string;
+  //dataSource;
   dataSource;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  subscription: Subscription;
 
   constructor(
     private searchService: MediaService,
     private cdref: ChangeDetectorRef,
     private searchOption: mediaSearchOptions
-  ) { }
+  ) { 
+    this.searchResult = searchService.searchResult;
+    this.subscription = this.searchService.getData().subscribe(data => { 
+      this.searchResult = data;
+      this.dataSource = new MatTableDataSource<Media>(this.searchResult);
+      this.dataSource.paginator = this.paginator;
+  });
+  }
 
 
   ngOnInit(): void {
-    this.searchResult = this.searchService.getSearchResult();
-    this.searchQuerry = this.searchService.getSearchedFor();
+    console.log("on Init", this.searchResult, this.searchQuerry)
+
   }
   ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource<Media>(this.searchResult);
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource = new MatTableDataSource<Media>(this.searchResult);
+    // this.dataSource.paginator = this.paginator;
   }
   ngAfterViewChecked() {
     this.cdref.detectChanges();
      }
      
   ngOnChanges() {
+    
     this.searchResult = this.searchService.getSearchResult();
     this.searchQuerry = this.searchService.getSearchedFor();
+    console.log("ngonChange", this.searchResult,this.searchQuerry)
+    this.cdref.detectChanges();
   }
 
   ngDoCheck() {
     if (this.searchQuerry !== this.searchService.getSearchedFor()) {
+      console.log("ngDocheck", this.searchQuerry, this.searchService.getSearchedFor())
        this.ngOnChanges();
     }
  }
+ 
+ngOnDestroy() {
+  // unsubscribe to ensure no memory leaks
+  this.subscription.unsubscribe();
+}
 
   columnsToDisplay = ['resultNumber', 'title', 'mediaTyp2', 'expand'];
   expandedElement: Media | null;
@@ -63,4 +82,5 @@ export class MediaSearchResultsComponent implements OnInit {
   getSvg(mediaType: string) {
     return  this.searchOption.getSvg(mediaType);
   }
+
 }

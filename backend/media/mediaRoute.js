@@ -10,6 +10,9 @@ router
   .post(mediaController.createMedia);
 
 router
+  .route('/quickSearch')
+  .get(mediaController.quickSearch)
+router
   .route('/:id')
   .get(mediaController.getMedia)
    //toDo: protect so only updates from authorized persons are possible

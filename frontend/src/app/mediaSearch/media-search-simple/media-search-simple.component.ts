@@ -18,6 +18,6 @@ export class MediaSearchSimpleComponent implements OnInit {
   
   onSubmit(data) {
     //toDO check user input (security wise, not syntactic)
-    this.searchService.searchFor(data.value);
+    this.searchService.quickSearch(data.value);
   }
 }
