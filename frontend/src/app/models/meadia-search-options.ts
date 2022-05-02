@@ -5,16 +5,28 @@ import { Injectable } from "@angular/core";
         providedIn: 'root'
     })
 export class mediaSearchOptions {
+    //TODO optional generate searchFields via Object.keys from fronToBackendFieldName
     private searchFields = ["No restriction", "Author", "Description", "Developer", "Isbn", "Publisher", "Release Year", "Title"]
     private languages = ["-- All --", "English", "German"];
+    private frontToBackendFieldName = {
+        "No restriction": "none",
+        "Author": "authors",
+        "Description": "description",
+        "Developer": "developer",
+        "Isbn": "isbn",
+        "Publisher": "publisher",
+        "Release Year" : "releaseYear",
+        "Title": "title"
+    }
     // toDO (genre would have to be extended to include game/music/movies genres) or adapt genre in selection pages depending on media typ
     // could also argue, that priority for the lib is on books, therefore search pages only filter genres by books (for now)
-    private genres = ["-- All --", "Art", "Children", "Cooking", "Crafts, Hobbies & Home", "Crime", "Education", "Health & Fitness", "Historical", "Horror", "Humor", "Motivational", "Politics", "Religiion", "Romance", "Thriller", "Adventure", "Fantasy", "Roman", "Sci-fi"]
+    private genres = ["-- All --", "Adventure",  "Art", "Children", "Cooking", "Crafts, Hobbies & Home", "Crime", "Education", "Fantasy", "Health & Fitness", "Historical", "Horror", "Humor", "Motivational", "Politics", "Religiion", "Roman", "Romance", "Thriller", "Sci-fi"]
     private mediaTypes = ["-- All --", "Book", "CD / DVD / Blu-Ray", "electronical Game", "Game", "Magazine"];
     private searchOperators = ["and", "or", "not"];
 
     getSearchFields() {
-        return this.searchFields;
+        // return this.searchFields;
+        return Object.keys(this.frontToBackendFieldName)
     }
     getLanguages() {
         return this.languages;
@@ -97,8 +109,8 @@ export class mediaSearchOptions {
     */
     simplifySearchObject(data) {
         let obj = {}
-        if (Object.keys(data).length == 1) {
-            obj["searchTerm0"]={}
+        if (Object.keys(data).length == 1) { //quick Search was used 
+            obj["searchTerm0"] = {}
             obj["searchTerm0"]["field"] = "none";// { "none": data.searchTerm0 };
             obj["searchTerm0"]["value"] = data.searchTerm0;
         } else {
@@ -106,32 +118,25 @@ export class mediaSearchOptions {
             //check if searchTerm is not empty;
             //  true: search was restricted, false: skip
             if (data.searchTerm0 !== "") {
-                obj["searchTerm0"]={};
-                (data.searchField0 == this.searchFields[0]) ?
-                    obj["searchTerm0"]["field"] = "none"//{ "none": data.searchTerm0 }
-                    : obj["searchTerm0"]["field"] =data.searchField0;// { [data.searchField0]: data.searchTerm0 };
-                obj["searchTerm0"]["value"]=data.searchTerm0;
+                obj["searchTerm0"] = {};
+                obj["searchTerm0"]["field"] = this.frontToBackendFieldName[data.searchField0]
+                obj["searchTerm0"]["value"] = data.searchTerm0;
             }
             //##second search querry##
             //check if searchTerm is not empty;
             //  true: search was restricted, false: skip
             if (data.searchTerm1 !== "") {
-                obj["searchTerm1"] ={};
-                (data.searchField1 == this.searchFields[0]) ?
-                    obj["searchTerm1"]["field"] = "none"
-                    : obj["searchTerm1"]["field"] = data.searchField1;
+                obj["searchTerm1"] = {};
+                obj["searchTerm1"]["field"] = this.frontToBackendFieldName[data.searchField1]
                 obj["searchTerm1"]["operator"] = data.searchOperator1;
-                // obj["searchTerm1"]["field"] =["none"];
                 obj["searchTerm1"]["value"] = data.searchTerm1;
             }
             //##third search querry##
             //check if searchTerm is not empty;
             //  true: search was restricted, false: skip
             if (data.searchTerm2 !== "") {
-                obj["searchTerm2"] ={};
-                (data.searchField2 == this.searchFields[0]) ?
-                    obj["searchTerm2"]["field"] = "none"
-                    : obj["searchTerm2"]["field"] = data.searchField2;
+                obj["searchTerm2"] = {};
+                obj["searchTerm2"]["field"] = this.frontToBackendFieldName[data.searchField2]
                 obj["searchTerm2"]["operator"] = data.searchOperator2;
                 obj["searchTerm2"]["value"] = data.searchTerm2;
             }

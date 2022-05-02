@@ -1,5 +1,5 @@
 export interface Media {
-	id: number;
+	_id: number;
     ean?: number;
     title: string;
     releaseYear?: number;

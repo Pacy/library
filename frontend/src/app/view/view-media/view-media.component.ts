@@ -83,7 +83,7 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
     // no need to unsubscribe from ActivatedRoute observable
     this.route.params.subscribe(params => {
       let id = params['id']; // get value from url
-      this.subscription = this.searchService.getMediumExemplarByID(id)
+      this.subscription = this.searchService.getMediumByID(id)
         .subscribe((data) => {
           this.medium$ = of(data);
           this.changeDetector.detectChanges();

@@ -34,13 +34,24 @@
     }
 
     /**
-     * lowerCase the keys in the object given and return an adjusted object then
-     * @param {*} obj 
-     * @returns obj
-     */
-     function lowerObjectKeys  (obj) {
-        let result = {};
-        // to do 
-        return result;
+     * Check if an objective is empty or has some key-value pairs
+     * @param {*} obj to test
+     * @returns true or false
+     */ 
+     function objectIsEmpty(obj) {
+        return Object.keys(obj).length == 0;
       }
- module.exports = { unflattenObject, lowerObjectKeys};
+
+      /**
+       * 
+       * @param {*} str expects a string to check if it is a number or not
+       * @returns boolean
+       */
+      // code snippets (including comment) from https://stackoverflow.com/questions/175739/how-can-i-check-if-a-string-is-a-valid-number
+      function isNumber(str) {
+          console.log(str, !isNaN(str),!isNaN(parseFloat(str)));
+        if (typeof str != "string") return false // we only process strings!  
+        return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+               !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+      }
+ module.exports = { unflattenObject, objectIsEmpty, isNumber};

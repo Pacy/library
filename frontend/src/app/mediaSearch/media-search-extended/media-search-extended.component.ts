@@ -48,6 +48,6 @@ export class MediaSearchExtendedComponent implements OnInit {
   }
 
   search(data) {
-    this.searchService.searchFor(data);
+    this.searchService.searchFor(data, false);
   }
 }
