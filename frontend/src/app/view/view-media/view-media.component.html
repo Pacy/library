@@ -1,26 +1,26 @@
-<mat-card id="media-card" >
+<mat-card id="media-card">
     <mat-card-content>
-        <div *ngIf="medium$ | async as medium" >
+        <div *ngIf="medium$ | async as medium">
             <mat-card-header id="card-header">
-                <mat-card-title> 
+                <mat-card-title>
+                    {{medium.title}}
                     <!-- media graphic -->
-                    <i id="medium-icon" class="{{svgClass}} fa-2x"></i>
-                    <h2 id="medium-title">{{medium.title}}</h2>
+                    <i id="medium-icon" class="{{svgClass}} fa-lg"></i>
                 </mat-card-title>
             </mat-card-header>
             <div class="split">
                 <table class="medium-table-left medium-table">
                     <tr>
                         <td>Release Year</td>
-                        <td >{{medium.releaseYear}}</td>
+                        <td>{{medium.releaseYear}}</td>
                     </tr>
                     <tr>
                         <td>Publisher</td>
-                        <td >{{medium.publisher}}</td>
+                        <td>{{medium.publisher}}</td>
                     </tr>
                     <tr>
                         <td>Genre</td>
-                        <td >{{medium.genre}}</td>
+                        <td>{{medium.genre}}</td>
                     </tr>
                     <tr>
                         <td>Language</td>
@@ -44,7 +44,55 @@
             <div *ngIf="!medium.possibleToTakeHome">
                 <p class="note">Medium can only be viewed in the library. It cannot be borrowed.</p>
             </div>
+            <mat-card-actions align="end">
+                <button mat-icon-button class="headerButton" routerLink="/editMedia/{{medium._id}}">
+                    <mat-icon aria-label="Edit button">edit</mat-icon>
+                </button>
+                <button mat-icon-button class="headerButton" (click)="confirmDeletion(confirmDeleteDialogue)">
+                    <mat-icon aria-label="Delete button">delete</mat-icon>
+                </button>
+            </mat-card-actions>
         </div>
     </mat-card-content>
 </mat-card>
 <!-- Optional change (table) layout for phone size to reduce the space of the first table column (actually only affects description column) -->
+
+<ng-template #confirmDeleteDialogue let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Confirm Deletion</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p>This will delete this medium from the database. Please confirm that you want to continue&hellip;</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="deleteConfirmation(deleting)">Confirm deletion</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Cancel clicked')">Cancel</button>
+    </div>
+</ng-template>
+
+<ng-template #deleting let-modal>
+    <div class="modal-header">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="spinner-border" role="status" *ngIf="waitingOnDeleteRespond; else deleteRespond">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div>
+            <ng-template #deleteRespond>
+                <span class="material-icons" *ngIf="deleteSuccesful">
+                    done
+                </span>
+                <span class="material-icons" *ngIf="!deleteSuccesful">
+                    error
+                </span>
+            </ng-template>
+            <p id="deleteMessage"> trying to delete database entry&hellip;</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="delete()" *ngIf="!deleteSuccesful">try again</button>
+        <button type="button" class="btn btn-light" (click)="closeAllModal()">Close</button>
+    </div>
+</ng-template>

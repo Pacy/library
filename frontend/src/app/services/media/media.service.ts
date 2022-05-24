@@ -17,7 +17,6 @@ export class MediaService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   // const headers = new HttpHeaders().append('header', 'value');
 
-
   constructor(
     private searchOption: mediaSearchOptions,
     private http: HttpClient
@@ -59,15 +58,37 @@ export class MediaService {
 
   getMediumExemplarByID(id) { }
 
-  editMediumByID(i) { }
+  editMediumByID(id, data): Observable<any> {
+    const apiUrl = `${this.endpoint}/${id}`;
+    return this.http.put(apiUrl,data, {headers:this.headers})
+    .pipe(catchError(this.handleError));
+   }
 
   editMediumExemplarByID(i) { }
 
-  deleteMediumByID(i) { }
+  deleteMediumByID(id): Observable<any> {
+    const apiUrl = `${this.endpoint}/${id}`;
+    return this.http.delete(apiUrl)
+      .pipe(
+        catchError(this.handleError))
+  }
+
 
   deleteMediumExemplarByID(i) { }
 
-  createMediumBy() { }
+  /**
+   * Sent a create request to the backend with the given data object
+   * @param data 
+   */
+  createMedium(data: object): Observable<any> {
+    const apiUrl = `${this.endpoint}`;
+
+    return this.http.post(apiUrl, data)
+      // .subscribe((res) => {
+      //   console.log(res);
+      // });
+    .pipe(catchError(this.handleError))
+  }
 
   createMediumExemplar() { }
 
@@ -160,6 +181,6 @@ export class MediaService {
       window.alert(errorMessage);
     }
     console.log(errorMessage);
-    return throwError(errorMessage);
+    return throwError(() => { return (errorMessage) });
   }
 }

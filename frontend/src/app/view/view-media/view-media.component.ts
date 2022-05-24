@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, AfterViewInit, Type, ViewContainerRef, QueryList, ChangeDetectorRef } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { Media } from 'src/app/models/media';
-import { ActivatedRoute } from "@angular/router"; // get value from url
+import { ActivatedRoute, Router } from "@angular/router"; // get value from url
 import { MediaService } from 'src/app/services/media/media.service';
 import { mediaSearchOptions } from 'src/app/models/meadia-search-options';
 import { SubCategoryViewDirective } from './sub-category-view.directive';
@@ -10,6 +10,9 @@ import { ViewDiscComponent } from '../view-disc/view-disc.component';
 import { ViewDigitalGameComponent } from '../view-digital-game/view-digital-game.component';
 import { ViewGameComponent } from '../view-game/view-game.component';
 import { ViewMagazineComponent } from '../view-magazine/view-magazine.component';
+
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-view-media',
@@ -21,17 +24,22 @@ import { ViewMagazineComponent } from '../view-magazine/view-magazine.component'
 export class ViewMediaComponent implements OnInit, AfterViewInit {
   
   @ViewChildren('SubCategoryView', { read: ViewContainerRef }) private SubCategoryViewDirective!: QueryList<any>;
+  waitingOnDeleteRespond: boolean = true;
+  deleteSuccesful: boolean = true;
   
   constructor(
     private route: ActivatedRoute,
     private searchService: MediaService,
     private searchOption: mediaSearchOptions,
-   private changeDetector: ChangeDetectorRef
+   private changeDetector: ChangeDetectorRef,
+   private modalService: NgbModal,
+   private router: Router
   ) {}
 
   medium$!: Observable<Media>; // data of the medium request from the backend
   svgClass; // class for the graphical representation of the medium type
   private mediaType: string[];
+  private id; //id of the object to view. 
 
   private subscription: Subscription;
 
@@ -82,8 +90,8 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
   loadMedium() {
     // no need to unsubscribe from ActivatedRoute observable
     this.route.params.subscribe(params => {
-      let id = params['id']; // get value from url
-      this.subscription = this.searchService.getMediumByID(id)
+      this.id = params['id']; // get value from url
+      this.subscription = this.searchService.getMediumByID(this.id)
         .subscribe((data) => {
           this.medium$ = of(data);
           this.changeDetector.detectChanges();
@@ -91,5 +99,59 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
           this.setSvg(data.mediaType)
         })
     })
+  }
+
+  // confirmed delete request
+  deleteConfirmation(content){
+    this.modalService.open(content, {centered:true})
+    this.delete();
+    // this.modalService.dismissAll();
+  }
+
+  // call media service to try to delete currently viewed media
+  delete(){
+    this.searchService.deleteMediumByID(this.id)
+    .subscribe(
+      (res) => {
+        console.log(res);
+        this.deleteSuccessful();
+      },
+      (err) => {
+        this.deleteFailed(err);
+      }
+    )
+  }
+
+  clickMethod(name: string) {
+    if(confirm("Are you sure to delete "+name)) {
+      console.log("Implement delete functionality here");
+    }
+  }
+
+  confirmDeletion(content) {
+    this.modalService.open(content, { centered: true });
+    this.waitingOnDeleteRespond=true;
+  }
+
+  deleteSuccessful=() =>{
+    this.waitingOnDeleteRespond=false;
+    this.deleteSuccesful= true;
+    document.getElementById('deleteMessage').innerText = ' Deletion succesful!';
+  }
+
+
+  deleteFailed = (error) =>{
+    this.waitingOnDeleteRespond=false;
+    this.deleteSuccesful= false;
+    document.getElementById('deleteMessage').textContent = ` Deletion failed! + ${error}`;
+
+  }
+
+  closeAllModal(){
+    this.modalService.dismissAll();
+    // optional redirect here. this is currently only available to be called on modal reporting the delete status. 
+    // but the request could also be an error at the moment. 
+    // this.router.navigate();
+
   }
 }

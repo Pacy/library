@@ -32,13 +32,13 @@ const mediaSchema = new Schema({
   genre: String,
   mediaType: String,
   language: String,
-  tags: [String],
+  //currently obsolete, as it is not used tags: [String],
   previewImageLink: String,
   externalProductLink: String,
   // properties of the different mediatypes
   //      read comment on top for why the table will have a bunch of blank fields at the moment
   //book properties
-  isbn: Number,
+  // isbn: Number, // same number as ean, therefore can removed here
   authors: [{type:String}],
   pages: Number, // property also for a magazine
   tableOfContentLink: String, // property for books, magazine, (Disc)
@@ -49,13 +49,13 @@ const mediaSchema = new Schema({
   // digitalGame
   developers: [String],
   usk: Number,
-  platforms: [String],
+  platforms: String, // not an array, because different platform have also different ean. Which means it has to be a seperate entry
   // Games
   minAge: Number,
   playTime: Number,
   playersMinimum: Number,
   playersMaximum: Number,
-  // 
+  // magazine
   issn: Number,
   magazineNumber: Number,
 },{

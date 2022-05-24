@@ -1,0 +1,25 @@
+#issn {
+    width: 22%;
+}
+
+.shortNumber {
+    width: 13%;
+}
+
+
+#tableOfContent {
+    width: 48%;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 960px) {
+    .shortNumber, #issn, #tableOfContent {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .shortNumber, #issn, #tableOfContent {
+        width: 100%;
+    }
+}

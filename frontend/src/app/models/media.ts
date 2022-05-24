@@ -8,13 +8,13 @@ export interface Media {
     genre?: string;
     mediaTyp: string,
     language?: string;
-    tags?: string[];
+    //currently no use case for them, tags?: string[];
     previewImageLink?: string;
-    externalProductLink?: string;
+    externalProductLink?: string; // link to external pages, so user may be able to have a sneak peak in the book there. not for afiliation link earnings
 }
 
 export interface Book extends Media{
-    isbn: number; /* todo: debatte if number or string, for 9-999-999 representation instead 999999 */
+    // ean and isbn same number;; isbn: number; /* todo: debatte if number or string, for 9-999-999 representation instead 999999 */
     authors: string[];
     pages: number;
     tableOfContentLink?: string; //link to a picture of the page of content
@@ -32,7 +32,8 @@ export interface Disc extends Media{
 export interface digitalGame extends Media{
     developers: string[]; // in case multiple developers 
     usk: number;
-    platforms: string[];
+  // does make less sense right now;;  tableOfContentLink?: string; //link to a picture of the page of content
+    platforms: string;
 }
 
 // No digital games, i.e card, boardgames,..

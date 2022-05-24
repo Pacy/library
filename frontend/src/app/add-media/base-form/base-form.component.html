@@ -1,0 +1,87 @@
+<div [formGroup]="form" class="formGroup">
+
+    <mat-form-field id="title">
+        <mat-label>Title</mat-label>
+        <!-- no 'for' attirubte required, as the specified floating label will be automatically used as the label for the form field control-->
+        <input matInput formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field id="ean">
+        <mat-label>Ean</mat-label>
+        <input matInput maxlength="13" pattern="\d*" formControlName="ean">
+        <mat-error *ngIf="form.controls.ean.errors?.minlength">Your ean is missing some numbers. Has to be 13 numbers
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field id="releaseYear">
+        <mat-label>Release Year</mat-label>
+        <input matInput type="number" formControlName="releaseYear">
+        <mat-error *ngIf="form.controls.releaseYear.errors?.max">You are way ahead of time. Please reconsider the
+            release year</mat-error>
+    </mat-form-field>
+
+    <mat-form-field id="publisher">
+        <mat-label>Publisher</mat-label>
+        <mat-chip-list #chipList aria-label="Publisher input" formControlName="publisher">
+            <mat-chip *ngFor="let p of form.get('publisher').value" (removed)="removePublisher(p)">
+                {{p}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+            <input placeholder="Press enter or comma after each author entered" [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addPublisher($event)">
+        </mat-chip-list>
+    </mat-form-field>
+
+    <mat-radio-group aria-label="Select an option" id="language" formControlName="language">
+        <mat-label>Language:</mat-label>
+        <mat-radio-button value="english">english</mat-radio-button>
+        <mat-radio-button value="german">german</mat-radio-button>
+        <!-- <mat-radio-button value="german,english">Both</mat-radio-button> -->
+    </mat-radio-group>
+
+    <!--    <mat-form-field>
+            <mat-label>Tags</mat-label>
+            <input matInput formControlName="tags">
+        </mat-form-field> -->
+
+    <mat-form-field>
+        <mat-label>External Product Link</mat-label>
+        <input matInput type="url" pattern="https?://.*" placeholder="know a website for a sneak peak in the book?"
+            formControlName="externalProductLink">
+        <mat-error *ngIf="form.controls.externalProductLink.errors?.pattern">Your input does not seem to be a valid url
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Cover Image Link</mat-label>
+        <input matInput type="url" pattern="https?://.*" formControlName="previewImageLink"
+            placeholder="http(s)://www.google.com/bookCover">
+        <mat-error *ngIf="form.controls.previewImageLink.errors?.pattern">Your input does not seem to be a valid url
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Genre</mat-label>
+        <mat-select formControlName="genre">
+            <mat-option *ngFor="let g of genreList" [value]="g">{{g}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Media Type</mat-label>
+        <mat-select formControlName="mediaType">
+            <mat-option value="Book">Book</mat-option>
+            <mat-option value="CD / DVD / Blu-Ray">CD, DVD, Blu-Ray</mat-option>
+            <mat-option value="Game">Game</mat-option>
+            <mat-option value="electronical Game">Video Game</mat-option>
+            <mat-option value="Magazine">Magazine</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field id="description">
+        <mat-label>Description</mat-label>
+        <textarea rows="6" matInput formControlName="description"></textarea>
+    </mat-form-field>
+</div>

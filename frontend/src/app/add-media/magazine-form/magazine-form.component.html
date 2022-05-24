@@ -1,0 +1,27 @@
+<div [formGroup]="form" class="formGroup">
+    <mat-form-field id="issn">
+        <mat-label>Issn</mat-label>
+        <input matInput maxlength="8" pattern="\d{7}[\dxX]$" formControlName="issn">
+        <mat-error *ngIf="form.controls.issn.errors?.minlength">you entered less than 8 character</mat-error>
+        <mat-error *ngIf="form.controls.issn.errors?.pattern">Your input does not seem to be a valid ISSN</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="shortNumber">
+        <mat-label>Magazine Number</mat-label>
+        <input matInput type="number" formControlName="magazineNumber">
+        <mat-error *ngIf="form.controls.magazineNumber.errors?.min">Magazine number should be not lower than 0</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="shortNumber">
+        <mat-label>Pages</mat-label>
+        <input matInput type="number" formControlName="pages">
+        <mat-error *ngIf="form.controls.pages.errors?.min">Magazine should have at least 1 page</mat-error>
+    </mat-form-field>
+
+    <mat-form-field id="tableOfContent">
+        <mat-label>Table of Content(Link)</mat-label>
+        <input matInput  type="url" pattern="https?://.*" formControlName="tableOfContentLink" placeholder="Link to a table of content">
+    <mat-error *ngIf="form.controls.tableOfContentLink.errors?.pattern">Your input does not seem to be a valid url
+    </mat-error>
+    </mat-form-field>
+</div>

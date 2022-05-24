@@ -1,0 +1,29 @@
+<div [formGroup]="form" class="formGroup">
+    <mat-form-field id="developers">
+        <mat-label>Developer(s)</mat-label>
+        <mat-chip-list #chipList aria-label="Developer input" formControlName="developers">
+            <mat-chip *ngFor="let dev of form.get('developers').value" (removed)="removeDeveloper(dev)">
+                {{dev}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+            <input placeholder="Press enter or comma after each publisher entered" [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addDeveloper($event)">
+        </mat-chip-list>
+    </mat-form-field>
+
+    <mat-form-field id="usk">
+        <mat-label>Usk</mat-label>
+        <input matInput type="number" formControlName="usk">
+        <mat-error *ngIf="form.controls['usk'].hasError('germanAgeRating')">Valid german age ratings are 0,6,12,16,18
+        </mat-error>
+    </mat-form-field>
+
+    <mat-radio-group aria-label="Select an option" id="platforms" formControlName="platforms">
+        <mat-label>Platform(s):</mat-label>
+        <mat-radio-button value="pc">pc</mat-radio-button>
+        <mat-radio-button value="playstation">playstation</mat-radio-button>
+        <mat-radio-button value="xbox">xbox</mat-radio-button>
+    </mat-radio-group>
+</div>

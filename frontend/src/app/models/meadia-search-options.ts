@@ -20,7 +20,7 @@ export class mediaSearchOptions {
     }
     // toDO (genre would have to be extended to include game/music/movies genres) or adapt genre in selection pages depending on media typ
     // could also argue, that priority for the lib is on books, therefore search pages only filter genres by books (for now)
-    private genres = ["-- All --", "Adventure",  "Art", "Children", "Cooking", "Crafts, Hobbies & Home", "Crime", "Education", "Fantasy", "Health & Fitness", "Historical", "Horror", "Humor", "Motivational", "Politics", "Religiion", "Roman", "Romance", "Thriller", "Sci-fi"]
+    private genres = ["-- All --", "Adventure",  "Art", "Children", "Cooking", "Crafts, Hobbies & Home", "Crime","--Disk--", "Education", "Fantasy","--Game--", "Health & Fitness", "Historical", "Horror", "Humor", "Motivational", "Politics", "Religiion", "Roman", "Romance", "Thriller", "Sci-fi", "--VideoGame--"]
     private mediaTypes = ["-- All --", "Book", "CD / DVD / Blu-Ray", "electronical Game", "Game", "Magazine"];
     private searchOperators = ["and", "or", "not"];
 
@@ -154,7 +154,15 @@ export class mediaSearchOptions {
         return obj;
     }
 
-    // flaten a given (nested) object to an object with depth one 
+    /**
+     * Flatten a given (nested) object to an unflatten object. The unflatten object contains information about being flatten
+     * (i.e key1.keys2: value)
+     * 
+     * @param object nested object to be flatten
+     * @param prefix prefix for recursive calls (to keep nested information)
+     * @param res 
+     * @returns flatten object
+     */
     flattenObject(object, prefix = '', res = {}) {
         Object.entries(object).reduce((r, [key, val]) => {
             const k = `${prefix}${key}`
@@ -168,6 +176,11 @@ export class mediaSearchOptions {
         return res;
     }
 
+    /**
+     * 
+     * @param mediaType 
+     * @returns css class name of scalable vector icon (font awesome icon)
+     */
     getSvg(mediaType: string) {
         switch (mediaType) {
             case this.mediaTypes[1]: return "fas fa-book";  //"menu_book";

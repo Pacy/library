@@ -8,16 +8,21 @@
 }
 
 #card-header {
-    /* display: flex; */
+    display: flex;
     /* align-items: center; */
     justify-content: center;
+    /* text-align: center; */
 }
 #medium-icon {
-    float: right;
+    /* float: right; */
     margin-left: 4px;
 }
 #medium-title {
     display: inline;
+}
+
+.headerButton{
+    float:right;
 }
 
 .split {
@@ -62,6 +67,10 @@ tr:nth-child(odd) {
 .note{
     color:red; 
     clear:both;
+}
+
+.modal-body{
+    display:inline-flex
 }
 
 /* Responsive Styles */

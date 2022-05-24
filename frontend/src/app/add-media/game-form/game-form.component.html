@@ -1,0 +1,24 @@
+<div [formGroup]="form" class="formGroup">
+    <mat-form-field class="gameFormField">
+        <mat-label>minimum Age advised</mat-label>
+        <input matInput type="number" formControlName="minAge">
+        <mat-error *ngIf="form.controls.minAge.errors?.min">Age can not be negative</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="gameFormField">
+        <mat-label>Average match time in minuted</mat-label>
+        <input matInput type="number" formControlName="playTime" placeholder="in minutes">
+        <mat-error *ngIf="form.controls.playTime.errors?.min">Play time can not be negative</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="gameFormField">
+        <mat-label>minimum Players requried</mat-label>
+        <input matInput type="number" formControlName="playersMinimum">
+        <mat-error *ngIf="form.controls.playersMinimum.errors?.min">Minimum player should be at least 1</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="gameFormField">
+        <mat-label>maximum Players possible</mat-label>
+        <input matInput type="number" formControlName="playersMaximum">
+    </mat-form-field>
+</div>

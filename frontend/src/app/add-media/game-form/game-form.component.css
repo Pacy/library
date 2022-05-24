@@ -1,0 +1,16 @@
+.gameFormField{
+    width: 24%;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 960px) {
+.gameFormField{
+    width: 48%;
+}
+}
+
+@media screen and (max-width: 480px) {
+    .gameFormField{
+        width: 100%;
+    }
+}

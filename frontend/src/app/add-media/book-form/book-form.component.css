@@ -1,0 +1,30 @@
+#pages {
+    min-width: 75px;
+    max-width: 10%
+}
+
+#tableOfContent {
+    max-width: 35%;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 960px) {
+    #pages, #tableOfContent {
+        max-width: none;
+        width: 48%;
+    }
+
+    #tableOfContent {
+        margin-left: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #pages, #tableOfContent {
+        width: 100%;
+    }
+
+    #tableOfContent {
+        margin-left: auto;
+    }
+}

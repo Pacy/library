@@ -7,7 +7,7 @@ import { AccountComponent } from './account/account.component';
 import { MediaSearchComponent } from './mediaSearch/media-search/media-search.component';
 import { MediaSearchResultsComponent } from './mediaSearch/media-search-results/media-search-results.component';
 import { ViewMediaComponent } from './view/view-media/view-media.component';
-
+import { UpdateMediaComponent } from './update-media/update-media.component';
 
 
 const routes: Routes = [
@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'mediaSearch', component: MediaSearchComponent},
   { path: 'viewMedia/:id', component: ViewMediaComponent},
+  { path: 'editMedia/:id', component: UpdateMediaComponent},
   { path: '', component: HomeComponent} //optional create PageNotFound instead
 ];
 

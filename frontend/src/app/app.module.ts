@@ -21,10 +21,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MediaSearchComponent } from './mediaSearch/media-search/media-search.component';
 import { MediaSearchResultsComponent } from './mediaSearch/media-search-results/media-search-results.component';
 import {MatInputModule} from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { MediaSearchExtendedComponent } from './mediaSearch/media-search-extended/media-search-extended.component';
 import { MediaSearchSimpleComponent } from './mediaSearch/media-search-simple/media-search-simple.component';
+import {MatChipsModule} from '@angular/material/chips';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -41,6 +43,14 @@ import { ViewMagazineComponent } from './view/view-magazine/view-magazine.compon
 import { ViewBookComponent } from './view/view-book/view-book.component';
 import { SanitizeHtmlPipe } from './pipes/sanitize-html-pipe.pipe';
 import { SubCategoryViewDirective } from './view/view-media/sub-category-view.directive';
+import { BookFormComponent } from './add-media/book-form/book-form.component';
+import { DiscFormComponent } from './add-media/disc-form/disc-form.component';
+import { GameFormComponent } from './add-media/game-form/game-form.component';
+import { DigitalGameFormComponent } from './add-media/digital-game-form/digital-game-form.component';
+import { MagazineFormComponent } from './add-media/magazine-form/magazine-form.component';
+import { BaseFormComponent } from './add-media/base-form/base-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UpdateMediaComponent } from './update-media/update-media.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +69,7 @@ import { SubCategoryViewDirective } from './view/view-media/sub-category-view.di
     ViewMagazineComponent,
     ViewBookComponent,
     SanitizeHtmlPipe,//obsolete at this point
-    SubCategoryViewDirective
+    SubCategoryViewDirective, BookFormComponent, DiscFormComponent, GameFormComponent, DigitalGameFormComponent, MagazineFormComponent, BaseFormComponent, UpdateMediaComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +89,10 @@ import { SubCategoryViewDirective } from './view/view-media/sub-category-view.di
     MatSelectModule,
     MatTableModule,
     MatPaginatorModule,
-    HttpClientModule
+    HttpClientModule,
+    MatChipsModule,
+    MatRadioModule,
+    NgbModule
     ],
   providers: [MediaService],
   bootstrap: [AppComponent]
