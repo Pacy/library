@@ -13,7 +13,7 @@ export class GameFormComponent implements OnInit {
   constructor(private rootFromGroup: FormGroupDirective) { }
 
   ngOnInit(): void {
-    this.form = this.rootFromGroup.control.get(this.formGroupName) as FormGroup
+    this.form = this.rootFromGroup.control.get(this.formGroupName) as FormGroup;
   }
 
 }

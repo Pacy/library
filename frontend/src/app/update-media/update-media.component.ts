@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { mediaSearchOptions } from '../models/meadia-search-options';
 import { ActivatedRoute } from '@angular/router';
-import { germanAgeRatingValidator } from './../add-media/customFormValidator'
+import { germanAgeRatingValidator, minMaxRelationValidator, urlValidator } from './../add-media/customFormValidator'
 
 
 @Component({
@@ -68,8 +68,8 @@ export class UpdateMediaComponent implements OnInit {
         mediaType: [],//? string,
         language: [],//? string;
         // currently obsolete tags: [],//? string[];
-        previewImageLink: [],//? string;
-        externalProductLink: [],//? string;
+        previewImageLink: ["", urlValidator()],//? string
+        externalProductLink: ["", urlValidator()],//? string
       }),
       //book formGroup
       book: this.fb.group({
@@ -77,13 +77,13 @@ export class UpdateMediaComponent implements OnInit {
         //  fruitInput: [null],
         authors: [[]],//?  string[];
         pages: ["", [Validators.min(1), Validators.max(23000)]],//? number;
-        tableOfContentLink: [],//? string; //link to a picture of the page of content
+        tableOfContentLink: ["", urlValidator()],//? string; //link to a picture of the page of content
       }),
 
       //Cd, dvd formGroup
       disc: this.fb.group({
         fsk: ['', germanAgeRatingValidator()],//? number;
-        tableOfContentLink: [],//? string; //link to a picture of the page of content
+        tableOfContentLink: ["", urlValidator()],//? string; //link to a picture of the page of content
         duration: ["", Validators.min(0)],//?  number; //in minutes
         involvedPerson: [[]],//? string[]; // singers, actors,...    
       }),
@@ -101,13 +101,16 @@ export class UpdateMediaComponent implements OnInit {
         minAge: ["", Validators.min(0)],//?  number; //minimum advised age
         playTime: ["", Validators.min(0)],//?  number; //either in minutes or a string to handle later
         playersMinimum: ["", Validators.min(1)],//? number; //minimum players needed
-        playersMaximum: [],//?  number; //maximum players possible
-      }),
+        playersMaximum: ["", Validators.min(1)],//?  number; //maximum players possible
+      },
+        { validators: minMaxRelationValidator("playersMinimum", "playersMaximum") }
+      ),
+
 
       //magazine formGroup
       magazine: this.fb.group({
         issn: ["", [Validators.minLength(8), Validators.pattern(/^\d{7}[\dxX]$/)]],//  string; //string as the last number (#8) could also be a "X"
-        tableOfContentLink: [],//? string; // link to a picture of the page of content
+        tableOfContentLink: ["", urlValidator()],//? string; // link to a picture of the page of content
         magazineNumber: ["", Validators.min(0)],//?  number;
         pages: ["", Validators.min(1)],//?  number;
       })

@@ -8,7 +8,7 @@ Application is built with MEAN stack
 ## Project Status
 Work in progress, so far working
 - a basic 'home' page including some news (news are hardcoded at the moment)
-- crud operation for media (front- and backend functionality)
+- crud operation for media and there respective sites
 
 
 ## Tech

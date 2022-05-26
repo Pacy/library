@@ -2,6 +2,10 @@
     width: 24%;
 }
 
+.red-font{
+    color:red;
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 960px) {
 .gameFormField{

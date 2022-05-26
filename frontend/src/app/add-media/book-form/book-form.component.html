@@ -24,7 +24,8 @@
         <mat-label>Table of Content (Link)</mat-label>
         <input matInput type="url" pattern="https?://.*" formControlName="tableOfContentLink"
             placeholder="Link to a table of content">
-        <mat-error *ngIf="form.controls.tableOfContentLink.errors?.pattern">Your input does not seem to be a valid url
+        <mat-error *ngIf="form.controls.tableOfContentLink.errors?.urlPattern">
+            {{form.controls.tableOfContentLink.errors.urlPattern.message}}
         </mat-error>
     </mat-form-field>
 </div>

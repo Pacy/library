@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MediaService } from '../services/media/media.service';
-import { germanAgeRatingValidator } from './customFormValidator'
+import { germanAgeRatingValidator, minMaxRelationValidator, urlValidator } from './customFormValidator'
 
 
 @Component({
@@ -35,21 +35,21 @@ export class AddMediaComponent implements OnInit {
         mediaType: [],//? string
         language: [],//? string
         // currently obsolete tags: [],//? string[]
-        previewImageLink: [],//? string
-        externalProductLink: [],//? string
+        previewImageLink: ["", urlValidator()],//? string
+        externalProductLink: ["", urlValidator()],//? string
       }),
       //book formGroup
       book: this.fb.group({
         // isbn: [],// number; same number as ean 
         authors: [[]],//?  string[];
         pages: ["", [Validators.min(1), Validators.max(23000)]],//? number;
-        tableOfContentLink: [],//? string; //link to a picture of the page of content
+        tableOfContentLink: ["", urlValidator()],//? string; //link to a picture of the page of content
       }),
 
       //Cd, dvd formGroup
       disc: this.fb.group({
         fsk: ['', germanAgeRatingValidator()],//? number;
-        tableOfContentLink: [],//? string; //link to a picture of the page of content
+        tableOfContentLink: ["", urlValidator()],//? string; //link to a picture of the page of content
         duration: ["", Validators.min(0)],//?  number; //in minutes
         involvedPerson: [[]],//? string[]; // singers, actors,...    
       }),
@@ -67,17 +67,21 @@ export class AddMediaComponent implements OnInit {
         minAge: ["", Validators.min(0)],//?  number; //minimum advised age
         playTime: ["", Validators.min(0)],//?  number; //either in minutes or a string to handle later
         playersMinimum: ["", Validators.min(1)],//? number; //minimum players needed
-        playersMaximum: [],//?  number; //maximum players possible
-      }),
+        playersMaximum: ["", Validators.min(1)],//?  number; //maximum players possible
+      },
+        { validators: minMaxRelationValidator("playersMinimum", "playersMaximum") }
+      ),
 
       //magazine formGroup
       magazine: this.fb.group({
         issn: ["", [Validators.minLength(8), Validators.pattern(/^\d{7}[\dxX]$/)]],//  string; //string as the last number (#8) could also be a "X"
-        tableOfContentLink: [],//? string; // link to a picture of the page of content
+        tableOfContentLink: ["", urlValidator()],//? string; // link to a picture of the page of content
         magazineNumber: ["", Validators.min(0)],//?  number;
         pages: ["", Validators.min(1)],//?  number;
       })
-    });
+    },
+      { updateOn: "blur" } // Validators errors would only be checked after user leaves field/clicks submit
+      );
 
     // this.createForm.get("book").disable()
     // would reduce the empty fields of the forms not used, but i plan to iterate over the whole object anway to remove empty fields of the field selected, so it would be unnecessary to do here
@@ -162,7 +166,7 @@ export class AddMediaComponent implements OnInit {
   /**
    * close the alert messsage by setting the boolean variable to display it to false
    */
-  closeAlert(){
-    this.serverResponded=false;
+  closeAlert() {
+    this.serverResponded = false;
   }
 }

@@ -48,17 +48,17 @@
 
     <mat-form-field>
         <mat-label>External Product Link</mat-label>
-        <input matInput type="url" pattern="https?://.*" placeholder="know a website for a sneak peak in the book?"
+        <input matInput type="url" placeholder="know a website for a sneak peak in the book?"
             formControlName="externalProductLink">
-        <mat-error *ngIf="form.controls.externalProductLink.errors?.pattern">Your input does not seem to be a valid url
-        </mat-error>
+            <mat-error *ngIf="form.controls.externalProductLink.errors?.urlPattern">{{form.controls.externalProductLink.errors.urlPattern.message}}
+            </mat-error>
     </mat-form-field>
 
     <mat-form-field>
         <mat-label>Cover Image Link</mat-label>
-        <input matInput type="url" pattern="https?://.*" formControlName="previewImageLink"
-            placeholder="http(s)://www.google.com/bookCover">
-        <mat-error *ngIf="form.controls.previewImageLink.errors?.pattern">Your input does not seem to be a valid url
+        <input matInput type="url" formControlName="previewImageLink"
+            placeholder="http://www.google.com/bookCover">
+        <mat-error *ngIf="form.controls.previewImageLink.errors?.urlPattern">{{form.controls.previewImageLink.errors.urlPattern.message}}
         </mat-error>
     </mat-form-field>
 

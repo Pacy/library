@@ -15,10 +15,13 @@
         <mat-label>minimum Players requried</mat-label>
         <input matInput type="number" formControlName="playersMinimum">
         <mat-error *ngIf="form.controls.playersMinimum.errors?.min">Minimum player should be at least 1</mat-error>
+        <mat-hint *ngIf="form.errors?.minMaxRelation" class="red-font">the minimum numbers of players can not be larger than the maximum
+            number of player possible</mat-hint>
     </mat-form-field>
 
     <mat-form-field class="gameFormField">
         <mat-label>maximum Players possible</mat-label>
         <input matInput type="number" formControlName="playersMaximum">
+        <mat-error *ngIf="form.controls.playersMaximum.errors?.min">Maximum player should be at least 1</mat-error>
     </mat-form-field>
 </div>
