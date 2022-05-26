@@ -12,6 +12,10 @@ import { germanAgeRatingValidator } from './customFormValidator'
 export class AddMediaComponent implements OnInit {
   createForm!: FormGroup;
 
+  serverResponded: boolean = false;
+  submitSuccesful: boolean = false;
+  submitRespondMessage: string;
+
   constructor(
     private mediaApi: MediaService,
     private fb: FormBuilder
@@ -89,6 +93,8 @@ export class AddMediaComponent implements OnInit {
     // console.warn(this.createForm.value);
     // console.log(this.createForm.errors)
 
+    //optional: close previous alert message
+
     // unflatten object, containing all fields that have a value
     let result = {};
 
@@ -134,14 +140,29 @@ export class AddMediaComponent implements OnInit {
         {
           next: (x) => {
             console.log('Succesful created!' + JSON.stringify(x));
+            this.serverResponded = true;
+            this.submitSuccesful = true;
+            this.submitRespondMessage = "Medium was created"
             this.createForm.reset();
             // todo show sucess message
           },
-          error: (err: Error) => console.error('Observer got an error: ' + err),
+          error: (err: Error) => {
+            console.error('Observer got an error: ' + err);
+            this.serverResponded = true;
+            this.submitSuccesful = false;
+            this.submitRespondMessage = "Medium could not be created.\n" + err;
+          },
           complete: () => {
             console.log('Observer got a complete notification');
             // todo show sucess message
           },
         })
+  }
+
+  /**
+   * close the alert messsage by setting the boolean variable to display it to false
+   */
+  closeAlert(){
+    this.serverResponded=false;
   }
 }
