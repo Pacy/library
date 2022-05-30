@@ -1,4 +1,4 @@
-import { ChangeDetectorRef ,Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Media } from 'src/app/models/media';
 import { MediaService } from 'src/app/services/media/media.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -26,53 +26,60 @@ export class MediaSearchResultsComponent implements OnInit {
   //dataSource;
   dataSource;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  // subscription necessary as we have to unsubscribe from a subject on destory
+  // although may have to change this a bit as this is one delivery per request only
   subscription: Subscription;
 
   constructor(
     private searchService: MediaService,
     private cdref: ChangeDetectorRef,
     private searchOption: mediaSearchOptions
-  ) { 
-    this.searchResult = searchService.searchResult;
-    this.subscription = this.searchService.getData().subscribe(data => { 
-      this.searchResult = data;
-      this.dataSource = new MatTableDataSource<Media>(this.searchResult);
-      this.dataSource.paginator = this.paginator;
-  });
+  ) {
+    // this.searchResult = searchService.searchResult;
+    // console.log("searchResult: ", this.searchResult)
+    this.subscription = this.searchService.getData().subscribe({
+      next: data => {
+        this.searchResult = data;
+        this.dataSource = new MatTableDataSource<Media>(this.searchResult);
+        this.dataSource.paginator = this.paginator;
+      },
+      error: (e) => console.log(e),
+      complete: () => console.log("this is never called")
+    });
   }
 
 
   ngOnInit(): void {
-    console.log("on Init", this.searchResult, this.searchQuerry)
-
+    // console.log("on Init", this.searchResult, this.searchQuerry)
   }
   ngAfterViewInit() {
     // this.dataSource = new MatTableDataSource<Media>(this.searchResult);
     // this.dataSource.paginator = this.paginator;
   }
   ngAfterViewChecked() {
-    this.cdref.detectChanges();
-     }
-     
+    // this.cdref.detectChanges();
+  }
+
   ngOnChanges() {
-    
+
     this.searchResult = this.searchService.getSearchResult();
-    this.searchQuerry = this.searchService.getSearchedFor();
-    console.log("ngonChange", this.searchResult,this.searchQuerry)
-    this.cdref.detectChanges();
+    this.searchQuerry = this.searchService.getSearchedForString();
+    // console.log("ngonChange", this.searchResult,this.searchQuerry)
+    // this.cdref.detectChanges();
   }
 
   ngDoCheck() {
-    if (this.searchQuerry !== this.searchService.getSearchedFor()) {
-      console.log("ngDocheck", this.searchQuerry, this.searchService.getSearchedFor())
-       this.ngOnChanges();
+    if (this.searchQuerry !== this.searchService.getSearchedForString()) {
+      // console.log("ngDocheck", this.searchQuerry, this.searchService.getSearchedForString())
+      this.ngOnChanges();
     }
- }
- 
-ngOnDestroy() {
-  // unsubscribe to ensure no memory leaks
-  this.subscription.unsubscribe();
-}
+  }
+
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
+  }
 
   columnsToDisplay = ['resultNumber', 'title', 'mediaTyp2', 'expand'];
   expandedElement: Media | null;
@@ -80,7 +87,7 @@ ngOnDestroy() {
   // return the appropriated svg class depending on the medium type given
   // ToDO optional exchange mat-icons with better fitting svg
   getSvg(mediaType: string) {
-    return  this.searchOption.getSvg(mediaType);
+    return this.searchOption.getSvg(mediaType);
   }
 
 }

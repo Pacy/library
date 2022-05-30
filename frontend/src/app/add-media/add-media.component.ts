@@ -81,7 +81,7 @@ export class AddMediaComponent implements OnInit {
       })
     },
       { updateOn: "blur" } // Validators errors would only be checked after user leaves field/clicks submit
-      );
+    );
 
     // this.createForm.get("book").disable()
     // would reduce the empty fields of the forms not used, but i plan to iterate over the whole object anway to remove empty fields of the field selected, so it would be unnecessary to do here
@@ -151,13 +151,13 @@ export class AddMediaComponent implements OnInit {
             // todo show sucess message
           },
           error: (err: Error) => {
-            console.error('Observer got an error: ' + err);
+            console.error('create medium got an error: ' + err);
             this.serverResponded = true;
             this.submitSuccesful = false;
             this.submitRespondMessage = "Medium could not be created.\n" + err;
           },
           complete: () => {
-            console.log('Observer got a complete notification');
+            // console.log('create medium observer got a complete notification');
             // todo show sucess message
           },
         })

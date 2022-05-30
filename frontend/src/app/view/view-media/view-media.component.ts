@@ -22,36 +22,40 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class ViewMediaComponent implements OnInit, AfterViewInit {
-  
+
   @ViewChildren('SubCategoryView', { read: ViewContainerRef }) private SubCategoryViewDirective!: QueryList<any>;
   waitingOnDeleteRespond: boolean = true;
   deleteSuccesful: boolean = true;
-  
+
   constructor(
     private route: ActivatedRoute,
     private searchService: MediaService,
     private searchOption: mediaSearchOptions,
-   private changeDetector: ChangeDetectorRef,
-   private modalService: NgbModal,
-   private router: Router
-  ) {}
+    private changeDetector: ChangeDetectorRef,
+    private modalService: NgbModal,
+    private router: Router
+  ) { }
 
   medium$!: Observable<Media>; // data of the medium request from the backend
   svgClass; // class for the graphical representation of the medium type
   private mediaType: string[];
   private id; //id of the object to view. 
 
-  private subscription: Subscription;
+  foundMedium: boolean;
+  // message to be displayed if no medium was found
+  errorMessage: string;
+
+  // private subscription: Subscription;
 
   ngOnInit(): void {
     this.mediaType = this.searchOption.getMediaTypes();
   }
-  
+
   ngAfterViewInit() {
     this.loadMedium();
   }
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 
   // unsure if not checking for attributes in the template would cause problems/error
@@ -62,7 +66,7 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
 
   // set the svg class according to the mediaType given
   setSvg(mediaType: string) {
-   this.svgClass = this.searchOption.getSvg(mediaType);
+    this.svgClass = this.searchOption.getSvg(mediaType);
   }
 
   // create the subCategoryView component matching the mediaType of the data received
@@ -78,7 +82,7 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
       case this.mediaType[5]: subViewComponent = ViewMagazineComponent; break;
       default: console.log("error loadSubView"); return null;
     }
- 
+
     this.SubCategoryViewDirective.forEach((sub: ViewContainerRef) => {
       let componentRef = sub.createComponent(subViewComponent);
       componentRef.instance.data = data;
@@ -91,67 +95,80 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
     // no need to unsubscribe from ActivatedRoute observable
     this.route.params.subscribe(params => {
       this.id = params['id']; // get value from url
-      this.subscription = this.searchService.getMediumByID(this.id)
-        .subscribe((data) => {
-          this.medium$ = of(data);
-          this.changeDetector.detectChanges();
-          this.loadSubCategoryView(data)
-          this.setSvg(data.mediaType)
+      // this.subscription = 
+      this.searchService.getMediumByID(this.id)
+        .subscribe({
+          next: (data) => {
+            this.foundMedium = true;
+            this.medium$ = of(data);
+            this.changeDetector.detectChanges();
+            this.loadSubCategoryView(data)
+            this.setSvg(data.mediaType)
+          },
+          error: (e) => {
+            this.foundMedium = false;
+            // optional adjust error message, so that the user sees less technical details (including api url) and have a better respond
+            // have to check what kind of error beside 404 (not found), 500 (internal server error, i.e cast error) can appear here otherwise
+            this.errorMessage = e;
+          },
+          complete: () => console.log("getMediumByID Observable completed")
         })
     })
   }
 
   // confirmed delete request
-  deleteConfirmation(content){
-    this.modalService.open(content, {centered:true})
+  deleteConfirmation(content) {
+    this.modalService.open(content, { centered: true })
     this.delete();
     // this.modalService.dismissAll();
   }
 
   // call media service to try to delete currently viewed media
-  delete(){
+  delete() {
     this.searchService.deleteMediumByID(this.id)
-    .subscribe(
-      (res) => {
-        console.log(res);
-        this.deleteSuccessful();
-      },
-      (err) => {
-        this.deleteFailed(err);
-      }
-    )
+      .subscribe({
+        next: (res) => {
+          console.log(res)
+          this.deleteSuccessful();
+        },
+        error: (e) => {
+          this.deleteFailed(e);
+        },
+        complete: () => {
+          console.log('delete medium observer got a complete notification');
+        }
+      })
   }
 
   clickMethod(name: string) {
-    if(confirm("Are you sure to delete "+name)) {
+    if (confirm("Are you sure to delete " + name)) {
       console.log("Implement delete functionality here");
     }
   }
 
   confirmDeletion(content) {
     this.modalService.open(content, { centered: true });
-    this.waitingOnDeleteRespond=true;
+    this.waitingOnDeleteRespond = true;
   }
 
-  deleteSuccessful=() =>{
-    this.waitingOnDeleteRespond=false;
-    this.deleteSuccesful= true;
+  deleteSuccessful = () => {
+    this.waitingOnDeleteRespond = false;
+    this.deleteSuccesful = true;
     document.getElementById('deleteMessage').innerText = ' Deletion succesful!';
   }
 
 
-  deleteFailed = (error) =>{
-    this.waitingOnDeleteRespond=false;
-    this.deleteSuccesful= false;
+  deleteFailed = (error) => {
+    this.waitingOnDeleteRespond = false;
+    this.deleteSuccesful = false;
     document.getElementById('deleteMessage').textContent = ` Deletion failed! + ${error}`;
 
   }
 
-  closeAllModal(){
+  closeAllModal() {
     this.modalService.dismissAll();
     // optional redirect here. this is currently only available to be called on modal reporting the delete status. 
     // but the request could also be an error at the moment. 
     // this.router.navigate();
-
   }
 }

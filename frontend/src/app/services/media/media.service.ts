@@ -29,12 +29,14 @@ export class MediaService {
   private searchedForString: string;
 
   searchResult = new Array<Media>();
+
+  // viewMedia methods subscribe to this subject to received update
   subject$ = new Subject();
 
 
   // return the search results in an array
   getSearchResult() {
-    console.log("getSearchResult", this.searchResult)
+    // console.log("getSearchResult", this.searchResult)
     return this.searchResult;
   }
 
@@ -60,17 +62,16 @@ export class MediaService {
 
   editMediumByID(id, data): Observable<any> {
     const apiUrl = `${this.endpoint}/${id}`;
-    return this.http.put(apiUrl,data, {headers:this.headers})
-    .pipe(catchError(this.handleError));
-   }
+    return this.http.put(apiUrl, data, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
 
   editMediumExemplarByID(i) { }
 
   deleteMediumByID(id): Observable<any> {
     const apiUrl = `${this.endpoint}/${id}`;
     return this.http.delete(apiUrl)
-      .pipe(
-        catchError(this.handleError))
+      .pipe(catchError(this.handleError))
   }
 
 
@@ -87,7 +88,7 @@ export class MediaService {
       // .subscribe((res) => {
       //   console.log(res);
       // });
-    .pipe(catchError(this.handleError))
+      .pipe(catchError(this.handleError))
   }
 
   createMediumExemplar() { }
@@ -108,34 +109,40 @@ export class MediaService {
     this.setSearched(true);
     if (!quickSearchUsed) {
       this.getSearchResultFromServer(obj)
-        .subscribe((result: Media[]) => {
-          this.searchResult = result;
-          this.subject$.next(this.searchResult)
-        },
-          error => console.log(error)
+        .subscribe({
+          next: (result: Media[]) => {
+            this.searchResult = result;
+            this.subject$.next(this.searchResult)
+          },
+          error: (e) => console.log(e),
+          complete: () => console.log("searchFor completed")
+        }
         )
     } else {
       this.quickSearch(obj)
-        .subscribe((result: Media[]) => {
-          this.searchResult = result;
-          this.subject$.next(this.searchResult)
-        },
-          error => console.log(error)
-        )
+        .subscribe({
+          next: (result: Media[]) => {
+            this.searchResult = result;
+            this.subject$.next(this.searchResult)
+          },
+          error: (e) => console.log(e),
+          complete: () => console.log("searchFor/quickSearch completed")
+        })
     }
     this.searchedForString = this.searchOption.getSearchedForString(obj);
   }
 
+
   getData(): Observable<any> {
     return this.subject$.asObservable();
   }
+
   quickSearch(s): Observable<Media[]> {
     let queryParameter = this.searchOption.flattenObject(s)
     queryParameter = new URLSearchParams(queryParameter).toString();
 
     let apiUrl = `${this.endpoint}/quickSearch?${queryParameter}`;
 
-    console.log("url", apiUrl)
     return this.http.get<Media[]>(apiUrl)//, {headers: this.headers,  params: paramss})
       .pipe(
         catchError(this.handleError)
@@ -150,7 +157,6 @@ export class MediaService {
 
     let apiUrl = `${this.endpoint}?${queryParameter}`;
 
-    console.log("url", apiUrl)
     return this.http.get<Media[]>(apiUrl)//, {headers: this.headers,  params: paramss})
       .pipe(
         catchError(this.handleError)
@@ -158,7 +164,7 @@ export class MediaService {
   }
 
 
-  getSearchedFor() {
+  getSearchedForString() {
     if (typeof this.searchedForString === 'undefined') {
       return "error: search string is undefined";
     } else if (this.searchedForString.length == 0) {
@@ -178,9 +184,10 @@ export class MediaService {
     } else {
       // Get server-side error
       errorMessage = `Error Code: ${error.status} \nError: ${error.error} \nMessage: ${error.message}`;
-      window.alert(errorMessage);
+      // window.alert(errorMessage);
+      console.log(errorMessage)
     }
-    console.log(errorMessage);
+    // console.log(errorMessage);
     return throwError(() => { return (errorMessage) });
   }
 }

@@ -15,7 +15,7 @@ import { germanAgeRatingValidator, minMaxRelationValidator, urlValidator } from 
 export class UpdateMediaComponent implements OnInit {
   editForm!: FormGroup;
 
-  getMediumSubscription: Subscription;
+  // getMediumSubscription: Subscription;
   medium // data of the medium request from the backend
 
   submitedChanges: boolean = false;
@@ -40,17 +40,22 @@ export class UpdateMediaComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.id = params['id']; // get value from url
-      this.getMediumSubscription = this.mediaService.getMediumByID(this.id)
-        .subscribe((data) => {
-          console.log(data, "Data")
-          this.medium = data;
-          this.updateForm(data);
+      // this.getMediumSubscription = 
+      this.mediaService.getMediumByID(this.id)
+        .subscribe({
+          next: (data) => {
+            // console.log(data, "Data")
+            this.medium = data;
+            this.updateForm(data);
+          },
+          error: (e) => console.log(e),
+          complete: () => console.log("getMediumById Observer completed")
         })
     })
   }
 
   ngOnDestroy() {
-    this.getMediumSubscription.unsubscribe();
+    // this.getMediumSubscription.unsubscribe();
   }
 
 
@@ -140,7 +145,7 @@ export class UpdateMediaComponent implements OnInit {
   onSubmit() {
 
     if (!this.editForm.valid || !this.editForm.dirty) {
-      console.log("submit clicked, but nothing to do. wuhu")
+      console.log("submit clicked, but nothing to do. juhu")
       return;
     }
 
@@ -159,19 +164,20 @@ export class UpdateMediaComponent implements OnInit {
     this.mediaService.editMediumByID(this.id, result)
       .subscribe(
         {
-          complete: () => {
-            this.submitedChanges = true;
-            this.submitSuccesful = true;
-            this.submitRespondMessage = "Medium updated successfully"
-            console.log('Content updated successfully!');
-            //optional remove the message after a few seconds or reroute
-          },
           error: (e) => {
             this.submitedChanges = true;
             this.submitSuccesful = false;
             this.submitRespondMessage = `Medium was not updated. Error: ${e}`
             console.log(e);
           },
+          complete: () => {
+            this.submitedChanges = true;
+            this.submitSuccesful = true;
+            this.submitRespondMessage = "Medium updated successfully";
+            // console.log("edit medium by id was completed")
+            // console.log('Content updated successfully!');
+            //optional remove the message after a few seconds or reroute
+          }
         });
   }
 

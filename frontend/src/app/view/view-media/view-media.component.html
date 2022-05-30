@@ -1,4 +1,9 @@
-<mat-card id="media-card">
+<div *ngIf="!foundMedium">
+    <div class="alert alert-danger">
+        <span [innerHTML]="errorMessage"></span>
+    </div>
+</div>
+<mat-card id="media-card" *ngIf="foundMedium">
     <mat-card-content>
         <div *ngIf="medium$ | async as medium">
             <mat-card-header id="card-header">

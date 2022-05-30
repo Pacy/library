@@ -60,7 +60,8 @@ Different challenges appear when working on the project, and new things can be l
 For example that a monogDB index search combined with an $or operator, requires the other field to be indexed to work.
 
 
-I guess, I could have (or start now) written things here, that I am learingn while working on it🤔
+I guess, I could have written things here (or could start now), that I am learning while working on it🤔
+// Update: create a private file for this now with some of them
 
 
 <!---
