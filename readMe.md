@@ -8,7 +8,12 @@ Application is built with MEAN stack
 ## Project Status
 Work in progress, so far working
 - a basic 'home' page including some news (news are hardcoded at the moment)
-- crud operation for media and there respective sites
+- crud operation for media 
+   - create with reactive form
+   - read with template driven form (supports a quick search field that return a weighted list, or an extended search form with and/not/or operator(s))
+   - update uses the same reactive form as the create component
+   - delete simple button with a modal for confirmation
+
 
 
 ## Tech

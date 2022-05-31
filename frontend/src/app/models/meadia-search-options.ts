@@ -20,7 +20,12 @@ export class mediaSearchOptions {
     }
     // toDO (genre would have to be extended to include game/music/movies genres) or adapt genre in selection pages depending on media typ
     // could also argue, that priority for the lib is on books, therefore search pages only filter genres by books (for now)
-    private genres = ["-- All --", "Adventure",  "Art", "Children", "Cooking", "Crafts, Hobbies & Home", "Crime","--Disk--", "Education", "Fantasy","--Game--", "Health & Fitness", "Historical", "Horror", "Humor", "Motivational", "Politics", "Religiion", "Roman", "Romance", "Thriller", "Sci-fi", "--VideoGame--"]
+    private genres = ["-- All --", "Adventure",  "Art", "Children", "Cooking", "Crafts, Hobbies & Home", "Crime","--Disc--", "Education", "Fantasy","--Game--", "Health & Fitness", "Historical", "Horror", "Humor", "Motivational", "Politics", "Religiion", "Roman", "Romance", "Thriller", "Sci-fi", "--VideoGame--"]
+    // genre  game/videogame/disc does not make sense, they are mediaTypes as categoriesed below. May have to make a seperate genre for the ones that have less overlaps, 
+    // or make a bigger genre array.
+    // i guess books, movies have pretty big overlaps. Videos games have to have their own genre type, disc have to compared with big -may have to add a category 'learning' there and see from then
+    // board games need to check what genre they are split in
+
     private mediaTypes = ["-- All --", "Book", "CD / DVD / Blu-Ray", "electronical Game", "Game", "Magazine"];
     private searchOperators = ["and", "or", "not"];
 

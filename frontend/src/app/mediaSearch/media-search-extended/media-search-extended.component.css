@@ -47,3 +47,7 @@
 .search-matcard-row-top {
     margin-left: 64px;
 }
+
+.on-hover-pointer{
+    cursor: pointer;
+}

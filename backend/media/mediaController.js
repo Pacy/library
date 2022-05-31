@@ -193,11 +193,19 @@ function createOrQuery(object1, object2) {
  *      
  */
 function createNotQuery(object1, object2) {
-  const notQueryArray = Object.entries(object1);
+  const notQueryArray = Object.entries(object1).flat();
   let result = {};
   let notQuery = {};
 
-  notQuery[notQueryArray[0][0]] = { "$not": new RegExp(notQueryArray[0][1], 'i') }// $not value has to be a regexp 
+
+  // check if value is a number // checking for number is here currently ok, as a we replacedString with regexp at the moment and cast numberfields to number
+  // otherwise we would have to check for the number fields 
+  if(typeof notQueryArray[1] === "number") {
+    // if number is $ne operator instead, because $not does not accept numbers
+    notQuery[notQueryArray[0]] = { "$ne": notQueryArray[1] }
+  }else{
+    notQuery[notQueryArray[0]] = { "$not": new RegExp(notQueryArray[1], 'i') }// $not value has to be a regexp 
+  }
   result["$and"] = [notQuery, object2]
   return result;
 }

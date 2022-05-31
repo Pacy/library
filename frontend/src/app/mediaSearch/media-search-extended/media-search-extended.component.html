@@ -1,6 +1,32 @@
+<!-- Modal regarding searchRestriction -->
+<ng-template #searchRestriction let-modal>
+  <div class="modal-header">
+      <h6 class="modal-title">Currently the following combination are not supported</h6>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <ul>
+      <li>
+        Search terms that include the operator "NOT" combined with the "No restriction" field are ignored
+      </li>
+      <li>
+        Only one "No restirction" field can be handled at once for now
+      </li>
+      <li>
+        "No restirction" field that are affected with a operator "OR" only work on specific (indexed) fields.
+      </li>
+    </ul>
+    <p> We apologize for any inconvenience these missing functions do. We try to get them in later on.</p>
+  </div>
+</ng-template>
+
+<!-- Extended Search Matcard -->
 <mat-card class="search-matcard">
   <mat-card-header>
     <mat-card-title>Extended Search</mat-card-title>
+    <span class="material-icons on-hover-pointer" (click)="openModal(searchRestriction)" > <!-- showSearchRestriction = true -->
+      info
+      </span>
   </mat-card-header>
   <mat-card-content>
     <form class="search-matcard-form" id="extendedSearch" #extendedSearch="ngForm"

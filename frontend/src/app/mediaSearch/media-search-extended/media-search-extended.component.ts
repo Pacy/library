@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { mediaSearchOptions } from 'src/app/models/meadia-search-options';
 import { MediaService } from 'src/app/services/media/media.service';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+
 @Component({
   selector: 'app-media-search-extended',
   templateUrl: './media-search-extended.component.html',
@@ -11,7 +14,9 @@ export class MediaSearchExtendedComponent implements OnInit {
 
   constructor(
     private searchService: MediaService,
-    private searchOption: mediaSearchOptions
+    private searchOption: mediaSearchOptions,
+    private modalService: NgbModal,
+
   ) { }
 
   searchFields = [];
@@ -19,15 +24,17 @@ export class MediaSearchExtendedComponent implements OnInit {
   genres = []
   mediaTypes = [];
   searchOperators = [];
-  
+
   selectedLanguage = ""
   selectedGenre = "";
-  selectedMediaType ="";
+  selectedMediaType = "";
   searchField0 = "";
   searchOperator1 = "";
   searchField1 = "";
   searchOperator2 = "";
   searchField2 = "";
+
+  showSearchRestriction: boolean = true;
 
 
   ngOnInit(): void {
@@ -49,5 +56,11 @@ export class MediaSearchExtendedComponent implements OnInit {
 
   search(data) {
     this.searchService.searchFor(data, false);
+  }
+
+  openModal(content) {
+    this.modalService.open(content, { centered: true, size:'lg' })
+    // this.delete();
+    // this.modalService.dismissAll();
   }
 }
