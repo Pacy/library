@@ -18,9 +18,11 @@
   <button mat-menu-item  routerLink="/updateUser/:id">View User Information </button>
 </mat-menu>
   <h1 class="title"><a routerLink="home">Basic Library</a></h1>
-    <a class="toolbarNav" routerLink="mediaSearch">-  Search</a>
-    <a class="toolbarNav" [matMenuTriggerFor]="MediaMenu">-  Media</a>
-    <a class="toolbarNav">-  Users</a>
+  <div class="navbar-banner">
+    <a class="toolbar-nav-item" routerLink="mediaSearch">- Search</a>
+    <a class="toolbar-nav-item" [matMenuTriggerFor]="MediaMenu">- Media</a>
+    <a class="toolbar-nav-item" >- Users</a>
+  </div>
     <div class="spacer"></div>
     <a aria-label="Optional twitter link" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
       <svg id="twitter-logo" height="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">

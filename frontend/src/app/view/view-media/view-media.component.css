@@ -13,28 +13,37 @@
     justify-content: center;
     /* text-align: center; */
 }
+
 #medium-icon {
     /* float: right; */
     margin-left: 4px;
 }
+
 #medium-title {
     display: inline;
 }
 
-.headerButton{
-    float:right;
+.headerButton {
+    float: right;
 }
 
 .split {
     float: left;
     width: 50%;
 }
+
 .medium-table {
     width: 100%;
 }
+
+.medium-table tr td:nth-of-type(2) {
+    padding: 5px;
+}
+
 .medium-table-left {
     padding-right: 8px;
 }
+
 .medium-table-right {
     padding-left: 8px;
 }
@@ -43,9 +52,11 @@ table {
     border-collapse: seperate;
     border-spacing: 0 2px;
 }
+
 table>tr>td:nth-child(odd) {
     text-align: center;
 }
+
 td:nth-child(1) {
     width: 90px;
 }
@@ -53,24 +64,44 @@ td:nth-child(1) {
 .left {
     text-align: left;
 }
+
 tr:nth-child(odd) {
     background-color: #cde6ffaa;
 }
 
-#preview-image-pc {
+#preview-image {
     display: block;
     margin-right: auto;
     margin-left: auto;
-    max-width: 250px;
-    max-height: 200px;
-}
-.note{
-    color:red; 
-    clear:both;
+    max-width: 70%;
+    max-height: 45vh;
 }
 
-.modal-body{
-    display:inline-flex
+.note {
+    color: red;
+    clear: both;
+}
+
+.modal-body {
+    display: inline-flex
+}
+
+.preserve-newlines {
+    white-space: pre-line;
+
+}
+
+.flex-mediumscreen {
+    display: block;
+}
+
+.image {
+    display: block;
+    transition: all 100ms ease-in-out;
+}
+
+.image:hover img {
+    transform: scale(1.7);
 }
 
 /* Responsive Styles */
@@ -86,6 +117,7 @@ tr:nth-child(odd) {
         display: block;
         width: 100%;
     }
+
     /* Clearfix (clear floats) */
     .split::after {
         content: "";
@@ -96,21 +128,31 @@ tr:nth-child(odd) {
     .medium-table-left {
         padding-right: 0px;
     }
-    #preview-image-pc {
-        width: 20%;
+
+    #preview-image {
+        /* width: 20%; */
         padding: 5px;
-        float: left
+        /* float: left */
     }
+
     .medium-table-right {
-        float: left;
-        width: 80%;
+        /* float: left; */
+        /* width: 100%; */
         padding-left: 0px;
+    }
+
+    .flex-mediumscreen {
+        display: flex;
+    }
+
+    .image:hover img {
+        transform: scale(2.7);
     }
 }
 
-/* Optional: A.1) Remove image when on mobile screen as the picture is quite small then 
-             A.2) Enable Zoom for picture when clicking/hovering it
-             A.3) Change display order, so picture can be larger
+/* Optional: A.1) √ Remove image when on mobile screen as the picture is quite small then -> removed loading to spare mobile user from data usage
+             A.2) Enable Zoom for picture when clicking/hovering it 
+             A.3) √ Change display order, so picture can be larger -> see 1)
 */
 @media screen and (max-width: 480px) {
     #media-card {
@@ -118,5 +160,17 @@ tr:nth-child(odd) {
         width: 95%;
         padding-left: 8px;
         padding-right: 8px;
+    }
+
+    .medium-table-right {
+        width: 100%;
+    }
+
+    #preview-image {
+        display: none;
+    }
+
+    .flex-mediumscreen {
+        display: block;
     }
 }

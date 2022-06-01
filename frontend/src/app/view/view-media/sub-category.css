@@ -1,0 +1,21 @@
+/* sub categorie have smiliar syntax, therefore move them to this file for handling similiar function */
+
+#medium-table {
+    width: 100%;
+}
+
+td:nth-child(1) {
+    width: 90px;
+}
+
+tr:nth-child(even) {
+    background-color: #cde6ffaa;
+}
+
+table>tr>td:nth-child(odd) {
+    text-align: center;
+}
+
+#medium-table tr td:nth-of-type(2){
+    padding: 5px;
+}

@@ -4,7 +4,7 @@ import { SubCategory } from '../view-media/sub-category';
 @Component({
   selector: 'app-view-magazine',
   templateUrl: './view-magazine.component.html',
-  styleUrls: ['./view-magazine.component.css']
+  styleUrls: ['./view-magazine.component.css' ,'../view-media/sub-category.css']
 })
 export class ViewMagazineComponent implements SubCategory {
   @Input() data: any;
