@@ -154,14 +154,14 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
   deleteSuccessful = () => {
     this.waitingOnDeleteRespond = false;
     this.deleteSuccesful = true;
-    document.getElementById('deleteMessage').innerText = ' Deletion succesful!';
+    document.getElementById('delete-message').innerText = 'Deletion succesful!';
   }
 
 
   deleteFailed = (error) => {
     this.waitingOnDeleteRespond = false;
     this.deleteSuccesful = false;
-    document.getElementById('deleteMessage').textContent = ` Deletion failed! + ${error}`;
+    document.getElementById('delete-message').textContent = ` Deletion failed! + ${error}`;
 
   }
 

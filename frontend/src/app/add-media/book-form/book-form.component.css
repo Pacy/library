@@ -1,30 +1,30 @@
-#pages {
+.pages {
     min-width: 75px;
     max-width: 10%
 }
 
-#tableOfContent {
+.table-of-content {
     max-width: 35%;
 }
 
 /* Responsive Styles */
 @media screen and (max-width: 960px) {
-    #pages, #tableOfContent {
+    .pages, .table-of-content {
         max-width: none;
         width: 48%;
     }
 
-    #tableOfContent {
+    .table-of-content {
         margin-left: 5px;
     }
 }
 
 @media screen and (max-width: 480px) {
-    #pages, #tableOfContent {
+    .pages, .table-of-content {
         width: 100%;
     }
 
-    #tableOfContent {
+    .table-of-content {
         margin-left: auto;
     }
 }

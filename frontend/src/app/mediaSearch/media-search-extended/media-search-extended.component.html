@@ -24,9 +24,9 @@
 <mat-card class="search-matcard">
   <mat-card-header>
     <mat-card-title>Extended Search</mat-card-title>
-    <span class="material-icons on-hover-pointer" (click)="openModal(searchRestriction)" > <!-- showSearchRestriction = true -->
+    <mat-icon class="material-icons on-hover-pointer" (click)="openModal(searchRestriction)" aria-label="show current search limitation"> <!-- showSearchRestriction = true -->
       info
-      </span>
+    </mat-icon>
   </mat-card-header>
   <mat-card-content>
     <form class="search-matcard-form" id="extendedSearch" #extendedSearch="ngForm"
@@ -105,6 +105,6 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button id="search-button" mat-raised-button type="submit" form="extendedSearch">Search</button>
+    <button class="search-button" mat-raised-button type="submit" form="extendedSearch">Search</button>
   </mat-card-actions>
 </mat-card>

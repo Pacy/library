@@ -1,16 +1,19 @@
+<!-- error message if no medium was retrieved -->
 <div *ngIf="!foundMedium">
     <div class="alert alert-danger">
         <span [innerHTML]="errorMessage"></span>
     </div>
 </div>
-<mat-card id="media-card" *ngIf="foundMedium">
+
+<!--  medium to be displayed -->
+<mat-card class="media-card" *ngIf="foundMedium">
     <mat-card-content>
         <div *ngIf="medium$ | async as medium">
             <mat-card-header id="card-header">
                 <mat-card-title>
                     {{medium.title}}
                     <!-- media graphic -->
-                    <i id="medium-icon" class="{{svgClass}} fa-lg"></i>
+                    <i class="medium-icon" class="{{svgClass}} fa-lg" aria-label="medium type icon"></i>
                 </mat-card-title>
             </mat-card-header>
             <div class="split">
@@ -37,7 +40,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="split flex-mediumscreen">
+            <div class="split flex-medium-screen">
                 <a href="{{medium.externalProductLink}}" target="_blank">
                     <picture class="image">
                         <source media="(min-width: 481px)" srcset="{{medium.previewImageLink}}">
@@ -49,7 +52,7 @@
                         -->
                         <source media="(max-width: 480px)" sizes="1px"
                             srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 1w">
-                        <img id="preview-image" src="{{medium.previewImageLink}}" alt="Preview image of medium"
+                        <img class="preview-image" src="{{medium.previewImageLink}}" alt="Cover image of medium"
                             onerror="this.onerror=null; this.src='https://www.insticc.org/node/TechnicalProgram/56e7352809eb881d8c5546a9bbf8406e.png';">
                     </picture>
                 </a>
@@ -61,11 +64,11 @@
                 <p class="note">Medium can only be viewed in the library. It cannot be borrowed.</p>
             </div>
             <mat-card-actions align="end">
-                <button mat-icon-button class="headerButton" routerLink="/editMedia/{{medium._id}}">
-                    <mat-icon aria-label="Edit button">edit</mat-icon>
+                <button mat-icon-button routerLink="/editMedia/{{medium._id}}" aria-label="Edit medium">
+                    <mat-icon >edit</mat-icon>
                 </button>
-                <button mat-icon-button class="headerButton" (click)="confirmDeletion(confirmDeleteDialogue)">
-                    <mat-icon aria-label="Delete button">delete</mat-icon>
+                <button mat-icon-button (click)="confirmDeletion(confirmDeleteDialogue)" aria-label="Delete medium">
+                    <mat-icon>delete</mat-icon>
                 </button>
             </mat-card-actions>
         </div>
@@ -77,7 +80,7 @@
 <ng-template #confirmDeleteDialogue let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Confirm Deletion</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <button type="button" class="btn-close" aria-label="Close pop up" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
         <p>This will delete this medium from the database. Please confirm that you want to continue&hellip;</p>
@@ -88,13 +91,13 @@
     </div>
 </ng-template>
 
-<!-- modal for server respond to delete request -->
+<!-- modal for server respond (of delete request) -->
 <ng-template #deleting let-modal>
     <div class="modal-header">
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <button type="button" class="btn-close" aria-label="Close pop up" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <div class="spinner-border" role="status" *ngIf="waitingOnDeleteRespond; else deleteRespond">
+        <div class="spinner-border" role="status" *ngIf="waitingOnDeleteRespond; else deleteRespond" aria-label="loading icon">
             <span class="visually-hidden">Loading...</span>
         </div>
         <div>
@@ -106,7 +109,7 @@
                     error
                 </span>
             </ng-template>
-            <p id="deleteMessage"> trying to delete database entry&hellip;</p>
+            <p id="delete-message"> trying to delete database entry&hellip;</p>
         </div>
     </div>
     <div class="modal-footer">

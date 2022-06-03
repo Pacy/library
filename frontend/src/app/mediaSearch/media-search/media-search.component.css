@@ -1,14 +1,14 @@
-.simpleSearch {
+.simple-search {
     flex-grow: 2;
     margin-right: 0;
 }
 
-.extendedSearchButton {
+.extended-search-button {
     margin-left: 20px;
     flex-grow: 1;
 }
 
-.searchContainer {
+.search-container {
     display: flex;
     align-items: center;
     padding-top: 10px;

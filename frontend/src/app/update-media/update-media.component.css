@@ -13,13 +13,6 @@
     width: 48%;
 }
 
-/* form class for each sub form */
-.formGroup {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
 .button {
     border: 1px solid #a8d4ff;
     background-color: #cde6ff;

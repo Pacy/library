@@ -34,12 +34,12 @@
     padding-right: 5px;
   }
 
-  .toolbar #twitter-logo {
+  .toolbar .twitter-logo {
     height: 40px;
     margin: 0 16px;
   }
 
-  .toolbar #twitter-logo:hover {
+  .toolbar .twitter-logo:hover {
     opacity: 0.8;
   }
 
@@ -50,7 +50,7 @@
     align-items: center;
   }
 
-  a:hover, a:visited:hover, #burgerMenuIcon:hover, .navButton:hover {
+  a:hover, a:visited:hover, .burger-menu-icon:hover, .nav-button:hover {
     color: #125699;
   }
 
@@ -75,7 +75,7 @@
     padding-left: 25px;
   }
 
-  #navBar {
+  .nav-bar {
     position: absolute;
     display: none;
     top: 60px;
@@ -85,24 +85,25 @@
     background-color: #a8d4ff;
   }
 
-  #navBar ul {
-    padding: 0px;
+  .nav-bar ul {
+    display: flex;
+    padding-left: 0px;
     margin: 0px;
-    overflow: hidden;
+    /* overflow: hidden; */
     list-style-type: none;
   }
 
-  #navBar li {
-    float: left;
+  .nav-bar li {
+    /* float: left; */
     padding: 12px 20px;
     border-left: 1px solid white;
   }
 
-  #navBar li:first-child {
+  .nav-bar li:first-child {
     border-left: none;
   }
 
-  .navButton {
+  .nav-button {
     cursor: pointer;
     color: white;
   }
@@ -120,13 +121,13 @@
     color: white;
   }
 
-  #burgerMenuIcon {
+  .burger-menu-icon {
     margin-right: 10px;
     margin-left: 5px;
     display: none;
   }
 
-  #accountLinkIcon{
+  .account-icon{
     margin-right: 15px;
   }
 
@@ -140,7 +141,7 @@
     .navbar-banner {
       display: none;
     }
-    #navBar {
+    .nav-bar {
       display: block;
     }
     .content {
@@ -149,13 +150,13 @@
   }
 
   @media screen and (max-width: 480px) {
-    #accountLinkIcon, #navBar {
+    .account-icon, .nav-bar {
       display: none;
     }
     .content {
       margin-top: 60px;
     }
-    #burgerMenuIcon {
+    .burger-menu-icon {
       display: block;
     }
     .spacer {

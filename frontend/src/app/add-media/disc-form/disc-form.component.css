@@ -1,32 +1,32 @@
-#fsk {
+.fsk {
     min-width: 40px;
     width: 20%;
     margin-left: 7px;
 }
 
-#duration {
+.duration {
     min-width: 45px;
     width: 25%;
 }
 
 
-#involvedPersons {
+.involved-persons {
     width: 98%;
 }
 
 /* Responsive Styles */
 @media screen and (max-width: 960px) {
-    #fsk {
+    .fsk {
         margin-left: 5px;
     }
 }
 
 @media screen and (max-width: 480px) {
-    #fsk, #duration, #involvedPersons {
+    .fsk, .duration, .involved-persons {
         width: 100%;
     }
 
-    #fsk {
+    .fsk {
         margin: auto;
     }
 }

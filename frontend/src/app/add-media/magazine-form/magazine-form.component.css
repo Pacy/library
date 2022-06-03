@@ -1,25 +1,25 @@
-#issn {
+.issn {
     width: 22%;
 }
 
-.shortNumber {
+.short-number {
     width: 13%;
 }
 
 
-#tableOfContent {
+.table-of-content {
     width: 48%;
 }
 
 /* Responsive Styles */
 @media screen and (max-width: 960px) {
-    .shortNumber, #issn, #tableOfContent {
+    .short-number, .issn, .table-of-content {
         width: 48%;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .shortNumber, #issn, #tableOfContent {
+    .short-number, .issn, .table-of-content {
         width: 100%;
     }
 }

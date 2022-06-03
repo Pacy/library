@@ -2,37 +2,37 @@ mat-grid-tile {
   background: lightblue; /*equals = rgb(173, 216, 230);*/
 }
 
-.mainTile {
+.main-tile {
   margin: 50px;
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.mainTileHeader {
+.main-tile-header {
   font-size: 300%;
 }
 
-.mainTileContent {
+.main-tile-content {
   white-space: pre-line;
   line-height: 1.6;
   font-size: 120%;
 }
 
-.mainTileContentImage {
+.main-tile-image {
   max-height: 20vw;
 }
 
-.mainTileImageContainer {
+.main-tile-image-container {
   float: left;
   margin-right: 7px;
 }
 
-.tileContainer {
+.tile-container {
   cursor: pointer;
 }
 
-.tileContent {
+.tile-content {
   display: -webkit-box;
   overflow: hidden;
   -webkit-line-clamp: 4;
@@ -41,49 +41,49 @@ mat-grid-tile {
   white-space: pre-line;
 }
 
-.activeTile {
+.active-zile {
   width: 100%;
   height: 100%;
   background-color: rgb(103, 146, 160);
 }
 
 @media screen and (max-width: 960px) {
-  .tileContent {
+  .tile-content {
     -webkit-line-clamp: 3;
     margin-top: 48px;
   }
-  .mainTileContent {
+  .main-tile-content {
     font-size: 110%;
   }
-  .mainTile {
+  .main-tile {
     margin-top: 10px;
   }
-  .tileContent {
+  .tile-content {
     font-size: 95%;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .tileContent {
+  .tile-content {
     -webkit-line-clamp: 2;
     margin-top: 48px;
   }
-  .mainTileContent {
+  .main-tile-content {
     font-size: 100%;
   }
-  .mainTile {
+  .main-tile {
     margin: 10px;
   }
-  .mainTile h2 {
+  .main-tile h2 {
     margin-top: 5px;
   }
-  .tileContent {
+  .tile-content {
     font-size: 95%;
   }
-  .mainTileHeader {
+  .main-tile-ceader {
     font-size: 200%;
   }
-  .tileHeader {
+  .tile-header {
     font-size: 95%;
   }
 }

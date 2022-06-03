@@ -1,4 +1,4 @@
-.gameFormField{
+.game-form-field{
     width: 24%;
 }
 
@@ -8,13 +8,13 @@
 
 /* Responsive Styles */
 @media screen and (max-width: 960px) {
-.gameFormField{
+.game-form-field{
     width: 48%;
 }
 }
 
 @media screen and (max-width: 480px) {
-    .gameFormField{
+    .game-form-field{
         width: 100%;
     }
 }

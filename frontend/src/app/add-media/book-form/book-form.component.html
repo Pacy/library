@@ -13,14 +13,14 @@
         </mat-chip-list>
     </mat-form-field>
 
-    <mat-form-field id="pages">
+    <mat-form-field class="pages">
         <mat-label>Pages</mat-label>
         <input matInput type="number" formControlName="pages" placeholder="# of pages">
         <mat-error *ngIf="form.controls.pages.errors?.min">A book should have at least 1 page</mat-error>
         <mat-error *ngIf="form.controls.pages.errors?.max">There is no book with so many pages</mat-error>
     </mat-form-field>
 
-    <mat-form-field id="tableOfContent">
+    <mat-form-field class="table-of-content">
         <mat-label>Table of Content (Link)</mat-label>
         <input matInput type="url" pattern="https?://.*" formControlName="tableOfContentLink"
             placeholder="Link to a table of content">

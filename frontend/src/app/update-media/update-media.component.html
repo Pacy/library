@@ -9,7 +9,6 @@
 
         <app-base-form formGroupName="base"></app-base-form>
 
-
         <app-book-form *ngIf="editForm.value.base.mediaType == 'Book'" formGroupName="book"></app-book-form>
         <app-disc-form *ngIf="editForm.value.base.mediaType == 'CD / DVD / Blu-Ray'" formGroupName="disc">
         </app-disc-form>

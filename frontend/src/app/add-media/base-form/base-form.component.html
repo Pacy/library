@@ -1,26 +1,26 @@
 <div [formGroup]="form" class="formGroup">
 
-    <mat-form-field id="title">
+    <mat-form-field class="title">
         <mat-label>Title</mat-label>
         <!-- no 'for' attirubte required, as the specified floating label will be automatically used as the label for the form field control-->
         <input matInput formControlName="title">
     </mat-form-field>
 
-    <mat-form-field id="ean">
+    <mat-form-field class="ean">
         <mat-label>Ean</mat-label>
         <input matInput maxlength="13" pattern="\d*" formControlName="ean">
         <mat-error *ngIf="form.controls.ean.errors?.minlength">Your ean is missing some numbers. Has to be 13 numbers
         </mat-error>
     </mat-form-field>
 
-    <mat-form-field id="releaseYear">
+    <mat-form-field class="release-year">
         <mat-label>Release Year</mat-label>
         <input matInput type="number" formControlName="releaseYear">
-        <mat-error *ngIf="form.controls.releaseYear.errors?.max">You are way ahead of time. Please reconsider the
+        <mat-error *ngIf="form.controls.releaseYear.errors?.max">You are way ahead of time. Please reconsclasser the
             release year</mat-error>
     </mat-form-field>
 
-    <mat-form-field id="publisher">
+    <mat-form-field class="publisher">
         <mat-label>Publisher</mat-label>
         <mat-chip-list #chipList aria-label="Publisher input" formControlName="publisher">
             <mat-chip *ngFor="let p of form.get('publisher').value" (removed)="removePublisher(p)">
@@ -34,7 +34,7 @@
         </mat-chip-list>
     </mat-form-field>
 
-    <mat-radio-group aria-label="Select an option" id="language" formControlName="language">
+    <mat-radio-group aria-label="Select an option" class="language" formControlName="language">
         <mat-label>Language:</mat-label>
         <mat-radio-button value="english">english</mat-radio-button>
         <mat-radio-button value="german">german</mat-radio-button>
@@ -80,7 +80,7 @@
         </mat-select>
     </mat-form-field>
 
-    <mat-form-field id="description">
+    <mat-form-field class="description">
         <mat-label>Description</mat-label>
         <textarea rows="6" matInput formControlName="description"></textarea>
     </mat-form-field>

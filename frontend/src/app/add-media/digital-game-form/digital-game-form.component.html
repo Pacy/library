@@ -1,5 +1,5 @@
 <div [formGroup]="form" class="formGroup">
-    <mat-form-field id="developers">
+    <mat-form-field class="developers">
         <mat-label>Developer(s)</mat-label>
         <mat-chip-list #chipList aria-label="Developer input" formControlName="developers">
             <mat-chip *ngFor="let dev of form.get('developers').value" (removed)="removeDeveloper(dev)">
@@ -13,14 +13,14 @@
         </mat-chip-list>
     </mat-form-field>
 
-    <mat-form-field id="usk">
+    <mat-form-field class="usk">
         <mat-label>Usk</mat-label>
         <input matInput type="number" formControlName="usk">
         <mat-error *ngIf="form.controls['usk'].hasError('germanAgeRating')">Valid german age ratings are 0,6,12,16,18
         </mat-error>
     </mat-form-field>
 
-    <mat-radio-group aria-label="Select an option" id="platforms" formControlName="platforms">
+    <mat-radio-group aria-label="Select an option" class="platforms" formControlName="platforms">
         <mat-label>Platform(s):</mat-label>
         <mat-radio-button value="pc">pc</mat-radio-button>
         <mat-radio-button value="playstation">playstation</mat-radio-button>

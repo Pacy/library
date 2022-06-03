@@ -1,19 +1,19 @@
-<div class="searchContainer">
-    <app-media-search-simple class="simpleSearch"></app-media-search-simple>
-    <div class="extendedSearchButton" *ngIf="!extendedSearch" (click)="toggleExtendedSearch()">
-        <button mat-raised-button>extended search
-            <mat-icon>expand_more</mat-icon>
-        </button>
-    </div>
-    <div class="extendedSearchButton" *ngIf="extendedSearch">
-        <button mat-stroked-button (click)="toggleExtendedSearch()">extended search
-            <mat-icon>expand_less</mat-icon>
+<div class="search-container">
+    <!-- simple search field component -->
+    <app-media-search-simple class="simple-search"></app-media-search-simple>
+
+    <!-- toggle button for extended search -->
+    <div class="extended-search-button" (click)="toggleExtendedSearch()">
+        <button mat-button [ngClass]='extendedSearch? "mat-stroked-button" : "mat-raised-button"' aria-label="toggle">extended search
+            <mat-icon>{{extendedSearch? "expand_less" :"expand_more"}}</mat-icon>
         </button>
     </div>
 </div>
 
+<!-- extended search component -->
 <div *ngIf="extendedSearch">
     <app-media-search-extended></app-media-search-extended>
 </div>
 
+<!-- search results -->
 <app-media-search-results *ngIf="getSearchStatus()"></app-media-search-results>

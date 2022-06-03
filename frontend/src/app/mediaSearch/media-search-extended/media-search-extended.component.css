@@ -22,7 +22,7 @@
     flex-wrap: wrap; 
 }
 
-#search-button {
+.search-button {
     float: right;
     border: 1px solid #a8d4ff;
     background-color: #cde6ff;

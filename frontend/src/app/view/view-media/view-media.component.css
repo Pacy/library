@@ -1,4 +1,4 @@
-#media-card {
+.media-card {
     margin-top: 90px;
     width: 80%;
     margin-right: auto;
@@ -14,17 +14,13 @@
     /* text-align: center; */
 }
 
-#medium-icon {
+.medium-icon {
     /* float: right; */
     margin-left: 4px;
 }
 
-#medium-title {
+.medium-title {
     display: inline;
-}
-
-.headerButton {
-    float: right;
 }
 
 .split {
@@ -69,7 +65,7 @@ tr:nth-child(odd) {
     background-color: #cde6ffaa;
 }
 
-#preview-image {
+.preview-image {
     display: block;
     margin-right: auto;
     margin-left: auto;
@@ -91,7 +87,7 @@ tr:nth-child(odd) {
 
 }
 
-.flex-mediumscreen {
+.flex-medium-screen {
     display: block;
 }
 
@@ -107,7 +103,7 @@ tr:nth-child(odd) {
 /* Responsive Styles */
 
 @media screen and (max-width: 960px) {
-    #media-card {
+    .media-card {
         width: 85%;
         padding-left: 25px;
         padding-right: 25px;
@@ -129,7 +125,7 @@ tr:nth-child(odd) {
         padding-right: 0px;
     }
 
-    #preview-image {
+    .preview-image {
         /* width: 20%; */
         padding: 5px;
         /* float: left */
@@ -141,7 +137,7 @@ tr:nth-child(odd) {
         padding-left: 0px;
     }
 
-    .flex-mediumscreen {
+    .flex-medium-screen {
         display: flex;
     }
 
@@ -155,7 +151,7 @@ tr:nth-child(odd) {
              A.3) √ Change display order, so picture can be larger -> see 1)
 */
 @media screen and (max-width: 480px) {
-    #media-card {
+    .media-card {
         margin-top: 60px;
         width: 95%;
         padding-left: 8px;
@@ -166,11 +162,11 @@ tr:nth-child(odd) {
         width: 100%;
     }
 
-    #preview-image {
+    .preview-image {
         display: none;
     }
 
-    .flex-mediumscreen {
+    .flex-medium-screen {
         display: block;
     }
 }
