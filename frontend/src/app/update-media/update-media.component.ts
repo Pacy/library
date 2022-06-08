@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { mediaSearchOptions } from '../models/meadia-search-options';
 import { ActivatedRoute } from '@angular/router';
 import { germanAgeRatingValidator, minMaxRelationValidator, urlValidator } from './../add-media/customFormValidator'
+import { MediaHelper } from '../services/media/media-helper';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class UpdateMediaComponent implements OnInit {
     private route: ActivatedRoute,
 
     private mediaService: MediaService,
+    private mediaHelper: MediaHelper,
     // private searchOption: mediaSearchOptions,
     private fb: FormBuilder) { }
 
@@ -156,7 +158,7 @@ export class UpdateMediaComponent implements OnInit {
     let result = {};
 
     // unflatten object
-    result = this.flattenObject(dirtyValues)
+    result = this.mediaHelper.flattenObjectLoseInformation(dirtyValues)
 
     // console.log("result", result)
 
@@ -182,30 +184,7 @@ export class UpdateMediaComponent implements OnInit {
   }
 
 
-  /**
-    * Flatten a given (nested) object to an unflatten object. The new object contains no information about previous nested representation.
-    * (i.e key2: value ; no information about a potential key1 containing key2)
-    * 
-    * @param object nested object to be flatten
-    * @param res 
-    * @returns flatten object
-    */
-  flattenObject(object, res = {}) {
-    Object.entries(object).reduce((r, [key, val]) => {
-      // const k = `${prefix}${key}`
-      if (typeof val === "object") {
-        if (Array.isArray(val)) {
-          res[key] = val;
-        }
-        else
-          this.flattenObject(val, r)
-      } else {
-        res[key] = val
-      }
-      return r
-    }, res)
-    return res;
-  }
+
 
   /**
    * Return all the dirty fields from the form

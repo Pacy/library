@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 
 import { HttpClientModule } from '@angular/common/http'
 
@@ -10,26 +10,26 @@ import { AddMediaComponent } from './add-media/add-media.component';
 import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component';
 
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
-import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MediaSearchComponent } from './mediaSearch/media-search/media-search.component';
 import { MediaSearchResultsComponent } from './mediaSearch/media-search-results/media-search-results.component';
-import {MatInputModule} from '@angular/material/input';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MediaSearchExtendedComponent } from './mediaSearch/media-search-extended/media-search-extended.component';
 import { MediaSearchSimpleComponent } from './mediaSearch/media-search-simple/media-search-simple.component';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatSelectModule} from '@angular/material/select';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 // Services
 import { MediaService } from './services/media/media.service';
@@ -85,7 +85,7 @@ import { UpdateMediaComponent } from './update-media/update-media.component';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule, 
+    CommonModule,
     MatSelectModule,
     MatTableModule,
     MatPaginatorModule,
@@ -93,7 +93,7 @@ import { UpdateMediaComponent } from './update-media/update-media.component';
     MatChipsModule,
     MatRadioModule,
     NgbModule
-    ],
+  ],
   providers: [MediaService],
   bootstrap: [AppComponent]
 })

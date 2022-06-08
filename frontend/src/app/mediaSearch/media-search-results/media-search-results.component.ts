@@ -33,7 +33,7 @@ export class MediaSearchResultsComponent implements OnInit {
 
   constructor(
     private searchService: MediaService,
-    private cdref: ChangeDetectorRef,
+    // private cdref: ChangeDetectorRef,
     private searchOption: mediaSearchOptions
   ) {
     // this.searchResult = searchService.searchResult;

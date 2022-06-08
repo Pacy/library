@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Media } from 'src/app/models/media';
-import { mediaSearchOptions } from 'src/app/models/meadia-search-options';
+// import { mediaSearchOptions } from 'src/app/models/meadia-search-options';
 
 import { Observable, Subject, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import { AppSettings } from 'src/appSetting';
 import { catchError, map, share } from 'rxjs/operators';
+import { MediaHelper } from './media-helper';
 
 
 @Injectable({
@@ -18,9 +19,12 @@ export class MediaService {
   // const headers = new HttpHeaders().append('header', 'value');
 
   constructor(
-    private searchOption: mediaSearchOptions,
-    private http: HttpClient
-  ) { }
+    // private searchOption: mediaSearchOptions,
+    private http: HttpClient,
+    private mediaHelper : MediaHelper
+  ) { 
+    // let mediaHelper = new MediaHelper();
+  }
 
   //determine if user already used the search
   private searched = false;
@@ -83,7 +87,7 @@ export class MediaService {
    */
   createMedium(data: object): Observable<any> {
     const apiUrl = `${this.endpoint}`;
-
+    
     return this.http.post(apiUrl, data)
       // .subscribe((res) => {
       //   console.log(res);
@@ -129,7 +133,7 @@ export class MediaService {
           complete: () => console.log("searchFor/quickSearch completed")
         })
     }
-    this.searchedForString = this.searchOption.getSearchedForString(obj);
+    this.searchedForString = this.mediaHelper.getSearchedForString(obj);
   }
 
 
@@ -138,7 +142,7 @@ export class MediaService {
   }
 
   quickSearch(s): Observable<Media[]> {
-    let queryParameter = this.searchOption.flattenObject(s)
+    let queryParameter = this.mediaHelper.flattenObjectKeepInformation(s)
     queryParameter = new URLSearchParams(queryParameter).toString();
 
     let apiUrl = `${this.endpoint}/quickSearch?${queryParameter}`;
@@ -151,8 +155,8 @@ export class MediaService {
 
   getSearchResultFromServer(s): Observable<Media[]> {
 
-    let simplifiedData = this.searchOption.simplifySearchObject(s);
-    let queryParameter = this.searchOption.flattenObject(simplifiedData)
+    let simplifiedData = this.mediaHelper.simplifySearchObject(s);
+    let queryParameter = this.mediaHelper.flattenObjectKeepInformation(simplifiedData)
     queryParameter = new URLSearchParams(queryParameter).toString();
 
     let apiUrl = `${this.endpoint}?${queryParameter}`;

@@ -24,10 +24,10 @@ const Schema = mongoose.Schema;
 const mediaSchema = new Schema({
   // properties for every object
   // omitting id field, so mongoDB auto generates a unique _id field that is a primary key, in case there is no ean
-  ean: {type: Number, unique:true, sparse :true},
-  title: {type:String, required:true},
+  ean: { type: Number, unique: true, sparse: true },
+  title: { type: String, required: true },
   releaseYear: Number,
-  publisher: [String],
+  publisher: { type: [String], default: undefined },
   description: String,
   genre: String,
   mediaType: String,
@@ -39,15 +39,15 @@ const mediaSchema = new Schema({
   //      read comment on top for why the table will have a bunch of blank fields at the moment
   //book properties
   // isbn: Number, // same number as ean, therefore can removed here
-  authors: [{type:String}],
+  authors: { type: [String], default: undefined },
   pages: Number, // property also for a magazine
   tableOfContentLink: String, // property for books, magazine, (Disc)
   // CD, DVD, Blu-Ray
   fsk: Number,
   duration: Number,
-  involvedPerson: [String],
+  involvedPerson: { type: [String], default: undefined },
   // digitalGame
-  developers: [String],
+  developers: { type: [String], default: undefined },
   usk: Number,
   platforms: String, // not an array, because different platform have also different ean. Which means it has to be a seperate entry
   // Games
@@ -58,7 +58,7 @@ const mediaSchema = new Schema({
   // magazine
   issn: Number,
   magazineNumber: Number,
-},{
+}, {
   collection: 'media'
 })
 

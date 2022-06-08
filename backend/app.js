@@ -10,10 +10,7 @@ const express = require('express'),
 
 // Connecting mongoDB
 mongoose.Promise = global.Promise;
-mongoose.connect(dataBaseConfig.db, {
-  useNewUrlParser: true,
-  useFindAndModify: false
-}).then(() => {
+mongoose.connect(dataBaseConfig.db.URI, dataBaseConfig.db.options).then(() => {
   console.log('Database connected sucessfully ')
 },
   error => {
