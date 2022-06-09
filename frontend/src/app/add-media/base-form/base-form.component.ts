@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
-import { mediaSearchOptions } from '../../models/meadia-search-options'
+import { MediaHelper } from '../../services/media/media-helper'
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { chipListAdd, chipListRemove } from '../chipListHelper'
@@ -20,7 +20,7 @@ export class BaseFormComponent implements OnInit {
   genreList: string[];
   constructor(
     private rootFromGroup: FormGroupDirective,
-    private mediaSearch: mediaSearchOptions
+    private mediaSearch: MediaHelper
   ) { }
 
   ngOnInit(): void {

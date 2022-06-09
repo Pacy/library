@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaService } from '../services/media/media.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { mediaSearchOptions } from '../models/meadia-search-options';
+// import { Subscription } from 'rxjs';
+// import { mediaSearchOptions } from '../models/meadia-search-options';
 import { ActivatedRoute } from '@angular/router';
 import { germanAgeRatingValidator, minMaxRelationValidator, urlValidator } from './../add-media/customFormValidator'
 import { MediaHelper } from '../services/media/media-helper';

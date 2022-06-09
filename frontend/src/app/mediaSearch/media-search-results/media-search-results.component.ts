@@ -4,7 +4,7 @@ import { MediaService } from 'src/app/services/media/media.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { mediaSearchOptions } from 'src/app/models/meadia-search-options';
+import { MediaHelper } from '../../services/media/media-helper'
 import { Subscription } from 'rxjs';
 
 
@@ -34,7 +34,7 @@ export class MediaSearchResultsComponent implements OnInit {
   constructor(
     private searchService: MediaService,
     // private cdref: ChangeDetectorRef,
-    private searchOption: mediaSearchOptions
+    private searchOption: MediaHelper
   ) {
     // this.searchResult = searchService.searchResult;
     // console.log("searchResult: ", this.searchResult)

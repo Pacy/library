@@ -3,7 +3,7 @@ import { Observable, of, Subscription } from 'rxjs';
 import { Media } from 'src/app/models/media';
 import { ActivatedRoute, Router } from "@angular/router"; // get value from url
 import { MediaService } from 'src/app/services/media/media.service';
-import { mediaSearchOptions } from 'src/app/models/meadia-search-options';
+import { MediaHelper } from '../../services/media/media-helper'
 import { SubCategoryViewDirective } from './sub-category-view.directive';
 import { ViewBookComponent } from '../view-book/view-book.component'
 import { ViewDiscComponent } from '../view-disc/view-disc.component';
@@ -30,7 +30,7 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private searchService: MediaService,
-    private searchOption: mediaSearchOptions,
+    private searchOption: MediaHelper,
     private changeDetector: ChangeDetectorRef,
     private modalService: NgbModal,
     private router: Router

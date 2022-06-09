@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { mediaSearchOptions } from 'src/app/models/meadia-search-options';
+import { MediaHelper } from '../../services/media/media-helper'
 import { MediaService } from 'src/app/services/media/media.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -14,7 +14,7 @@ export class MediaSearchExtendedComponent implements OnInit {
 
   constructor(
     private searchService: MediaService,
-    private searchOption: mediaSearchOptions,
+    private searchOption: MediaHelper,
     private modalService: NgbModal,
 
   ) { }
