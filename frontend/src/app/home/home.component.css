@@ -41,7 +41,7 @@ mat-grid-tile {
   white-space: pre-line;
 }
 
-.active-zile {
+.active-tile {
   width: 100%;
   height: 100%;
   background-color: rgb(103, 146, 160);

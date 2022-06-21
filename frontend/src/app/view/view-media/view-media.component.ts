@@ -33,7 +33,7 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
     private searchOption: MediaHelper,
     private changeDetector: ChangeDetectorRef,
     private modalService: NgbModal,
-    private router: Router
+    // private router: Router
   ) { }
 
   medium$!: Observable<Media>; // data of the medium request from the backend

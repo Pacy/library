@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Media } from 'src/app/models/media';
-// import { mediaSearchOptions } from 'src/app/models/meadia-search-options';
 
 import { Observable, Subject, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
@@ -21,10 +20,8 @@ export class MediaService {
   constructor(
     // private searchOption: mediaSearchOptions,
     private http: HttpClient,
-    private mediaHelper : MediaHelper
-  ) { 
-    // let mediaHelper = new MediaHelper();
-  }
+    private mediaHelper: MediaHelper
+  ) { }
 
   //determine if user already used the search
   private searched = false;
@@ -37,6 +34,9 @@ export class MediaService {
   // viewMedia methods subscribe to this subject to received update
   subject$ = new Subject();
 
+  getEndpointURL() {
+    return this.endpoint;
+  }
 
   // return the search results in an array
   getSearchResult() {
@@ -46,7 +46,7 @@ export class MediaService {
 
   /**
    * 
-   * @param id object id of the medium that wants to be inspected
+   * @param id object id of the medium that wants to be retrieved from server
    * @returns object that was tried to retrieve
    */
   getMediumByID(id): Observable<any> {
@@ -87,12 +87,10 @@ export class MediaService {
    */
   createMedium(data: object): Observable<any> {
     const apiUrl = `${this.endpoint}`;
-    
+
     return this.http.post(apiUrl, data)
-      // .subscribe((res) => {
-      //   console.log(res);
-      // });
-      .pipe(catchError(this.handleError))
+      .pipe
+      (catchError(this.handleError))
   }
 
   createMediumExemplar() { }
@@ -118,7 +116,7 @@ export class MediaService {
             this.searchResult = result;
             this.subject$.next(this.searchResult)
           },
-          error: (e) => console.log(e),
+          error: (e) => console.log("Error while trying to get server search results: " +e),
           complete: () => console.log("searchFor completed")
         }
         )
@@ -129,7 +127,7 @@ export class MediaService {
             this.searchResult = result;
             this.subject$.next(this.searchResult)
           },
-          error: (e) => console.log(e),
+          error: (e) => console.log("Error with quickSearch execution: " +e),
           complete: () => console.log("searchFor/quickSearch completed")
         })
     }
@@ -141,8 +139,13 @@ export class MediaService {
     return this.subject$.asObservable();
   }
 
-  quickSearch(s): Observable<Media[]> {
-    let queryParameter = this.mediaHelper.flattenObjectKeepInformation(s)
+  /**
+   * 
+   * @param searchObject Object that contains one search string for the backend
+   * @returns server respond for the given search
+   */
+  quickSearch(searchObject): Observable<Media[]> {
+    let queryParameter = this.mediaHelper.flattenObjectKeepInformation(searchObject)
     queryParameter = new URLSearchParams(queryParameter).toString();
 
     let apiUrl = `${this.endpoint}/quickSearch?${queryParameter}`;
@@ -153,9 +156,14 @@ export class MediaService {
       )
   }
 
-  getSearchResultFromServer(s): Observable<Media[]> {
+  /**
+   * 
+   * @param searchObject Object that contains all search criteria from the user
+   * @returns the server respond to the given searchObject
+   */
+  getSearchResultFromServer(searchObject): Observable<Media[]> {
 
-    let simplifiedData = this.mediaHelper.simplifySearchObject(s);
+    let simplifiedData = this.mediaHelper.simplifySearchObject(searchObject);
     let queryParameter = this.mediaHelper.flattenObjectKeepInformation(simplifiedData)
     queryParameter = new URLSearchParams(queryParameter).toString();
 
@@ -167,7 +175,10 @@ export class MediaService {
       )
   }
 
-
+  /**
+   * 
+   * @returns string that was used for the search if defined
+   */
   getSearchedForString() {
     if (typeof this.searchedForString === 'undefined') {
       return "error: search string is undefined";
@@ -192,6 +203,6 @@ export class MediaService {
       console.log(errorMessage)
     }
     // console.log(errorMessage);
-    return throwError(() => { return (errorMessage) });
+    return throwError(() => { new Error(errorMessage) });
   }
 }

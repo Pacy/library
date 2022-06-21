@@ -33,7 +33,7 @@ export interface digitalGame extends Media{
     developers: string[]; // in case multiple developers 
     usk: number;
   // does make less sense right now;;  tableOfContentLink?: string; //link to a picture of the page of content
-    platforms: string;
+    platform: string; // platform (single not multiple). Different platforms have different ean, and therefore different entries
 }
 
 // No digital games, i.e card, boardgames,..

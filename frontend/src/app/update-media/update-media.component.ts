@@ -17,7 +17,7 @@ export class UpdateMediaComponent implements OnInit {
   editForm!: FormGroup;
 
   // getMediumSubscription: Subscription;
-  medium // data of the medium request from the backend
+   medium; // data of the medium request from the backend
 
   submitedChanges: boolean = false;
   submitSuccesful: boolean = false;
@@ -39,7 +39,6 @@ export class UpdateMediaComponent implements OnInit {
     this.createForm();
 
     // this.mediaType = this.searchOption.getMediaTypes();
-
     this.route.params.subscribe(params => {
       this.id = params['id']; // get value from url
       // this.getMediumSubscription = 
@@ -100,7 +99,7 @@ export class UpdateMediaComponent implements OnInit {
         developers: [[]],//  string[]; // in case multiple developers 
         usk: ['', germanAgeRatingValidator()],// number;
         // tableOfContentLink:[],//? not really matching for digital games
-        platforms: [],// string;
+        platform: [],// string;
       }),
 
       //physical games formGroup

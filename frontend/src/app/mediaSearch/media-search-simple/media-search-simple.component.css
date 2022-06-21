@@ -9,6 +9,10 @@
     float: right;
 }
 
+#search-icon{
+    font-size: 150%;
+}
+
 @media screen and (max-width: 960px) {
     .simple-search{
         max-width: 90%;

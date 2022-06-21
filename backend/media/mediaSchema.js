@@ -49,7 +49,7 @@ const mediaSchema = new Schema({
   // digitalGame
   developers: { type: [String], default: undefined },
   usk: Number,
-  platforms: String, // not an array, because different platform have also different ean. Which means it has to be a seperate entry
+  platform: String, // not an array, because different platform have also different ean. Which means it has to be a seperate entry
   // Games
   minAge: Number,
   playTime: Number,

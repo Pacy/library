@@ -41,7 +41,6 @@ import { ViewDiscComponent } from './view/view-disc/view-disc.component';
 import { ViewDigitalGameComponent } from './view/view-digital-game/view-digital-game.component';
 import { ViewMagazineComponent } from './view/view-magazine/view-magazine.component';
 import { ViewBookComponent } from './view/view-book/view-book.component';
-import { SanitizeHtmlPipe } from './pipes/sanitize-html-pipe.pipe';
 import { SubCategoryViewDirective } from './view/view-media/sub-category-view.directive';
 import { BookFormComponent } from './add-media/book-form/book-form.component';
 import { DiscFormComponent } from './add-media/disc-form/disc-form.component';
@@ -68,7 +67,6 @@ import { UpdateMediaComponent } from './update-media/update-media.component';
     ViewDigitalGameComponent,
     ViewMagazineComponent,
     ViewBookComponent,
-    SanitizeHtmlPipe,//obsolete at this point
     SubCategoryViewDirective, BookFormComponent, DiscFormComponent, GameFormComponent, DigitalGameFormComponent, MagazineFormComponent, BaseFormComponent, UpdateMediaComponent
   ],
   imports: [

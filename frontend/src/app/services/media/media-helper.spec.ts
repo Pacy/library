@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 // import { mediaSearchOptions } from 'src/app/models/meadia-search-options';
 import { MediaHelper } from './media-helper';
 
-fdescribe('MediaHelper', () => {
+describe('MediaHelper', () => {
   let mediaHelper: MediaHelper;
 
   beforeEach(() =>{

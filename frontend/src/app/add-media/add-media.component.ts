@@ -59,7 +59,7 @@ export class AddMediaComponent implements OnInit {
         developers: [[]],//  string[]; // in case multiple developers 
         usk: ['', germanAgeRatingValidator()],// number;
         // tableOfContentLink:[],//? not really matching for digital games
-        platforms: [],// string;
+        platform: [],// string;
       }),
 
       //physical games formGroup

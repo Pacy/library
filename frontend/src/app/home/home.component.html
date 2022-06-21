@@ -9,7 +9,7 @@
             <p class="main-tile-content">{{news[mainTile].description}}</p>
         </div>
     </mat-grid-tile>
-    <mat-grid-tile [ngClass]="{'activeTile': mainTile === i}" *ngFor="let n of news; let i = index" (click)="mainTile=i">
+    <mat-grid-tile [ngClass]="{'active-tile': mainTile === i}" *ngFor="let n of news; let i = index" (click)="mainTile=i">
         <div class="tile-container">
             <mat-grid-tile-header class="tile-header">
                 {{n.title}}

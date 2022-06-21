@@ -78,7 +78,8 @@ export class MediaSearchResultsComponent implements OnInit {
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
-    this.subscription.unsubscribe();
+    if(this.subscription)
+      this.subscription.unsubscribe();
   }
 
   columnsToDisplay = ['resultNumber', 'title', 'mediaTyp2', 'expand'];
