@@ -50,6 +50,10 @@ import { MagazineFormComponent } from './add-media/magazine-form/magazine-form.c
 import { BaseFormComponent } from './add-media/base-form/base-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UpdateMediaComponent } from './update-media/update-media.component';
+import { HeaderComponent } from './header/header.component';
+import { CreateComponent } from './user/create/create.component';
+import { UpdateComponent } from './user/update/update.component';
+import { ViewComponent } from './user/view/view.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +71,7 @@ import { UpdateMediaComponent } from './update-media/update-media.component';
     ViewDigitalGameComponent,
     ViewMagazineComponent,
     ViewBookComponent,
-    SubCategoryViewDirective, BookFormComponent, DiscFormComponent, GameFormComponent, DigitalGameFormComponent, MagazineFormComponent, BaseFormComponent, UpdateMediaComponent
+    SubCategoryViewDirective, BookFormComponent, DiscFormComponent, GameFormComponent, DigitalGameFormComponent, MagazineFormComponent, BaseFormComponent, UpdateMediaComponent, HeaderComponent, CreateComponent, UpdateComponent, ViewComponent
   ],
   imports: [
     BrowserModule,
