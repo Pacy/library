@@ -11,13 +11,19 @@ import { Observable } from 'rxjs';
 export class HeaderComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean>;
+  accessLevel//: Observable<number>;
+  subscription;
 
   constructor(public authService : AuthentificationService, private router: Router) { }
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.authService.isLoggedInObservable; // store reference to the observable
+    this.isLoggedIn$ = this.authService.isLoggedInObservable; // store reference to isLoggedIn BehaviorSubject
+    this.subscription = this.authService.userAccessLevelObseravable.subscribe( val => this.accessLevel = val); // subscribe to value changes of accessLevel of the user
   }
 
+  ngOnDestroy(): void{
+    this.subscription.unsubscribe()
+  }
 
   logout(): void {
     this.authService.logout();

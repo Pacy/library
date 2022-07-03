@@ -6,7 +6,7 @@
   <mat-menu #navigationMenu="matMenu" backdropClass="customize" [overlapTrigger]="false" yPosition="below"
     xPosition="after">
     <button mat-menu-item routerLink="mediaSearch">Search</button>
-    <ng-container *ngIf="isLoggedIn$ | async">
+    <ng-container *ngIf="(isLoggedIn$ | async) && accessLevel >1">
       <button mat-menu-item [matMenuTriggerFor]="MediaMenu">Media</button>
       <button [matMenuTriggerFor]="UsersMenu" mat-menu-item>Users</button>
     </ng-container>
@@ -29,7 +29,7 @@
   <h1 class="title"><a routerLink="home">Basic Library</a></h1>
   <div class="navbar-banner">
     <a class="toolbar-nav-item" routerLink="mediaSearch">- Search</a>
-    <ng-container *ngIf="isLoggedIn$ | async">
+    <ng-container *ngIf="(isLoggedIn$ | async) && accessLevel >1">
       <a class="toolbar-nav-item" [matMenuTriggerFor]="MediaMenu">- Media</a>
       <a class="toolbar-nav-item" [matMenuTriggerFor]="UsersMenu">- Users</a>
     </ng-container>
@@ -56,11 +56,9 @@
   <ul>
     <li><a routerLink="home">Home</a></li>
     <li><a routerLink="mediaSearch">Search</a></li>
-    <ng-container *ngIf="isLoggedIn$ | async">
+    <ng-container *ngIf="(isLoggedIn$ | async) && accessLevel >1">
       <li class="nav-button" [matMenuTriggerFor]="MediaMenu">Media</li>
       <li class="nav-button" [matMenuTriggerFor]="UsersMenu">Users</li>
     </ng-container>
   </ul>
 </nav>
-
-<!-- *ngIf= isLoggedIn$ on media and user menu have to be expanded by checks for users authorization! -->
