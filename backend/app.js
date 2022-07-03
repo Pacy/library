@@ -54,8 +54,10 @@ app.use(express.static(path.join(__dirname, 'dist/library')));
 */
 // Set up express js port
 const mediaRoute = require('./media/mediaRoute.js');
+const userRoute = require('./user/userRoute.js');
 // RESTful API root
 app.use('/api/media', mediaRoute);
+app.use('/api/user', userRoute);
 //app.get('/', (req, res) => res.send('Hello World!'));
 
 // unsupported get error
@@ -74,7 +76,7 @@ app.use((req, res, next) => {
 
 
 
-// error handler
+// error handler (middleware, next(error) will run all the middleware that has 4 parameters)
 app.use(function (err, req, res, next) {
   console.error("Error: ", err.message);
   if (!err.statusCode) err.statusCode = 500;

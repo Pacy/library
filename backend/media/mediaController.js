@@ -11,7 +11,7 @@ var tools = require('../utility');
 exports.getSearchResults = function (req, res, next) {
   const params = tools.unflattenObject(req.query)
   const searchQuery = createSearchQueryObject(params);
-  
+
   // skipping search char (i.e *, ?) for the moment as priority is actually frontend of the project
   Media.find(
     searchQuery
@@ -19,7 +19,7 @@ exports.getSearchResults = function (req, res, next) {
       if (error) {
         return next(error)
       } else {
-        res.status(201).json(data)
+        return res.status(201).json(data)
       }
     })
 };
@@ -35,7 +35,7 @@ exports.quickSearch = function (req, res, next) {
       if (error) {
         return next(error)
       } else {
-        res.status(201).json(data)
+        return res.status(201).json(data)
       }
     })
     .sort({ score: { $meta: "textScore" } })
@@ -47,7 +47,7 @@ exports.createMedia = function (req, res, next) {
     if (error) {
       return next(error)
     } else {
-      res.status(201).json(data)
+      return res.status(201).json(data)
     }
   })
 };
@@ -60,10 +60,13 @@ exports.getMedia = function (req, res, next) {
     if (error) {
       return next(error)
     } else {
-      if (data === null)
+      if (data === null) {
         // different opinions wether port 404 or 204 should be used for no result from a get query
-        res.status(404).send();
-      else res.status(200).json(data);
+        return res.status(404).send();
+      }
+      else {
+        return res.status(200).json(data);
+      }
     }
   })
 };
@@ -75,8 +78,8 @@ exports.updateMedia = function (req, res, next) {
     if (error) {
       return next(error);
     } else {
-      res.json(data)
       console.log('Media successfully updated!')
+      return res.json(data) //toDo: return new data instead of the old retrieve one?
     }
   })
 };
@@ -86,7 +89,7 @@ exports.deleteMedia = function (req, res, next) {
     if (error) {
       return next(error);
     } else {
-      res.status(204).send();
+      return res.status(204).send();
     }
   })
 };
@@ -200,10 +203,10 @@ function createNotQuery(object1, object2) {
 
   // check if value is a number // checking for number is here currently ok, as a we replacedString with regexp at the moment and cast numberfields to number
   // otherwise we would have to check for the number fields 
-  if(typeof notQueryArray[1] === "number") {
+  if (typeof notQueryArray[1] === "number") {
     // if number is $ne operator instead, because $not does not accept numbers
     notQuery[notQueryArray[0]] = { "$ne": notQueryArray[1] }
-  }else{
+  } else {
     notQuery[notQueryArray[0]] = { "$not": new RegExp(notQueryArray[1], 'i') }// $not value has to be a regexp 
   }
   result["$and"] = [notQuery, object2]
@@ -264,7 +267,7 @@ function replaceStringSearchValueByRegexOrNumber(obj) {
         obj[property]["value"] = new RegExp(obj[property]["value"], 'i');
       } else if (tools.isNumber(obj[property]["value"])) { // 1st check to ensure it is a number, 2nd ensures that whitespace
         obj[property]["value"] = +obj[property]["value"]
-      } else { 
+      } else {
         // either: A) throw an error, that the number schema field does not contain a number value B) delete it, so that the search continues without it
         // A) would be better to do in the front end though
         delete obj[property];
