@@ -5,10 +5,12 @@ import { AddMediaComponent } from './add-media/add-media.component';
 import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component';
 import { MediaSearchComponent } from './mediaSearch/media-search/media-search.component';
-import { MediaSearchResultsComponent } from './mediaSearch/media-search-results/media-search-results.component';
+// import { MediaSearchResultsComponent } from './mediaSearch/media-search-results/media-search-results.component';
 import { ViewMediaComponent } from './view/view-media/view-media.component';
 import { UpdateMediaComponent } from './update-media/update-media.component';
-
+import { CreateUserComponent } from './user/add-edit/add-edit-user.component'
+import { ViewUserComponent } from './user/view/view-user.component'
+import {LoginComponent} from './user/login/login.component'
 
 const routes: Routes = [
   { path: 'addMedia', component: AddMediaComponent},
@@ -17,6 +19,14 @@ const routes: Routes = [
   { path: 'mediaSearch', component: MediaSearchComponent},
   { path: 'viewMedia/:id', component: ViewMediaComponent},
   { path: 'editMedia/:id', component: UpdateMediaComponent},
+
+  // user paths
+  // { path: 'userSearch', component: },
+  { path: 'login', component: LoginComponent},
+  { path: 'createUser', component: CreateUserComponent},
+  { path: 'viewUser/:id', component: ViewUserComponent},
+  { path: 'editUser/:id', component: CreateUserComponent},
+
   { path: '', component: HomeComponent} //optional create PageNotFound instead
 ];
 

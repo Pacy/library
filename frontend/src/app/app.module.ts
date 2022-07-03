@@ -1,40 +1,45 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {
+  NgModule,
+  LOCALE_ID // used for datepicker local format
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { HttpClientModule } from '@angular/common/http'
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
-import { AddMediaComponent } from './add-media/add-media.component';
 import { HomeComponent } from './home/home.component';
-import { AccountComponent } from './account/account.component';
 
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatGridListModule } from '@angular/material/grid-list';
-
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+// angular material related
 import { MatCardModule } from '@angular/material/card';
-import { MediaSearchComponent } from './mediaSearch/media-search/media-search.component';
-import { MediaSearchResultsComponent } from './mediaSearch/media-search-results/media-search-results.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MediaSearchExtendedComponent } from './mediaSearch/media-search-extended/media-search-extended.component';
-import { MediaSearchSimpleComponent } from './mediaSearch/media-search-simple/media-search-simple.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
 
 // Services
 import { MediaService } from './services/media/media.service';
+import { UserService } from './services/user/user.service';
 
+// interceptor
+import { AuthInterceptor } from './http-interceptors/auth-interceptor'
 
+// media realted
+import { AddMediaComponent } from './add-media/add-media.component';
 import { ViewMediaComponent } from './view/view-media/view-media.component';
 import { ViewGameComponent } from './view/view-game/view-game.component';
 import { ViewDiscComponent } from './view/view-disc/view-disc.component';
@@ -48,12 +53,24 @@ import { GameFormComponent } from './add-media/game-form/game-form.component';
 import { DigitalGameFormComponent } from './add-media/digital-game-form/digital-game-form.component';
 import { MagazineFormComponent } from './add-media/magazine-form/magazine-form.component';
 import { BaseFormComponent } from './add-media/base-form/base-form.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UpdateMediaComponent } from './update-media/update-media.component';
+import { MediaSearchExtendedComponent } from './mediaSearch/media-search-extended/media-search-extended.component';
+import { MediaSearchSimpleComponent } from './mediaSearch/media-search-simple/media-search-simple.component';
+import { MediaSearchResultsComponent } from './mediaSearch/media-search-results/media-search-results.component';
+import { MediaSearchComponent } from './mediaSearch/media-search/media-search.component';
+
+import { MatNativeDateModule } from '@angular/material/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { HeaderComponent } from './header/header.component';
-import { CreateComponent } from './user/create/create.component';
-import { UpdateComponent } from './user/update/update.component';
-import { ViewComponent } from './user/view/view.component';
+
+// user related
+import { CreateUserComponent } from './user/add-edit/add-edit-user.component';
+import { ViewUserComponent } from './user/view/view-user.component';
+import { AccountComponent } from './account/account.component';
+import { LoginComponent } from './user/login/login.component';
+
+
 
 @NgModule({
   declarations: [
@@ -71,7 +88,18 @@ import { ViewComponent } from './user/view/view.component';
     ViewDigitalGameComponent,
     ViewMagazineComponent,
     ViewBookComponent,
-    SubCategoryViewDirective, BookFormComponent, DiscFormComponent, GameFormComponent, DigitalGameFormComponent, MagazineFormComponent, BaseFormComponent, UpdateMediaComponent, HeaderComponent, CreateComponent, UpdateComponent, ViewComponent
+    SubCategoryViewDirective,
+    BookFormComponent,
+    DiscFormComponent,
+    GameFormComponent,
+    DigitalGameFormComponent,
+    MagazineFormComponent,
+    BaseFormComponent,
+    UpdateMediaComponent,
+    HeaderComponent,
+    CreateUserComponent,
+    ViewUserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -94,9 +122,16 @@ import { ViewComponent } from './user/view/view.component';
     HttpClientModule,
     MatChipsModule,
     MatRadioModule,
-    NgbModule
+    NgbModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [MediaService],
+  providers: [
+    MediaService,
+    UserService,
+    { provide: LOCALE_ID, useValue: 'de-DE' },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } //multi true; returns an array of instances. Allows multiple providers to speard across many files ..
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

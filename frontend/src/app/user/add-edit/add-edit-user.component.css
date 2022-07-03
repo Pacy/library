@@ -1,0 +1,50 @@
+.mat-card {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.mat-form-field, .mat-radio-group {
+    margin-left: auto;
+    margin-right: auto;
+    width: 48%;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.button {
+    border: 1px solid #a8d4ff;
+    background-color: #cde6ff;
+}
+
+.notepad {
+    width: 98%;
+}
+
+.button-radio {
+    margin-left: 5px;
+}
+
+.date-picker-icon {
+    font-size: 1.25rem;
+}
+
+
+
+/* Responsive Styles */
+
+@media screen and (max-width: 960px) {
+    .mat-card {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .mat-form-field, .notepad, .mat-radio-group {
+        width: 100%;
+    }
+}

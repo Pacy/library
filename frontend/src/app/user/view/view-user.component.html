@@ -1,0 +1,17 @@
+<p>view works!</p>
+{{user}}
+
+<table>
+<tr *ngFor="let u of users">
+<td>Name: {{u.lastName}}</td>
+<td>email: {{u.email}}</td>
+</tr>
+</table> 
+
+
+Currently a dummy page to test get users authorization
+
+The view page will be later accesible via a user search (name or library number)
+-> 1 result => redirect to the user
+-> 2+ results => show user search result and click on the user wanted
+

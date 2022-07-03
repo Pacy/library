@@ -35,6 +35,7 @@
       font-weight: normal;
       padding-right: 15px;
       padding-left: 25px;
+      margin-bottom: 0;
   }
 
   .nav-bar {
@@ -89,8 +90,13 @@
       display: none;
   }
 
-  .account-icon {
+  .account-icon, .logout-icon {
       margin-right: 15px;
+  }
+
+  .logout-icon {
+    cursor: pointer;
+    margin-left:8 px;
   }
 
   .mat-icon-person {
@@ -117,9 +123,13 @@
           display: block;
       }
 
-      .spacer {
-          flex: 0;
+      .logout-icon{
+        margin-left: 0;
       }
+      /* 
+      .spacer {
+          flex: 1;
+      } */
 
       .title {
           padding-right: 0px;
