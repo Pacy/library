@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EmailValidator, FormBuilder, FormGroup, RequiredValidator, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -25,9 +25,6 @@ export class CreateUserComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
-
-    console.log("add-edit" + this.id + " " + this.isAddMode)
-
 
     this.createForm = this.fb.group({
       firstName: ["", Validators.required],
@@ -71,12 +68,12 @@ export class CreateUserComponent implements OnInit {
     if (this.createForm.invalid) {
       return;
     }
+
     if (this.isAddMode) {
       this.createUser();
     } else {
       this.updateUser();
     }
-
   }
 
   createUser() {
@@ -93,7 +90,6 @@ export class CreateUserComponent implements OnInit {
 
     // set (default) values for required attributes of user (could actually also do this in the backend. Need to figure out which spot is the prefered one)
     result["password"] = result["birthday"].getDate().toString() + (result["birthday"].getMonth() + 1); // password = DAY + MONTH (string concatenation)
-    // result["birthday"] = result["birthday"].getTime();
     result["overdueMedia"] = false;
     result["accountStatus"] = 1;
 
@@ -120,12 +116,6 @@ export class CreateUserComponent implements OnInit {
 
     // get dirty values from the from. (they are in a nested object)
     const result = this.getDirtyValues(this.createForm)
-    // console.log("dirtyValues", dirtyValues)
-
-    // unflatten object
-    // result = this.mediaHelper.flattenObjectLoseInformation(dirtyValues)
-
-    console.log("result", result)
 
     // call media service to sent the data to the backend
     this.userService.editUserByID(this.id, result)
@@ -155,15 +145,14 @@ export class CreateUserComponent implements OnInit {
      * @param form form to check for dirty values
      * @returns (nested) object
      */
+  // toDO: duplicate method from media edit component. Need to encapsulate it later
   // method taken from https://stackoverflow.com/questions/53613803/angular-reactive-forms-how-to-get-just-changed-values
   getDirtyValues(form: any) {
     let dirtyValues = {};
     Object.keys(form.controls)
       .forEach(key => {
         let currentControl = form.controls[key];
-        // console.log("control", currentControl.control, key)
         if (currentControl.dirty) {
-          // console.log("is nested control group?", currentControl.controls, currentControl)
           if (currentControl.controls)
             dirtyValues[key] = this.getDirtyValues(currentControl);
           else
@@ -173,4 +162,5 @@ export class CreateUserComponent implements OnInit {
       });
     return dirtyValues;
   }
+
 }
