@@ -8,12 +8,18 @@ Application is built with MEAN stack
 ## Project Status
 Work in progress, so far working
 - a basic 'home' page including some news (news are hardcoded at the moment)
-- crud operation for media 
+- crud operation for media (front- & backend)
    - create with reactive form
-   - read with template driven form (supports a quick search field that return a weighted list, or an extended search form with and/not/or operator(s))
+   - read accesible via search (or url edit with the object id)
    - update uses the same reactive form as the create component
    - delete simple button with a modal for confirmation
-
+- search for media with template driven form (supports a quick search field that return a weighted list, or an extended search form with and/not/or operator(s) and fields to search on)
+- curd operation for user (backend & partially in frontend)
+   - Create / update a user with reactive form
+- authentification & authorization
+   - compare user input with password hash in the database
+   - create a jwt token with an expire time (currently no refresh token used)
+   - using the jwt token for authorization
 
 
 ## Tech
@@ -31,18 +37,20 @@ Currently used version:
 - Angular 13.3.1
 - Express 4.17.3
 - Node.js 14.15.0
- 
-For a compatability list refer to this this [github compatability list]
+( For a compatability list refer to this this [github compatability list] )
+
 
 Clone this repository. Install the dependency (need npm for this)
+
 ``
 npm install
 ``
 
-Start mongoDB with mongod. (additional you can specify a database path)
+Start mongoDB with mongod. 
+(additional you can specify a database path
 ``
 mongod --dbpath="D:\data\db"
-``
+`` )
 
 > TO DO
 > have to add the indexes that need to be created here
@@ -60,13 +68,9 @@ This web application is meant to practice and improve my knowledge regarding bui
 Focus is actually on the front end, but backend logic and database take some time to get right. The whole project is built from scratch on my own.
 
 The project is built on the go while trying to get more confindence in frontend developing skills.
-Different challenges appear when working on the project, and new things can be learnt :D
+Different challenges appeared when working on the project, and new things are learnt :)
 
 For example that a monogDB index search combined with an $or operator, requires the other field to be indexed to work.
-
-
-I guess, I could have written things here (or could start now), that I am learning while working on it🤔
-// Update: create a private file for this now with some of them
 
 
 <!---
