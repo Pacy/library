@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
-  selector: 'app-create',
+  selector: 'app-add-edit-user',
   templateUrl: './add-edit-user.component.html',
   styleUrls: ['./add-edit-user.component.css'],
 })
@@ -59,7 +59,6 @@ export class CreateUserComponent implements OnInit {
         error: (err) => console.log("getting User data error: ", err),
         // complete: () => console.log("getting User by ID Observable completed")
       })
-
     }
   }
 

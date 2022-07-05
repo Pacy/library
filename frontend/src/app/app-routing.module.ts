@@ -3,12 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 // media components
-import { AddMediaComponent } from './media/add-media/add-media.component';
+import { AddMediaComponent } from './media/add-edit-media/add-edit-media.component';
 import { MediaSearchComponent } from './media/mediaSearch/media-search/media-search.component';
 import { ViewMediaComponent } from './media/view/view-media/view-media.component';
-import { UpdateMediaComponent } from './media/update-media/update-media.component';
 // user components
-import { CreateUserComponent } from './user/add-edit-user/add-edit-user.component';
+import { CreateUserComponent } from './user/add-user/add-edit-user.component';
 import { ViewUserComponent } from './user/view-user/view-user.component';
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './user/login/login.component';
@@ -25,7 +24,7 @@ const routes: Routes = [
   { path: 'addMedia', component: AddMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: {accessLevel: 2} },
   { path: 'mediaSearch', component: MediaSearchComponent, canActivate: [AuthGuardService, RoleGuardService], data: {accessLevel: 2} },
   { path: 'viewMedia/:id', component: ViewMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: {accessLevel: 2} },
-  { path: 'editMedia/:id', component: UpdateMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: {accessLevel: 2}},
+  { path: 'editMedia/:id', component: AddMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: {accessLevel: 2}},
 
   // user related
   { path: 'account', component: AccountComponent},

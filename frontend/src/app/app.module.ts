@@ -39,7 +39,7 @@ import { UserService } from './services/user/user.service';
 import { AuthInterceptor } from './http-interceptors/auth-interceptor'
 
 // media realted
-import { AddMediaComponent } from './media/add-media/add-media.component';
+import { AddMediaComponent } from './media/add-edit-media/add-edit-media.component';
 import { ViewMediaComponent } from './media/view/view-media/view-media.component';
 import { ViewGameComponent } from './media/view/view-game/view-game.component';
 import { ViewDiscComponent } from './media/view/view-disc/view-disc.component';
@@ -47,13 +47,12 @@ import { ViewDigitalGameComponent } from './media/view/view-digital-game/view-di
 import { ViewMagazineComponent } from './media/view/view-magazine/view-magazine.component';
 import { ViewBookComponent } from './media/view/view-book/view-book.component';
 import { SubCategoryViewDirective } from './media/view/view-media/sub-category-view.directive';
-import { BookFormComponent } from './media/add-media/book-form/book-form.component';
-import { DiscFormComponent } from './media/add-media/disc-form/disc-form.component';
-import { GameFormComponent } from './media/add-media/game-form/game-form.component';
-import { DigitalGameFormComponent } from './media/add-media/digital-game-form/digital-game-form.component';
-import { MagazineFormComponent } from './media/add-media/magazine-form/magazine-form.component';
-import { BaseFormComponent } from './media/add-media/base-form/base-form.component';
-import { UpdateMediaComponent } from './media/update-media/update-media.component';
+import { BookFormComponent } from './media/add-edit-media/book-form/book-form.component';
+import { DiscFormComponent } from './media/add-edit-media/disc-form/disc-form.component';
+import { GameFormComponent } from './media/add-edit-media/game-form/game-form.component';
+import { DigitalGameFormComponent } from './media/add-edit-media/digital-game-form/digital-game-form.component';
+import { MagazineFormComponent } from './media/add-edit-media/magazine-form/magazine-form.component';
+import { BaseFormComponent } from './media/add-edit-media/base-form/base-form.component';
 import { MediaSearchExtendedComponent } from './media/mediaSearch/media-search-extended/media-search-extended.component';
 import { MediaSearchSimpleComponent } from './media/mediaSearch/media-search-simple/media-search-simple.component';
 import { MediaSearchResultsComponent } from './media/mediaSearch/media-search-results/media-search-results.component';
@@ -65,7 +64,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './header/header.component';
 
 // user related
-import { CreateUserComponent } from './user/add-edit-user/add-edit-user.component';
+import { CreateUserComponent } from './user/add-user/add-edit-user.component';
 import { ViewUserComponent } from './user/view-user/view-user.component';
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './user/login/login.component';
@@ -95,7 +94,6 @@ import { LoginComponent } from './user/login/login.component';
     DigitalGameFormComponent,
     MagazineFormComponent,
     BaseFormComponent,
-    UpdateMediaComponent,
     HeaderComponent,
     CreateUserComponent,
     ViewUserComponent,

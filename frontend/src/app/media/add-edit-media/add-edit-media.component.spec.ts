@@ -7,11 +7,11 @@ import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { MediaService } from '../../services/media/media.service';
 
-import { UpdateMediaComponent } from './update-media.component';
+import { AddMediaComponent } from './add-edit-media.component';
 
-xdescribe('UpdateMediaComponent', () => {
-  let component: UpdateMediaComponent;
-  let fixture: ComponentFixture<UpdateMediaComponent>;
+xdescribe('AddMediaComponent', () => {
+  let component: AddMediaComponent;
+  let fixture: ComponentFixture<AddMediaComponent>;
 
   let mediaServiceStub = {
     // getMediumByID: (id) => { return {subscribe: () => {:id: id,"title": "Harry"} } }, 
@@ -21,9 +21,16 @@ xdescribe('UpdateMediaComponent', () => {
   // let mediaServiceStub = jasmine.createSpyObj('MediaService', ['getMediumByID']);
 
 
+  /**
+   *
+   * Added the starting point from the update-media.spec.ts into this.
+   * 
+   * 
+   */
+ 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UpdateMediaComponent],
+      declarations: [AddMediaComponent],
       providers: [
         {
           provide: ActivatedRoute,
@@ -44,7 +51,7 @@ xdescribe('UpdateMediaComponent', () => {
 
   beforeEach(() => {
     // mediaServiceStub.getMediumByID.and.returnValue( of({a:1}) )
-    fixture = TestBed.createComponent(UpdateMediaComponent);
+    fixture = TestBed.createComponent(AddMediaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

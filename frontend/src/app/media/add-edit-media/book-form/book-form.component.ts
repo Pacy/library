@@ -8,7 +8,7 @@ import { chipListAdd, chipListRemove } from '../chipListHelper'
 @Component({
   selector: 'app-book-form',
   templateUrl: './book-form.component.html',
-  styleUrls: ['.././add-media.component.css', './book-form.component.css']
+  styleUrls: ['.././add-edit-media.component.css', './book-form.component.css']
 })
 export class BookFormComponent implements OnInit {
   @Input() formGroupName!: string;

@@ -4,7 +4,7 @@ import { FormGroup, FormGroupDirective } from '@angular/forms';
 @Component({
   selector: 'app-game-form',
   templateUrl: './game-form.component.html',
-  styleUrls: ['.././add-media.component.css','./game-form.component.css']
+  styleUrls: ['.././add-edit-media.component.css','./game-form.component.css']
 })
 export class GameFormComponent implements OnInit {
   @Input() formGroupName!: string;

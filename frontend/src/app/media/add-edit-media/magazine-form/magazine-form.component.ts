@@ -4,7 +4,7 @@ import { FormGroup, FormGroupDirective } from '@angular/forms';
 @Component({
   selector: 'app-magazine-form',
   templateUrl: './magazine-form.component.html',
-  styleUrls: ['.././add-media.component.css','./magazine-form.component.css']
+  styleUrls: ['.././add-edit-media.component.css','./magazine-form.component.css']
 })
 export class MagazineFormComponent implements OnInit {
   @Input() formGroupName!: string;

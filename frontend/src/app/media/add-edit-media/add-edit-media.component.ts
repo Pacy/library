@@ -1,29 +1,59 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { MediaHelper } from 'src/app/services/media/media-helper';
 import { MediaService } from '../../services/media/media.service';
 import { germanAgeRatingValidator, minMaxRelationValidator, urlValidator } from './customFormValidator'
 
 
 @Component({
-  selector: 'app-add-media',
-  templateUrl: './add-media.component.html',
-  styleUrls: ['./add-media.component.css']
+  selector: 'app-add-edit-media',
+  templateUrl: './add-edit-media.component.html',
+  styleUrls: ['./add-edit-media.component.css']
 })
 export class AddMediaComponent implements OnInit {
-  createForm!: FormGroup;
+  mediaForm!: FormGroup;
 
   serverResponded: boolean = false;
   submitSuccesful: boolean = false;
   submitRespondMessage: string;
 
+  isAddMode: boolean;
+  id: string;
+
+
   constructor(
-    private mediaApi: MediaService,
-    private fb: FormBuilder
+    private mediaService: MediaService,
+    private fb: FormBuilder,
+
+    private route: ActivatedRoute,
+    private mediaHelper: MediaHelper,
   ) { }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
 
-    this.createForm = this.fb.group({
+    this.createForm();
+
+    // get values from backend if edit/:id was called
+    if (!this.isAddMode) {
+      this.mediaService.getMediumByID(this.id)
+        .subscribe({
+          next: (data) => this.updateForm(data),
+          error: (e) => console.log(e),
+          complete: () => console.log("getMediumById Observer completed")
+        })
+    }
+
+  }
+
+  /**
+   * create the reactive form for mediums 
+   * (for create and edit mediums)
+   */
+  createForm() {
+    this.mediaForm = this.fb.group({
       // common base for all mediatypes
       base: this.fb.group({
         ean: ["", Validators.minLength(13)], //?number
@@ -87,23 +117,33 @@ export class AddMediaComponent implements OnInit {
     // would reduce the empty fields of the forms not used, but i plan to iterate over the whole object anway to remove empty fields of the field selected, so it would be unnecessary to do here
   }
 
-
   /**
-   * Submit the data from the create form to the backend and adjust the view accordingly
-   * (The data from the form is nested, and has to be flatten first) 
-   * 
+   * Call the appropriated method when the submit button was clicked and the form is valid
    */
   onSubmit(): void {
-    // console.warn(this.createForm.value);
-    // console.log(this.createForm.errors)
+    if (!this.mediaForm.valid) {
+      console.log("submit clicked, but form invalid")
+      return;
+    }
 
+    if (this.isAddMode)
+      this.createMedium();
+    else
+      this.updateMedium();
+  }
+
+  /**
+   * Submit the data from the form to the backend and adjust the view accordingly
+   * (The data from the form is nested, and has to be flatten first) 
+   */
+  createMedium() {
     //optional: close previous alert message
 
     // unflatten object, containing all fields that have a value
     let result = {};
 
     // get all filled fields from the base form
-    const baseObject = this.createForm.value.base
+    const baseObject = this.mediaForm.value.base
     for (let prop in baseObject) {
       if (baseObject.hasOwnProperty(prop) && baseObject[prop]) {
         if (Array.isArray(baseObject[prop])) {
@@ -118,11 +158,11 @@ export class AddMediaComponent implements OnInit {
     // determinate which sub form has to be looked at for further values
     let mediaTypeObject = {};
     switch (baseObject.mediaType) {
-      case "Book": mediaTypeObject = this.createForm.value.book; break;
-      case "CD / DVD / Blu-Ray": mediaTypeObject = this.createForm.value.disc; break;
-      case "electronical Game": mediaTypeObject = this.createForm.value.digitalGame; break;
-      case "Game": mediaTypeObject = this.createForm.value.game; break;
-      case "Magazine": mediaTypeObject = this.createForm.value.magazine; break;
+      case "Book": mediaTypeObject = this.mediaForm.value.book; break;
+      case "CD / DVD / Blu-Ray": mediaTypeObject = this.mediaForm.value.disc; break;
+      case "electronical Game": mediaTypeObject = this.mediaForm.value.digitalGame; break;
+      case "Game": mediaTypeObject = this.mediaForm.value.game; break;
+      case "Magazine": mediaTypeObject = this.mediaForm.value.magazine; break;
     }
 
     // get all the filled fields from the sub form choosen
@@ -139,7 +179,7 @@ export class AddMediaComponent implements OnInit {
 
     // console.log("res", result)
 
-    this.mediaApi.createMedium(result)
+    this.mediaService.createMedium(result)
       .subscribe(
         {
           next: (x) => {
@@ -147,8 +187,8 @@ export class AddMediaComponent implements OnInit {
             this.serverResponded = true;
             this.submitSuccesful = true;
             this.submitRespondMessage = "Medium was created"
-            this.createForm.reset();
-            // todo show sucess message
+            this.mediaForm.reset();
+            // todo show success message
           },
           error: (err: Error) => {
             console.error('create medium got an error: ' + err);
@@ -156,17 +196,99 @@ export class AddMediaComponent implements OnInit {
             this.submitSuccesful = false;
             this.submitRespondMessage = "Medium could not be created.\n" + err;
           },
-          complete: () => {
-            // console.log('create medium observer got a complete notification');
-            // todo show sucess message
-          },
+          // complete: () => {
+          // console.log('create medium observer got a complete notification');
+          // },
         })
   }
 
+  updateMedium() {
+
+    if (!this.mediaForm.dirty) {
+      console.log("submit clicked, but nothing to do. juhu")
+      return;
+    }
+
+    // get dirty values from the from. (they are in a nested object)
+    const dirtyValues = this.getDirtyValues(this.mediaForm)
+    // console.log("dirtyValues", dirtyValues)
+
+    let result = {};
+
+    // unflatten object
+    result = this.mediaHelper.flattenObjectLoseInformation(dirtyValues)
+
+    // console.log("result", result)
+
+    // call media service to sent the data to the backend
+    this.mediaService.editMediumByID(this.id, result)
+      .subscribe(
+        {
+          error: (e) => {
+            this.serverResponded = true;
+            this.submitSuccesful = false;
+            this.submitRespondMessage = `Medium was not updated. Error: ${e}`
+            console.log(e);
+          },
+          complete: () => {
+            this.serverResponded = true;
+            this.submitSuccesful = true;
+            this.submitRespondMessage = "Medium updated successfully";
+            // console.log("edit medium by id was completed")
+            // console.log('Content updated successfully!');
+            //optional remove the message after a few seconds or reroute
+          }
+        });
+  }
   /**
    * close the alert messsage by setting the boolean variable to display it to false
    */
   closeAlert() {
     this.serverResponded = false;
+  }
+
+  /**
+  * Update the form data with the data receieved from back end
+  * 
+  * @param data received from backend
+  */
+  updateForm(data) {
+    // console.log("#", data.title, data)
+
+    this.mediaForm.get("base").patchValue(data)
+
+    switch (data.mediaType) {
+      case "Book": this.mediaForm.get("book").patchValue(data); break;
+      case "CD / DVD / Blu-Ray": this.mediaForm.get("disc").patchValue(data); break;
+      case "electronical Game": this.mediaForm.get("digitalGame").patchValue(data); break;
+      case "Game": this.mediaForm.get("game").patchValue(data); break;
+      case "Magazine": this.mediaForm.get("magazine").patchValue(data); break;
+    }
+  }
+
+  /**
+ * Return all the dirty fields from the form
+ * (does not mean they contain a new value though)
+ * 
+ * @param form form to check for dirty values
+ * @returns (nested) object
+ */
+  // method taken from https://stackoverflow.com/questions/53613803/angular-reactive-forms-how-to-get-just-changed-values
+  getDirtyValues(form: any) {
+    let dirtyValues = {};
+    Object.keys(form.controls)
+      .forEach(key => {
+        let currentControl = form.controls[key];
+        // console.log("control", currentControl.control, key)
+        if (currentControl.dirty) {
+          // console.log("is nested control group?", currentControl.controls, currentControl)
+          if (currentControl.controls)
+            dirtyValues[key] = this.getDirtyValues(currentControl);
+          else
+            dirtyValues[key] = currentControl.value;
+        }
+
+      });
+    return dirtyValues;
   }
 }

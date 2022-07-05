@@ -5,29 +5,29 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { chipListAdd, chipListRemove } from '../chipListHelper'
 
 @Component({
-  selector: 'app-disc-form',
-  templateUrl: './disc-form.component.html',
-  styleUrls: ['.././add-media.component.css', './disc-form.component.css']
+  selector: 'app-digital-game-form',
+  templateUrl: './digital-game-form.component.html',
+  styleUrls: ['.././add-edit-media.component.css','./digital-game-form.component.css']
 })
-export class DiscFormComponent implements OnInit {
+export class DigitalGameFormComponent implements OnInit {
   @Input() formGroupName!: string;
   form!: FormGroup;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  involvedPerson;
+  developer;
 
   constructor(private rootFromGroup: FormGroupDirective) { }
 
   ngOnInit(): void {
     this.form = this.rootFromGroup.control.get(this.formGroupName) as FormGroup;
-    this.involvedPerson = this.form.get('involvedPerson');
+    this.developer = this.form.get('developers');
   }
 
-  addPerson(event: MatChipInputEvent): void {
-    chipListAdd(event, this.involvedPerson)
+  addDeveloper(event: MatChipInputEvent): void {
+    chipListAdd(event, this.developer)
   }
 
-  removePerson(person: string): void {
-    chipListRemove(person, this.involvedPerson)
+  removeDeveloper(developer: string): void {
+    chipListRemove(developer, this.developer)
   }
 }

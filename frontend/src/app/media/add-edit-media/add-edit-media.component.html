@@ -1,0 +1,33 @@
+<div *ngIf="serverResponded">
+    <div class="alert alert-dismissable" [ngClass]="submitSuccesful? 'alert-success': 'alert-danger'">
+        <button class="close" (click)="closeAlert()">&times;</button>
+
+        <span [innerHTML]="submitRespondMessage"></span>
+    </div>
+</div>
+<mat-card>
+    <form [formGroup]="mediaForm" (ngSubmit)="onSubmit()">
+        <mat-card-title *ngIf="isAddMode">Add Medium</mat-card-title>
+        <mat-card-title *ngIf="isAddMode">Edit Medium</mat-card-title>
+
+        <app-base-form formGroupName="base"></app-base-form>
+
+
+        <app-book-form *ngIf="mediaForm.value.base.mediaType == 'Book'" formGroupName="book"></app-book-form>
+        <app-disc-form *ngIf="mediaForm.value.base.mediaType == 'CD / DVD / Blu-Ray'" formGroupName="disc">
+        </app-disc-form>
+        <app-digital-game-form *ngIf="mediaForm.value.base.mediaType == 'electronical Game'"
+            formGroupName="digitalGame"></app-digital-game-form>
+        <app-game-form *ngIf="mediaForm.value.base.mediaType == 'Game'" formGroupName="game"></app-game-form>
+        <app-magazine-form *ngIf="mediaForm.value.base.mediaType == 'Magazine'" formGroupName="magazine">
+        </app-magazine-form>
+
+        <br>
+        <p>Complete the form to enable button.</p>
+        <button mat-raised-button class="button" type="submit" [disabled]="!mediaForm.valid">Submit</button>
+    </form>
+</mat-card>
+<!-- {{mediaForm.value | json}} 
+    <br>
+ {{mediaForm.dirty}}
+-->
