@@ -3,7 +3,7 @@ import { Observable, of, Subscription } from 'rxjs';
 import { Media } from 'src/app/models/media';
 import { ActivatedRoute, Router } from "@angular/router"; // get value from url
 import { MediaService } from 'src/app/services/media/media.service';
-import { MediaHelper } from '../../services/media/media-helper'
+import { MediaHelper } from '../../../services/media/media-helper'
 import { SubCategoryViewDirective } from './sub-category-view.directive';
 import { ViewBookComponent } from '../view-book/view-book.component'
 import { ViewDiscComponent } from '../view-disc/view-disc.component';

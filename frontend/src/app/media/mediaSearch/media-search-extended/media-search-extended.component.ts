@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MediaHelper } from '../../services/media/media-helper'
+import { MediaHelper } from '../../../services/media/media-helper'
 import { MediaService } from 'src/app/services/media/media.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

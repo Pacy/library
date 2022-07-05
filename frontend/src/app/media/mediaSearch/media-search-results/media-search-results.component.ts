@@ -4,7 +4,7 @@ import { MediaService } from 'src/app/services/media/media.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MediaHelper } from '../../services/media/media-helper'
+import { MediaHelper } from '../../../services/media/media-helper'
 import { Subscription } from 'rxjs';
 
 

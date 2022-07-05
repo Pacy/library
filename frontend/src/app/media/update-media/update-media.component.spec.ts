@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { MediaService } from '../services/media/media.service';
+import { MediaService } from '../../services/media/media.service';
 
 import { UpdateMediaComponent } from './update-media.component';
 

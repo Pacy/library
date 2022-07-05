@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MediaService } from '../services/media/media.service';
+import { MediaService } from '../../services/media/media.service';
 import { germanAgeRatingValidator, minMaxRelationValidator, urlValidator } from './customFormValidator'
 
 

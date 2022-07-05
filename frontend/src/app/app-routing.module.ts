@@ -3,13 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 // media components
-import { AddMediaComponent } from './add-media/add-media.component';
-import { MediaSearchComponent } from './mediaSearch/media-search/media-search.component';
-import { ViewMediaComponent } from './view/view-media/view-media.component';
-import { UpdateMediaComponent } from './update-media/update-media.component';
+import { AddMediaComponent } from './media/add-media/add-media.component';
+import { MediaSearchComponent } from './media/mediaSearch/media-search/media-search.component';
+import { ViewMediaComponent } from './media/view/view-media/view-media.component';
+import { UpdateMediaComponent } from './media/update-media/update-media.component';
 // user components
-import { CreateUserComponent } from './user/add-edit/add-edit-user.component';
-import { ViewUserComponent } from './user/view/view-user.component';
+import { CreateUserComponent } from './user/add-edit-user/add-edit-user.component';
+import { ViewUserComponent } from './user/view-user/view-user.component';
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './user/login/login.component';
 // guards
