@@ -12,6 +12,7 @@ import { ViewGameComponent } from '../view-game/view-game.component';
 import { ViewMagazineComponent } from '../view-magazine/view-magazine.component';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertService } from 'src/app/alert';
 
 
 @Component({
@@ -25,7 +26,6 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('SubCategoryView', { read: ViewContainerRef }) private SubCategoryViewDirective!: QueryList<any>;
   waitingOnDeleteRespond: boolean = true;
-  deleteSuccesful: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +34,7 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
     private changeDetector: ChangeDetectorRef,
     private modalService: NgbModal,
     // private router: Router
+    private alertService: AlertService
   ) { }
 
   medium$!: Observable<Media>; // data of the medium request from the backend
@@ -42,8 +43,6 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
   private id; //id of the object to view. 
 
   foundMedium: boolean;
-  // message to be displayed if no medium was found
-  errorMessage: string;
 
   // private subscription: Subscription;
 
@@ -105,11 +104,12 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
             this.loadSubCategoryView(data)
             this.setSvg(data.mediaType)
           },
-          error: (e) => {
+          error: (err) => {
             this.foundMedium = false;
             // optional adjust error message, so that the user sees less technical details (including api url) and have a better respond
             // have to check what kind of error beside 404 (not found), 500 (internal server error, i.e cast error) can appear here otherwise
-            this.errorMessage = e;
+            // 503 service unavailable, 
+            this.alertService.error("Error: No medium could be found with this id " + err, { autoClose: false, keepAfterRouteChange: false });
           },
           complete: () => console.log("getMediumByID Observable completed")
         })
@@ -140,12 +140,6 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
       })
   }
 
-  clickMethod(name: string) {
-    if (confirm("Are you sure to delete " + name)) {
-      console.log("Implement delete functionality here");
-    }
-  }
-
   confirmDeletion(content) {
     this.modalService.open(content, { centered: true });
     this.waitingOnDeleteRespond = true;
@@ -153,16 +147,14 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
 
   deleteSuccessful = () => {
     this.waitingOnDeleteRespond = false;
-    this.deleteSuccesful = true;
-    document.getElementById('delete-message').innerText = 'Deletion succesful!';
+    this.alertService.success("Deletion succesful!", { autoClose: false, keepAfterRouteChange: false });
+    this.closeAllModal();
   }
-
 
   deleteFailed = (error) => {
     this.waitingOnDeleteRespond = false;
-    this.deleteSuccesful = false;
-    document.getElementById('delete-message').textContent = ` Deletion failed! + ${error}`;
-
+    this.alertService.error(`Deletion failed! + ${error}`, { autoClose: false, keepAfterRouteChange: false });
+    this.closeAllModal();
   }
 
   closeAllModal() {

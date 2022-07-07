@@ -1,10 +1,3 @@
-<!-- error message if no medium was retrieved -->
-<div *ngIf="!foundMedium">
-    <div class="alert alert-danger">
-        <span [innerHTML]="errorMessage"></span>
-    </div>
-</div>
-
 <!--  medium to be displayed -->
 <mat-card class="media-card" *ngIf="foundMedium">
     <mat-card-content>

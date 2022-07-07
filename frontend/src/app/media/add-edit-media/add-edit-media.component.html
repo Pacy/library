@@ -1,14 +1,7 @@
-<div *ngIf="serverResponded">
-    <div class="alert alert-dismissable" [ngClass]="submitSuccesful? 'alert-success': 'alert-danger'">
-        <button class="close" (click)="closeAlert()">&times;</button>
-
-        <span [innerHTML]="submitRespondMessage"></span>
-    </div>
-</div>
 <mat-card>
     <form [formGroup]="mediaForm" (ngSubmit)="onSubmit()">
         <mat-card-title *ngIf="isAddMode">Add Medium</mat-card-title>
-        <mat-card-title *ngIf="isAddMode">Edit Medium</mat-card-title>
+        <mat-card-title *ngIf="!isAddMode">Edit Medium</mat-card-title>
 
         <app-base-form formGroupName="base"></app-base-form>
 

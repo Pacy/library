@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from 'src/app/alert';
 import { MediaHelper } from 'src/app/services/media/media-helper';
 import { MediaService } from '../../services/media/media.service';
 import { germanAgeRatingValidator, minMaxRelationValidator, urlValidator } from './customFormValidator'
@@ -14,10 +15,6 @@ import { germanAgeRatingValidator, minMaxRelationValidator, urlValidator } from 
 export class AddMediaComponent implements OnInit {
   mediaForm!: FormGroup;
 
-  serverResponded: boolean = false;
-  submitSuccesful: boolean = false;
-  submitRespondMessage: string;
-
   isAddMode: boolean;
   id: string;
 
@@ -25,9 +22,9 @@ export class AddMediaComponent implements OnInit {
   constructor(
     private mediaService: MediaService,
     private fb: FormBuilder,
-
     private route: ActivatedRoute,
     private mediaHelper: MediaHelper,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -137,7 +134,6 @@ export class AddMediaComponent implements OnInit {
    * (The data from the form is nested, and has to be flatten first) 
    */
   createMedium() {
-    //optional: close previous alert message
 
     // unflatten object, containing all fields that have a value
     let result = {};
@@ -184,17 +180,11 @@ export class AddMediaComponent implements OnInit {
         {
           next: (x) => {
             console.log('Succesful created!' + JSON.stringify(x));
-            this.serverResponded = true;
-            this.submitSuccesful = true;
-            this.submitRespondMessage = "Medium was created"
+            this.alertService.success("Medium was successfully", { autoClose: false, keepAfterRouteChange: false });
             this.mediaForm.reset();
-            // todo show success message
           },
           error: (err: Error) => {
-            console.error('create medium got an error: ' + err);
-            this.serverResponded = true;
-            this.submitSuccesful = false;
-            this.submitRespondMessage = "Medium could not be created.\n" + err;
+            this.alertService.error("Error: Medium could not be created " + err, { autoClose: false, keepAfterRouteChange: false });
           },
           // complete: () => {
           // console.log('create medium observer got a complete notification');
@@ -225,27 +215,15 @@ export class AddMediaComponent implements OnInit {
       .subscribe(
         {
           error: (e) => {
-            this.serverResponded = true;
-            this.submitSuccesful = false;
-            this.submitRespondMessage = `Medium was not updated. Error: ${e}`
-            console.log(e);
+            this.alertService.error(`Medium was not updated. Error: ${e}`, { autoClose: false, keepAfterRouteChange: false });
+            // console.log(e);
           },
           complete: () => {
-            this.serverResponded = true;
-            this.submitSuccesful = true;
-            this.submitRespondMessage = "Medium updated successfully";
-            // console.log("edit medium by id was completed")
-            // console.log('Content updated successfully!');
-            //optional remove the message after a few seconds or reroute
+            this.alertService.success(`User was successfully updated`, { autoClose: true, keepAfterRouteChange: false });
           }
         });
   }
-  /**
-   * close the alert messsage by setting the boolean variable to display it to false
-   */
-  closeAlert() {
-    this.serverResponded = false;
-  }
+
 
   /**
   * Update the form data with the data receieved from back end

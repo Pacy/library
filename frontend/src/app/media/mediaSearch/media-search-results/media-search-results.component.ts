@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MediaHelper } from '../../../services/media/media-helper'
 import { Subscription } from 'rxjs';
+import { AlertService } from 'src/app/alert';
 
 
 @Component({
@@ -34,7 +35,8 @@ export class MediaSearchResultsComponent implements OnInit {
   constructor(
     private searchService: MediaService,
     // private cdref: ChangeDetectorRef,
-    private searchOption: MediaHelper
+    private searchOption: MediaHelper,
+    private alertService: AlertService
   ) {
     // this.searchResult = searchService.searchResult;
     // console.log("searchResult: ", this.searchResult)
@@ -44,8 +46,11 @@ export class MediaSearchResultsComponent implements OnInit {
         this.dataSource = new MatTableDataSource<Media>(this.searchResult);
         this.dataSource.paginator = this.paginator;
       },
-      error: (e) => console.log(e),
-      complete: () => console.log("this is never called")
+      error: (err) => {
+        console.log(err);
+        this.alertService.error("Error while searching " + err, { autoClose: false, keepAfterRouteChange: false });
+      },
+      complete: () => console.log("this is should never be called as observable is infinite/long lasting")
     });
   }
 
@@ -78,7 +83,7 @@ export class MediaSearchResultsComponent implements OnInit {
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
-    if(this.subscription)
+    if (this.subscription)
       this.subscription.unsubscribe();
   }
 

@@ -69,6 +69,8 @@ import { ViewUserComponent } from './user/view-user/view-user.component';
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './user/login/login.component';
 
+// module (external)
+import { AlertModule } from './alert';
 
 
 @NgModule({
@@ -122,7 +124,8 @@ import { LoginComponent } from './user/login/login.component';
     MatRadioModule,
     NgbModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    AlertModule
   ],
   providers: [
     MediaService,

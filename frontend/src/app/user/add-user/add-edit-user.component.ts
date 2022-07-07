@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from 'src/app/alert/alert.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class CreateUserComponent implements OnInit {
     private userService: UserService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -76,7 +77,6 @@ export class CreateUserComponent implements OnInit {
   }
 
   createUser() {
-
     let result = { ...this.createForm.value };
     console.log(this.createForm.value)
 
@@ -95,19 +95,20 @@ export class CreateUserComponent implements OnInit {
     this.userService.createUser(result).subscribe({
       next: (x) => {
         console.log("user added success", x);
-
+        this.alertService.success("User was successfully created", { autoClose: false, keepAfterRouteChange: false });
+        this.resetForm();
       },
       error: (err: Error) => {
-        console.log("error adding new user", err)
+        console.log("error adding new user", err);
+        this.alertService.error("Error: User could not be created " + err, { autoClose: false, keepAfterRouteChange: false });
       },
-      complete: () => {
-        console.log("create user observer completed")
-      }
+      // complete: () => {
+      //   console.log("create user observer completed");
+      // }
     })
   }
 
   updateUser() {
-
     if (!this.createForm.dirty) {
       console.log("submit clicked, but nothing to do. juhu")
       return;
@@ -121,18 +122,12 @@ export class CreateUserComponent implements OnInit {
       .subscribe(
         {
           error: (e) => {
-            // this.submitedChanges = true;
-            // this.submitSuccesful = false;
-            // this.submitRespondMessage = `User was not updated. Error: ${e}`
-            console.log(e);
+            this.alertService.error(`User was not updated. Error: ${e}`, { autoClose: false, keepAfterRouteChange: false });
+            // console.log(e);
           },
           complete: () => {
-            // this.submitedChanges = true;
-            // this.submitSuccesful = true;
-            // this.submitRespondMessage = "User updated successfully";
-            console.log("edit user by id was completed")
-            // console.log('Content updated successfully!');
-            //optional remove the message after a few seconds or reroute
+            this.alertService.success(`User was successfully updated`, { autoClose: true, keepAfterRouteChange: false });
+            // console.log("edit user by id was completed")
           }
         });
   }
@@ -148,6 +143,7 @@ export class CreateUserComponent implements OnInit {
   // method taken from https://stackoverflow.com/questions/53613803/angular-reactive-forms-how-to-get-just-changed-values
   getDirtyValues(form: any) {
     let dirtyValues = {};
+
     Object.keys(form.controls)
       .forEach(key => {
         let currentControl = form.controls[key];
@@ -159,7 +155,11 @@ export class CreateUserComponent implements OnInit {
         }
 
       });
+
     return dirtyValues;
   }
 
+  resetForm() {
+    this.createForm.reset();
+  }
 }
