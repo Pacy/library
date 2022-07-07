@@ -31,7 +31,8 @@ exports.login = function (req, res, next) {
         let user;
 
         if (error) {
-            console.log("Error on login: ", error);
+            //console.log("Error on login: ", error);
+            return next({ statusCode: 503, message: "Error reaching database" });
         } else {
             if (data == null) {
                 // toDo: check if a server should use some "fake" value and continue to give potential attacker no/less potential for a "timing attack". Unsure because server has to be accessed and delay over network.
