@@ -116,7 +116,10 @@ export class MediaService {
             this.searchResult = result;
             this.subject$.next(this.searchResult)
           },
-          error: (e) => console.log("Error while trying to get server search results: " +e),
+          error: (e) => {
+            console.log("Error while trying to get server search results: " +e);
+            this.subject$.error(e);
+          },
           complete: () => console.log("searchFor completed")
         }
         )
@@ -127,7 +130,10 @@ export class MediaService {
             this.searchResult = result;
             this.subject$.next(this.searchResult)
           },
-          error: (e) => console.log("Error with quickSearch execution: " +e),
+          error: (e) => {
+            console.log("Error with quickSearch execution: " +e);
+            this.subject$.error(e);
+        },
           complete: () => console.log("searchFor/quickSearch completed")
         })
     }
@@ -198,11 +204,11 @@ export class MediaService {
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status} \nError: ${error.error} \nMessage: ${error.message}`;
+      errorMessage = `Error Code: ${error.status} \nError: ${error.error} `;
       // window.alert(errorMessage);
-      console.log(errorMessage)
+      console.log(errorMessage + `\nMessage: ${error.message}`);
     }
     // console.log(errorMessage);
-    return throwError(() => { new Error(errorMessage) });
+    return throwError(() => errorMessage);
   }
 }

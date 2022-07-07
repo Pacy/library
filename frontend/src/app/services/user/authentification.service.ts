@@ -93,7 +93,7 @@ export class AuthentificationService {
     this.userAcessLevel.next(1); // 1 is a standard user
     localStorage.removeItem('expires_at');
     localStorage.removeItem('id_token');
-    // ideally inform user about logout too, but that is more important with a refresh token around
+    // ideally inform user about logout too, but that is more important with a refresh token around and when the request is sent to the server
   }
 
   // Error handling 
@@ -105,11 +105,11 @@ export class AuthentificationService {
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status} \nError: ${error.error} \nMessage: ${error.message}`;
+      errorMessage = `Error Code: ${error.status} \nError: ${error.error} `;
       // window.alert(errorMessage);
-      console.log(errorMessage)
+      console.log(errorMessage + `\nMessage: ${error.message}`);
     }
     // console.log(errorMessage);
-    return throwError(() => { new Error(errorMessage) });
+    return throwError(() => errorMessage);
   }
 }
