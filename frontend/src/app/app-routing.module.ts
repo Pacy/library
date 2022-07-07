@@ -21,17 +21,17 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
 
   // media related
-  { path: 'addMedia', component: AddMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: {accessLevel: 2} },
-  { path: 'mediaSearch', component: MediaSearchComponent, canActivate: [AuthGuardService, RoleGuardService], data: {accessLevel: 2} },
-  { path: 'viewMedia/:id', component: ViewMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: {accessLevel: 2} },
-  { path: 'editMedia/:id', component: AddMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: {accessLevel: 2}},
+  { path: 'addMedia', component: AddMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: { accessLevel: 2 } },
+  { path: 'mediaSearch', component: MediaSearchComponent },
+  { path: 'viewMedia/:id', component: ViewMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: { accessLevel: 2 } },
+  { path: 'editMedia/:id', component: AddMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: { accessLevel: 2 } },
 
   // user related
-  { path: 'account', component: AccountComponent},
+  { path: 'account', component: AccountComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'createUser', component: CreateUserComponent, canActivate: [AuthGuardService, RoleGuardService], data: {accessLevel: 2} },
-  { path: 'viewUser/:id', component: ViewUserComponent, canActivate: [AuthGuardService, RoleGuardService], data: {accessLevel: 2} },
-  { path: 'editUser/:id', component: CreateUserComponent, canActivate: [AuthGuardService, RoleGuardService], data: {accessLevel: 2} },
+  { path: 'createUser', component: CreateUserComponent, canActivate: [AuthGuardService, RoleGuardService], data: { accessLevel: 2 } },
+  { path: 'viewUser/:id', component: ViewUserComponent, canActivate: [AuthGuardService, RoleGuardService], data: { accessLevel: 2 } },
+  { path: 'editUser/:id', component: CreateUserComponent, canActivate: [AuthGuardService, RoleGuardService], data: { accessLevel: 2 } },
 
   // default
   //optional create PageNotFound instead
