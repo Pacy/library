@@ -1,0 +1,8 @@
+book.json and book.csv are two datasets for books. They were slightly adapted while importing as a example set for this application.
+Unused fields in those datasets were kept, in case they gonna be used later.
+
+Both dataset are under the public domain licsens
+
+Source of the dataset:
+book.json : https://github.com/ozlerhakan/mongodb-json-files/blob/master/datasets/books.json
+book.csv : https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks?resource=download 

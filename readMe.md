@@ -52,15 +52,18 @@ Start mongoDB with mongod.
 mongod --dbpath="D:\data\db"
 `` )
 
-> TO DO
-> have to add the indexes that need to be created here
->
+> The "_other" folder contain a database dump called library.gz, to import this data create a databse in mongodb called "library2021"
+> The dataset can then be import with 
+``
+mongorestore --gzip --archive=${PATH_TO_LIBRARY.GZ_FILE}
+``
+>This should include the dataset and all indexes
 
 Both, front- and backend, can be started together from the folder containing both projects with
 ``
 npm start
 ``
-or by using nagivating to them and then running the same command on each one.
+or by nagivating to them and then running the same command on each subfolder
 
 
 ## Reflection
@@ -77,9 +80,10 @@ For example that a monogDB index search combined with an $or operator, requires 
 ## License
 
 MIT
---->
+
 
 **Free Software, Hell Yeah!**
+--->
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO -  // created with https://dillinger.io/ // http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
