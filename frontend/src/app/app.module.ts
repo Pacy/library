@@ -72,6 +72,8 @@ import { LoginComponent } from './user/login/login.component';
 // module (external)
 import { AlertModule } from './alert';
 
+import { NewsComponent } from './news/news.component';
+
 
 @NgModule({
   declarations: [
@@ -99,7 +101,8 @@ import { AlertModule } from './alert';
     HeaderComponent,
     CreateUserComponent,
     ViewUserComponent,
-    LoginComponent
+    LoginComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,

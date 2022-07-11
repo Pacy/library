@@ -5,7 +5,9 @@
   </button>
   <mat-menu #navigationMenu="matMenu" backdropClass="customize" [overlapTrigger]="false" yPosition="below"
     xPosition="after">
+    <button mat-menu-item routerLink="home">Home</button>
     <button mat-menu-item routerLink="mediaSearch">Search</button>
+    <button mat-menu-item routerLink="news">News</button>
     <ng-container *ngIf="(isLoggedIn$ | async) && accessLevel >1">
       <button mat-menu-item [matMenuTriggerFor]="MediaMenu">Media</button>
       <button [matMenuTriggerFor]="UsersMenu" mat-menu-item>Users</button>
@@ -29,6 +31,7 @@
   <h1 class="title"><a routerLink="home">Basic Library</a></h1>
   <div class="navbar-banner">
     <a class="toolbar-nav-item" routerLink="mediaSearch">- Search</a>
+    <a class="toolbar-nav-item" routerLink="news">- News</a>
     <ng-container *ngIf="(isLoggedIn$ | async) && accessLevel >1">
       <a class="toolbar-nav-item" [matMenuTriggerFor]="MediaMenu">- Media</a>
       <a class="toolbar-nav-item" [matMenuTriggerFor]="UsersMenu">- Users</a>
@@ -56,6 +59,7 @@
   <ul>
     <li><a routerLink="home">Home</a></li>
     <li><a routerLink="mediaSearch">Search</a></li>
+    <li><a routerLink="news">News</a></li>
     <ng-container *ngIf="(isLoggedIn$ | async) && accessLevel >1">
       <li class="nav-button" [matMenuTriggerFor]="MediaMenu">Media</li>
       <li class="nav-button" [matMenuTriggerFor]="UsersMenu">Users</li>

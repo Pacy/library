@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, AfterViewInit, Type, ViewContainerRef, QueryList, ChangeDetectorRef } from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, of, Subscription, take } from 'rxjs';
 import { Media } from 'src/app/models/media';
 import { ActivatedRoute, Router } from "@angular/router"; // get value from url
 import { MediaService } from 'src/app/services/media/media.service';
@@ -13,6 +13,7 @@ import { ViewMagazineComponent } from '../view-magazine/view-magazine.component'
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'src/app/alert';
+import { AuthentificationService } from 'src/app/services/user/authentification.service';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('SubCategoryView', { read: ViewContainerRef }) private SubCategoryViewDirective!: QueryList<any>;
   waitingOnDeleteRespond: boolean = true;
+  authorised: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +36,8 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
     private changeDetector: ChangeDetectorRef,
     private modalService: NgbModal,
     // private router: Router
-    private alertService: AlertService
+    private alertService: AlertService,
+    private auth: AuthentificationService
   ) { }
 
   medium$!: Observable<Media>; // data of the medium request from the backend
@@ -48,6 +51,10 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.mediaType = this.searchOption.getMediaTypes();
+
+    this.auth.isLoggedInObservable
+      .pipe(take(1))
+      .subscribe(val => this.authorised = val);
   }
 
   ngAfterViewInit() {

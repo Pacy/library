@@ -54,9 +54,9 @@
                 </div>
             </div>
             <div *ngIf="!medium.possibleToTakeHome">
-                <p class="note">Medium can only be viewed in the library. It cannot be borrowed.</p>
+                <p class="note">Note: Functionality still in work till then: <br>Medium can only be viewed in the library. It cannot be borrowed yet.</p>
             </div>
-            <mat-card-actions align="end">
+            <mat-card-actions align="end" *ngIf="authorised">
                 <button mat-icon-button routerLink="/editMedia/{{medium._id}}" aria-label="Edit medium">
                     <mat-icon >edit</mat-icon>
                 </button>

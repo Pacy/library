@@ -1,0 +1,97 @@
+mat-grid-tile {
+    background: lightblue; /*equals = rgb(173, 216, 230);*/
+  }
+  
+  .main-tile {
+    margin: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .main-tile-header {
+    font-size: 300%;
+  }
+  
+  .main-tile-content {
+    white-space: pre-line;
+    line-height: 1.6;
+    font-size: 120%;
+  }
+  
+  .main-tile-image {
+    max-height: 20vw;
+  }
+  
+  .main-tile-image-container {
+    float: left;
+    margin-right: 7px;
+  }
+  
+  .tile-container {
+    cursor: pointer;
+  }
+  
+  .tile-content {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    margin: 20px 5px;
+    white-space: pre-line;
+  }
+  
+  .active-tile {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(103, 146, 160);
+  }
+  
+  @media screen and (max-width: 960px) {
+    .tile-content {
+      -webkit-line-clamp: 3;
+      margin-top: 48px;
+    }
+    .main-tile-content {
+      font-size: 110%;
+    }
+    .main-tile {
+      margin-top: 10px;
+    }
+    .tile-content {
+      font-size: 95%;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .tile-content {
+      -webkit-line-clamp: 2;
+      margin-top: 48px;
+    }
+    .main-tile-content {
+      font-size: 100%;
+    }
+    .main-tile {
+      margin: 10px;
+    }
+    .main-tile h2 {
+      margin-top: 5px;
+    }
+    .tile-content {
+      font-size: 95%;
+    }
+    .main-tile-ceader {
+      font-size: 200%;
+    }
+    .tile-header {
+      font-size: 95%;
+    }
+  }
+  
+  /* ToDo:  
+   - fix layout also when height is changing
+   
+   Optional:
+   - change grid layout for smaller screens. (i.e main tile | tile tile tile with horizontal scrollbar)
+   */
+  

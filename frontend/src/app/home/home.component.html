@@ -1,22 +1,47 @@
-<mat-grid-list cols="4" rowHeight="20vh">
-    <mat-grid-tile colspan=3 rowspan=4>
-        <div class="main-tile">
-            <h2 class="main-tile-header">{{news[mainTile].title}}</h2>
-            <div class="main-tile-image-container" *ngIf="news[mainTile].containsImage">
-                <!-- adding an imageDescp to "news" would be good for alt text-->
-                <img class="main-tile-image" [src]="news[mainTile].imageLink" alt="image associated to news post">
-            </div>
-            <p class="main-tile-content">{{news[mainTile].description}}</p>
+<ngb-carousel [showNavigationArrows]="false" [showNavigationIndicators]="true">
+    <!-- 1st image from carousel -->
+    <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+            <picture>
+                <source media="(min-width:1280px)" srcset="/assets/book_heart_1920.jpg">
+                <source media="(min-width:640px)" srcset="/assets/book_heart_1280.jpg">
+                <source srcset="/assets/book_heart_640.jpg">
+                <img class="carousel-img" src="/assets/book_heart_640.jpg" alt="two book pages forming a heart">
+            </picture>
         </div>
-    </mat-grid-tile>
-    <mat-grid-tile [ngClass]="{'active-tile': mainTile === i}" *ngFor="let n of news; let i = index" (click)="mainTile=i">
-        <div class="tile-container">
-            <mat-grid-tile-header class="tile-header">
-                {{n.title}}
-            </mat-grid-tile-header>
-            <div class="tile-content">
-                <p>{{n.description}}</p>
-            </div>
+    </ng-template>
+    <!-- 2nd image from carousel -->
+    <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+            <picture>
+                <source media="(min-width:1280px)" srcset="/assets/library_1920.jpg">
+                <source media="(min-width:640px)" srcset="/assets/library_1280.jpg">
+                <source srcset="/assets/library_640.jpg">
+                <img class="carousel-img" src="/assets/library_640.jpg" alt="picture of a library">
+            </picture>
         </div>
-    </mat-grid-tile>
-</mat-grid-list>
+    </ng-template>
+    <!-- 3rd image from carousel -->
+    <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+            <picture>
+                <source media="(min-width:1280px)" srcset="/assets/book_glasses_1920.jpg">
+                <source media="(min-width:640px)" srcset="/assets/book_glasses_1280.jpg">
+                <source srcset="/assets/book_glasses_640.jpg">
+                <img class="carousel-img" src="/assets/book_glasses_640.jpg"
+                    alt="a book next to some glasses and a clock">
+            </picture>
+        </div>
+    </ng-template>
+
+</ngb-carousel>
+
+<!-- description overlaying the carousel -->
+<div class="description">
+    <h3><a routerLink="/mediaSearch">Search for one now</a></h3>
+    <ul>
+        <li>over 1200 media</li>
+        <li>english & german</li>
+        <li>Books, (Video-)Games, Magazines, Movies and more</li>
+    </ul>
+</div>

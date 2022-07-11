@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
+import { NewsComponent} from './news/news.component'
 // media components
 import { AddMediaComponent } from './media/add-edit-media/add-edit-media.component';
 import { MediaSearchComponent } from './media/mediaSearch/media-search/media-search.component';
@@ -19,11 +20,12 @@ import { RoleGuardService } from './services/guard/role-guard.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'news', component: NewsComponent},
 
   // media related
   { path: 'addMedia', component: AddMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: { accessLevel: 2 } },
   { path: 'mediaSearch', component: MediaSearchComponent },
-  { path: 'viewMedia/:id', component: ViewMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: { accessLevel: 2 } },
+  { path: 'viewMedia/:id', component: ViewMediaComponent},
   { path: 'editMedia/:id', component: AddMediaComponent, canActivate: [AuthGuardService, RoleGuardService], data: { accessLevel: 2 } },
 
   // user related

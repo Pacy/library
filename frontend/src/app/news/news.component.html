@@ -1,0 +1,23 @@
+<mat-grid-list cols="4" rowHeight="20vh">
+    <mat-grid-tile colspan=3 rowspan=4>
+        <div class="main-tile">
+            <h2 class="main-tile-header">{{news[mainTile].title}}</h2>
+            <div class="main-tile-image-container" *ngIf="news[mainTile].imageLink">
+                <!-- adding an imageDescp to "news" would be good for alt text-->
+                <img class="main-tile-image" [src]="news[mainTile].imageLink" alt="image associated to news post">
+            </div>
+            <p class="main-tile-content">{{news[mainTile].description}}</p>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile [ngClass]="{'active-tile': mainTile === i}" *ngFor="let n of news; let i = index"
+        (click)="mainTile=i">
+        <div class="tile-container">
+            <mat-grid-tile-header class="tile-header">
+                {{n.title}}
+            </mat-grid-tile-header>
+            <div class="tile-content">
+                <p>{{n.description}}</p>
+            </div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

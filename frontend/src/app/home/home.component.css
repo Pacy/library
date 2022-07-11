@@ -1,96 +1,77 @@
-mat-grid-tile {
-  background: lightblue; /*equals = rgb(173, 216, 230);*/
-}
+ .description {
+     color: #fff;
+     position: absolute;
+     top: 50%;
+     left: 0;
+     width: 100%;
+     margin-right: auto;
+     margin-left: auto;
+     text-align: center;
+ }
 
-.main-tile {
-  margin: 50px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+ .description>ul {
+     list-style-type: none;
+     padding-left: 0;
+     margin-top: 15px;
+ }
 
-.main-tile-header {
-  font-size: 300%;
-}
+ .description>h3 a {
+     text-decoration: none;
+     color: inherit;
+     /* background-color: aqua; */
+     /* a8d4ff -sub header color */
+     background-color: rgb(7, 131, 248);
+     border-radius: 17%;
+     padding: 10px 20px;
+     margin-bottom: 5px;
+     text-shadow: 1px 1px 3px #000, 0px 0px 1px #000;
+ }
 
-.main-tile-content {
-  white-space: pre-line;
-  line-height: 1.6;
-  font-size: 120%;
-}
+ .description>ul li {
+     text-shadow:
+         0px 0px 2px #000,
+         1px 1px 2px #000,
+         0px 1px 2px #000,
+         1px 0px 2px #000,
+         0px -1px 2px #000,
+         -1px 0px 2px #000,
+         -1px -1px 2px #000;
+ }
 
-.main-tile-image {
-  max-height: 20vw;
-}
+ .description>h3 a:hover {
+     color: #0d6efd;
+ }
 
-.main-tile-image-container {
-  float: left;
-  margin-right: 7px;
-}
+ .carousel-img {
+     width: 100%;
+     height: calc(100vh - 60px);
+     /* second value is the header high*/
+     object-fit: cover;
+ }
 
-.tile-container {
-  cursor: pointer;
-}
+ /* dark overlay over carousel items */
+ .picsum-img-wrapper:after {
+     content: "";
+     display: block;
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     background: rgba(0, 0, 0, 0.4);
+ }
 
-.tile-content {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  margin: 20px 5px;
-  white-space: pre-line;
-}
+ /* Responsive Styles */
+ @media screen and (max-width: 960px) {
+     ngb-carousel .picsum-img-wrapper>img, .carousel-img {
+         height: calc(100vh - 100px);
+         /* second value is the header high*/
+     }
+ }
 
-.active-tile {
-  width: 100%;
-  height: 100%;
-  background-color: rgb(103, 146, 160);
-}
-
-@media screen and (max-width: 960px) {
-  .tile-content {
-    -webkit-line-clamp: 3;
-    margin-top: 48px;
-  }
-  .main-tile-content {
-    font-size: 110%;
-  }
-  .main-tile {
-    margin-top: 10px;
-  }
-  .tile-content {
-    font-size: 95%;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .tile-content {
-    -webkit-line-clamp: 2;
-    margin-top: 48px;
-  }
-  .main-tile-content {
-    font-size: 100%;
-  }
-  .main-tile {
-    margin: 10px;
-  }
-  .main-tile h2 {
-    margin-top: 5px;
-  }
-  .tile-content {
-    font-size: 95%;
-  }
-  .main-tile-ceader {
-    font-size: 200%;
-  }
-  .tile-header {
-    font-size: 95%;
-  }
-}
-
-/* ToDo:  
- - fix layout also when height is changing
- 
- Optional:
- - change grid layout for smaller screens. (i.e main tile | tile tile tile with horizontal scrollbar)
- */
+ @media screen and (max-width: 480px) {
+     ngb-carousel .picsum-img-wrapper>img, .carousel-img {
+         height: calc(100vh - 60px);
+         /* second value is the header high*/
+     }
+ }
