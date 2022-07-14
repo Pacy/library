@@ -42,6 +42,11 @@
      color: #0d6efd;
  }
 
+ h3 > a{
+    border-style: ridge;
+    border-width:thin;
+ }
+
  .carousel-img {
      width: 100%;
      height: calc(100vh - 60px);

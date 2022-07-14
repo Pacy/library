@@ -11,6 +11,8 @@ export class AccountComponent implements OnInit {
 
   constructor(private authService : AuthentificationService, private router: Router) { }
 
+  selectedComponent: String;
+
   ngOnInit(): void {
     this.isUserLoggedIn();
   }
@@ -21,4 +23,8 @@ export class AccountComponent implements OnInit {
     }
   }
   
+  selectComponent(componentName: String){
+    this.selectedComponent = componentName;
+  }
+
 }

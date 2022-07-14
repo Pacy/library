@@ -74,6 +74,11 @@ import { AlertModule } from './alert';
 
 import { NewsComponent } from './news/news.component';
 
+// account sub components
+import { AccountSettingComponent } from './account/account-setting/account-setting.component';
+import { BorrowHistoryComponent } from './account/borrow-history/borrow-history.component';
+import { CurrentBorrowComponent } from './account/current-borrow/current-borrow.component';
+
 
 @NgModule({
   declarations: [
@@ -102,7 +107,10 @@ import { NewsComponent } from './news/news.component';
     CreateUserComponent,
     ViewUserComponent,
     LoginComponent,
-    NewsComponent
+    NewsComponent,
+    AccountSettingComponent,
+    BorrowHistoryComponent,
+    CurrentBorrowComponent
   ],
   imports: [
     BrowserModule,

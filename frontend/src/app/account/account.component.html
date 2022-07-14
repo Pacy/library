@@ -1,1 +1,16 @@
-<p>account works!</p>
+<h3 *ngIf="!selectedComponent">What would you like to do?</h3>
+
+<div [ngClass]="!selectedComponent ? 'button-group-unselected' : 'button-group-selected' ">
+    <button class="select-button" [ngClass]="{'button-active': selectedComponent === 'current'}"
+        (click)="selectComponent('current')">Currently Borrowed Items</button>
+    <button class="select-button" [ngClass]="{'button-active': selectedComponent === 'history'}"
+        (click)="selectComponent('history')">Borrow History</button>
+    <button class="select-button" [ngClass]="{'button-active': selectedComponent === 'settings'}"
+        (click)="selectComponent('settings')">Account Settings</button>
+</div>
+
+<div class="" [ngSwitch]="selectedComponent">
+    <app-current-borrow *ngSwitchCase="'current'"></app-current-borrow>
+    <app-borrow-history *ngSwitchCase="'history'"></app-borrow-history>
+    <app-account-setting *ngSwitchCase="'settings'"></app-account-setting>
+</div>

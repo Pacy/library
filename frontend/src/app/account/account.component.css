@@ -1,0 +1,55 @@
+h3{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: -5px;
+}
+
+.button-group-unselected{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button-group-selected{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.select-button{
+    border-radius: 0.3rem ;
+    background-color: #a8d4ff;
+    border-width: thin;
+}
+
+.button-group-unselected > .select-button{
+    padding: 30px;
+    margin-top: 25px;
+    font-size: x-large;
+}
+
+.button-group-selected > .select-button{
+    margin:5px;
+    flex:1 ;
+    max-width: 240px;
+    padding: 4px 16px;
+    font-size: large;
+}
+
+.button-active{
+    background-color: #52a6fa;
+}
+
+ /* Responsive Styles */
+ @media screen and (max-width: 960px) {
+    .button-group-unselected > .select-button{
+        font-size: large;
+    }
+    .button-group-selected > .select-button{
+        font-size: unset;
+    }
+ }
