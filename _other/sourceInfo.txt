@@ -6,3 +6,21 @@ Both dataset are under the public domain licsens
 Source of the dataset:
 book.json : https://github.com/ozlerhakan/mongodb-json-files/blob/master/datasets/books.json
 book.csv : https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks?resource=download 
+
+
+
+
+### How to import a new file into DB
+mongoimport --db db_name --collection collectionName --file fileName.json --jsonArray
+
+
+### How to generate a db dumb
+mongodump --db library2021 --gzip --out
+_Alternative:
+mongodump --host localhost --port 27017 --db db_name
+
+
+### How to import db dumb 
+mongorestore --gzip --archive=${PATH_TO_LIBRARY.GZ_FILE}
+_Alternative:
+mongorestore --host localhost --port 27017 --db db_name library2021

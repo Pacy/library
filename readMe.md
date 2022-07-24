@@ -52,10 +52,11 @@ Start mongoDB with mongod.
 mongod --dbpath="D:\data\db"
 `` )
 
-> The "_other" folder contain a database dump called library.gz, to import this data create a databse in mongodb called "library2021"
+> The "_other" folder contain a database dump in the library folder, to import this data run a mongod instance
 > The dataset can then be import with 
 ``
-mongorestore --gzip --archive=${PATH_TO_LIBRARY.GZ_FILE}
+mongorestore --host localhost --port 27017 --db db_name_you_want library_folder_location
+
 ``
 >This should include the dataset and all indexes
 
