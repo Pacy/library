@@ -98,6 +98,7 @@ tr:nth-child(odd) {
 
 .image:hover img {
     transform: scale(1.7);
+    transition-delay: 0.5s;
 }
 
 /* Responsive Styles */
@@ -143,6 +144,7 @@ tr:nth-child(odd) {
 
     .image:hover img {
         transform: scale(2.7);
+        transition-delay: 0.5s;
     }
 }
 
