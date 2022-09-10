@@ -106,7 +106,9 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
         .subscribe({
           next: (data) => {
             this.foundMedium = true;
+            this.polishServerData(data);
             this.medium$ = of(data);
+
             this.changeDetector.detectChanges();
             this.loadSubCategoryView(data)
             this.setSvg(data.mediaType)
@@ -147,27 +149,55 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
       })
   }
 
+  /**
+   * opens the modal, that display a loading message, till the server responds
+   * 
+   */
   confirmDeletion(content) {
     this.modalService.open(content, { centered: true });
     this.waitingOnDeleteRespond = true;
   }
-
+ 
+  /**
+  * call the alert service to display a message about the succesful deletion, and close all open modals 
+  */
   deleteSuccessful = () => {
     this.waitingOnDeleteRespond = false;
     this.alertService.success("Deletion succesful!", { autoClose: false, keepAfterRouteChange: false });
     this.closeAllModal();
   }
 
+  /**
+  * call the alert service to display an error message about the failed attempt to delete the medium , and close all open modals 
+  */
   deleteFailed = (error) => {
     this.waitingOnDeleteRespond = false;
     this.alertService.error(`Deletion failed! + ${error}`, { autoClose: false, keepAfterRouteChange: false });
     this.closeAllModal();
   }
 
+  /**
+  * close all open modals
+  */
   closeAllModal() {
     this.modalService.dismissAll();
     // optional redirect here. this is currently only available to be called on modal reporting the delete status. 
     // but the request could also be an error at the moment. 
     // this.router.navigate();
+  }
+
+  /**
+  * polish the received data of the medium from the backend
+  * 1) update the releaseYear value, if it is not a year, but in milliseconds  since 1970
+  *    (assuming that 3 or 4 digits will never be later option. 
+  *     3/4 digits would only be 1.6sec - 2.8 mins from 1st of 1970, which would be a weird creation time.
+  *     Therefore going with this option till the database is more uniformly)
+  */
+  polishServerData(data){
+    const releaseYear = data["releaseYear"];
+    const dateLength = (Math.ceil(Math.log10(releaseYear + 1)));
+    if (!(dateLength == 4 || dateLength == 3)){
+      data["releaseYear"] = new Date(releaseYear).getFullYear();
+    }
   }
 }

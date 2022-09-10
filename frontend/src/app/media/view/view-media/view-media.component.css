@@ -148,10 +148,6 @@ tr:nth-child(odd) {
     }
 }
 
-/* Optional: A.1) √ Remove image when on mobile screen as the picture is quite small then -> removed loading to spare mobile user from data usage
-             A.2) Enable Zoom for picture when clicking/hovering it 
-             A.3) √ Change display order, so picture can be larger -> see 1)
-*/
 @media screen and (max-width: 480px) {
     .media-card {
         /* margin-top: 60px; */
