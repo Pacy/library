@@ -26,7 +26,6 @@ import { AuthentificationService } from 'src/app/services/user/authentification.
 export class ViewMediaComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('SubCategoryView', { read: ViewContainerRef }) private SubCategoryViewDirective!: QueryList<any>;
-  waitingOnDeleteRespond: boolean = true;
   authorised: boolean = false;
 
   constructor(
@@ -155,14 +154,12 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
    */
   confirmDeletion(content) {
     this.modalService.open(content, { centered: true });
-    this.waitingOnDeleteRespond = true;
   }
- 
+
   /**
   * call the alert service to display a message about the succesful deletion, and close all open modals 
   */
   deleteSuccessful = () => {
-    this.waitingOnDeleteRespond = false;
     this.alertService.success("Deletion succesful!", { autoClose: false, keepAfterRouteChange: false });
     this.closeAllModal();
   }
@@ -171,7 +168,6 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
   * call the alert service to display an error message about the failed attempt to delete the medium , and close all open modals 
   */
   deleteFailed = (error) => {
-    this.waitingOnDeleteRespond = false;
     this.alertService.error(`Deletion failed! + ${error}`, { autoClose: false, keepAfterRouteChange: false });
     this.closeAllModal();
   }
@@ -187,16 +183,17 @@ export class ViewMediaComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * polish the received data of the medium from the backend
-  * 1) update the releaseYear value, if it is not a year, but in milliseconds  since 1970
-  *    (assuming that 3 or 4 digits will never be later option. 
-  *     3/4 digits would only be 1.6sec - 2.8 mins from 1st of 1970, which would be a weird creation time.
-  *     Therefore going with this option till the database is more uniformly)
-  */
-  polishServerData(data){
+   * @param data of the requested backend medium
+   * polish the received data of the medium from the backend
+   * 1) update the releaseYear value, if it is not a year, but in milliseconds  since 1970
+   *    (assuming that 3 or 4 digits will never be later option. 
+   *     3/4 digits would only be 1.6sec - 2.8 mins from 1st of 1970, which would be a weird creation time.
+   *     Therefore going with this option till the database is more uniformly)
+   */
+  polishServerData(data) {
     const releaseYear = data["releaseYear"];
     const dateLength = (Math.ceil(Math.log10(releaseYear + 1)));
-    if (!(dateLength == 4 || dateLength == 3)){
+    if (!(dateLength == 4 || dateLength == 3)) {
       data["releaseYear"] = new Date(releaseYear).getFullYear();
     }
   }

@@ -35,7 +35,7 @@
             </div>
             <div class="split flex-medium-screen">
                 <a href="{{medium.externalProductLink}}" target="_blank">
-                    <picture class="image">
+                    <picture>
                         <source media="(min-width: 481px)" srcset="{{medium.previewImageLink}}">
                         <!-- idea from https://medium.com/@mike_masey/how-to-use-the-picture-element-to-prevent-images-loading-on-mobile-devices-1376e33b190e
                          "... screen size of 767px or smaller (which is when we want to hide the image)
@@ -45,7 +45,8 @@
                         -->
                         <source media="(max-width: 480px)" sizes="1px"
                             srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 1w">
-                        <img class="preview-image" src="{{medium.previewImageLink}}" alt="Cover image of medium"
+                        <img class="preview-image" [ngClass]="medium.previewImageLink ? 'image' : '' "
+                            src="{{medium.previewImageLink}}" alt="Cover image of medium"
                             onerror="this.onerror=null; this.src='https://www.insticc.org/node/TechnicalProgram/56e7352809eb881d8c5546a9bbf8406e.png';">
                     </picture>
                 </a>
@@ -54,11 +55,12 @@
                 </div>
             </div>
             <div *ngIf="!medium.possibleToTakeHome">
-                <p class="note">Note: Functionality still in work till then: <br>Medium can only be viewed in the library. It cannot be borrowed yet.</p>
+                <p class="note">Note: Functionality still in work till then: <br>Medium can only be viewed in the
+                    library. It cannot be borrowed yet.</p>
             </div>
             <mat-card-actions align="end" *ngIf="authorised">
                 <button mat-icon-button routerLink="/editMedia/{{medium._id}}" aria-label="Edit medium">
-                    <mat-icon >edit</mat-icon>
+                    <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-icon-button (click)="confirmDeletion(confirmDeleteDialogue)" aria-label="Delete medium">
                     <mat-icon>delete</mat-icon>
@@ -73,7 +75,8 @@
 <ng-template #confirmDeleteDialogue let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Confirm Deletion</h4>
-        <button type="button" class="btn-close" aria-label="Close pop up" (click)="modal.dismiss('Cross click')"></button>
+        <button type="button" class="btn-close" aria-label="Close pop up"
+            (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
         <p>This will delete this medium from the database. Please confirm that you want to continue&hellip;</p>
@@ -87,26 +90,15 @@
 <!-- modal for server respond (of delete request) -->
 <ng-template #deleting let-modal>
     <div class="modal-header">
-        <button type="button" class="btn-close" aria-label="Close pop up" (click)="modal.dismiss('Cross click')"></button>
+        <button type="button" class="btn-close" aria-label="Close pop up"
+            (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <div class="spinner-border" role="status" *ngIf="waitingOnDeleteRespond; else deleteRespond" aria-label="loading icon">
+        <div class="spinner-border" role="status" aria-label="loading icon">
             <span class="visually-hidden">Loading...</span>
         </div>
         <div>
-            <ng-template #deleteRespond>
-                <span class="material-icons" *ngIf="deleteSuccesful">
-                    done
-                </span>
-                <span class="material-icons" *ngIf="!deleteSuccesful">
-                    error
-                </span>
-            </ng-template>
-            <p id="delete-message"> trying to delete database entry&hellip;</p>
+            <p id="trying-delete-message">trying to delete database entry&hellip;</p>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="delete()" *ngIf="!deleteSuccesful">try again</button>
-        <button type="button" class="btn btn-light" (click)="closeAllModal()">Close</button>
     </div>
 </ng-template>
